@@ -1,8 +1,7 @@
 import './App.css';
-import { MantineProvider, MantineThemeOverride, Text } from '@mantine/core';
+import { MantineProvider, MantineThemeOverride } from '@mantine/core';
 import HomePage from './pages/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './Header/Header';
 
 const theme: MantineThemeOverride = {
   colors: {

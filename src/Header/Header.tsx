@@ -1,7 +1,6 @@
-import { Avatar, Indicator, NavLink, } from "@mantine/core";
+import { Avatar, Indicator, } from "@mantine/core";
 import { IconAnchor, IconBell, IconSettings } from "@tabler/icons-react";
 import React from "react";
-import dhoni from "./dhoni.jpg"
 import NavLinks from "./NavLinks";
 const Header = () => {
   return (
@@ -16,7 +15,7 @@ const Header = () => {
       <div className="flex gap-3 items-center">
         <div className="flex gap-3 items-center">
           <div>Marshal</div>
-          <Avatar className="w-10 h-10 rounded-full overflow-hidden object-cover" src={dhoni} />
+          <Avatar className="w-10 h-10 rounded-full overflow-hidden object-cover" src="dhoni.jpg" />
           {/* <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-fuchsia-500">
             <Avatar src={dhoni} />
             </div> */}
