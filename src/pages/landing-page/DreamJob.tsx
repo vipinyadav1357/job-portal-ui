@@ -38,7 +38,7 @@ const DreamJob = () => {
             <div className='w-[55%] flex items-center justify-center'>
                 <div className='w-[30rem] relative'>
                     <img src="/Boy.png" alt="boy" />
-                    <div className='text-mine-shaft-100 absolute -right-10 top-[55%] w-fit border-bright-sun-400 border rounded-lg p-3 backdrop-blur-md'>
+                    <div className='text-mine-shaft-100 absolute -right-16 top-[55%] w-fit border-bright-sun-400 border rounded-lg p-3 backdrop-blur-md'>
                         <div className='text-center text-sm mb-1'>got 10k+ Jobs</div>
                         <Avatar.Group spacing="sm">
                             <Tooltip label="Vipin Yadav" withArrow>
@@ -83,7 +83,6 @@ const DreamJob = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

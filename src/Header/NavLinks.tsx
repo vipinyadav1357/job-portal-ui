@@ -9,7 +9,7 @@ const links: { name: string, url: string }[] = [
 ]
 const renderlinks = (location: any) => {
     return (links.map((link, index) =>
-        <div className={`${location.pathname === "/" + link.url ? "border-b-[3px] border-bright-sun-400 text-bright-sun-400 h-fit flex items-center" : ""}`}>
+        <div key={index} className={`${location.pathname === "/" + link.url ? "border-b-[3px] border-bright-sun-400 text-bright-sun-400 h-fit flex items-center" : "hover:border-b-[3px] hover:border-bright-sun-400 hover:text-bright-sun-400 hover:h-fit hover:flex hover:items-center"}`}>
             <Link key={index} to={`/${link.url} `} >
                 {link.name}
             </Link>
