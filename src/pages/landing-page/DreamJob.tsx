@@ -8,7 +8,7 @@ const DreamJob = () => {
             <div className='flex flex-col gap-3 w-[45%] text-mine-shaft-100'>
 
                 <div className='text-6xl font-bold leading-tight [&>span]:text-bright-sun-400'>
-                    Find Your <span >Dream Job</span> With Us
+                    Find Your <span className='tracking-wider [text-shadow:_2px_1px_3px_#f99b07,_-2px_-1px_3px_#f99b07,_-2px_1px_3px_#f99b07,_2px_-1px_3px_#f99b07]'>Dream Job</span> With Us
                 </div>
 
                 <div className='text-lg text-mine-shaft-200'>
@@ -68,7 +68,7 @@ const DreamJob = () => {
                                 <img src='google1.png' alt='' />
                             </div>
                             <div className='text-mine-shaft-100 text-sm'>
-                                <div>Software Engineer</div>
+                                <div className='[text-shadow:_0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_0px_-0px_3px_#b0b0b0]'>Software Engineer</div>
                                 <div className='text-mine-shaft-200 text-xs'>Benguluru, India</div>
                             </div>
                         </div>
