@@ -8,7 +8,7 @@ const DreamJob = () => {
             <div className='flex flex-col gap-3 w-[45%] text-mine-shaft-100'>
 
                 <div className='text-6xl font-bold leading-tight [&>span]:text-bright-sun-400'>
-                    Find Your <span className='tracking-wider [text-shadow:_2px_1px_3px_#f99b07,_-2px_-1px_3px_#f99b07,_-2px_1px_3px_#f99b07,_2px_-1px_3px_#f99b07]'>Dream Job</span> With Us
+                    Find Your <span className='tracking-wider [text-shadow:_2px_1px_3px_#f99b07,_-2px_-1px_3px_#f99b07,_-2px_1px_3px_#f99b07,_2px_-1px_3px_#f99b07] '>Dream Job</span> With Us
                 </div>
 
                 <div className='text-lg text-mine-shaft-200'>
@@ -36,7 +36,7 @@ const DreamJob = () => {
             </div>
 
             <div className='w-[55%] flex items-center justify-center'>
-                <div className='w-[30rem] relative'>
+                <div className='w-[30rem] relative border-2 border-bright-sun-400 rounded-full'>
                     <img src="/Boy.png" alt="boy" />
                     <div className='text-mine-shaft-100 absolute -right-16 top-[55%] w-fit border-bright-sun-400 border rounded-lg p-3 backdrop-blur-md'>
                         <div className='text-center text-sm mb-1'>got 10k+ Jobs</div>
@@ -62,7 +62,7 @@ const DreamJob = () => {
                             </Tooltip>
                         </Avatar.Group>
                     </div>
-                    <div className='absolute top-[30%] -left-10 border-bright-sun-400 border w-fit p-2 rounded-lg backdrop-blur-md flex flex-col items-center gap-2'>
+                    <div className='absolute top-[30%] -left-12 border-bright-sun-400 border w-fit p-2 rounded-lg backdrop-blur-md flex flex-col items-center gap-2 tracking-wider'>
                         <div className='flex gap-2 items-center '>
                             <div className='w-11 h-11'>
                                 <img src='google1.png' alt='' />
