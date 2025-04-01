@@ -4,6 +4,7 @@ import DreamJob from './landing-page/DreamJob';
 import Companies from './landing-page/Companies';
 import JobCategories from './landing-page/JobCategories';
 import Working from './landing-page/Working';
+import Testimonials from './landing-page/Testimonials';
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <Companies />
       <JobCategories />
       <Working />
+      <Testimonials />
     </div >
   );
 }

@@ -6,7 +6,7 @@ import { jobCategory } from '../../Data/Data'
 const JobCategories = () => {
     const [control, setControl] = useState(false);
     return (
-        <div className='mt-10 text-mine-shaft-100 pb-5'>
+        <div className='mt-10 text-mine-shaft-100 pb-10'>
             <div className='text-4xl mb-4 font-semibold text-center'>
                 Browse <span className='text-bright-sun-400 [text-shadow:_0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_0px_-1px_3px_#f99b07] tracking-wider'>Job</span> Categories
             </div>
@@ -15,7 +15,7 @@ const JobCategories = () => {
                 setControl(true)
             }} onMouseLeave={() => {
                 setControl(false)
-            }} className='mt-5' slideSize="22%" slideGap="xs" align={"center"} controlsOffset="xl" controlSize={40} loop dragFree withControls={control ? true : false} >
+            }} className='mt-5' slideSize="22%" slideGap="xs" align={"center"} controlsOffset="xl" controlSize={50} loop dragFree withControls={control ? true : false} >
                 {
                     jobCategory
                         .map((category, index) =>
