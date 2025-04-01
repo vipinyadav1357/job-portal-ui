@@ -42,13 +42,13 @@ const DreamJob = () => {
                         <div className='text-center text-sm mb-1'>got 10k+ Jobs</div>
                         <Avatar.Group spacing="sm">
                             <Tooltip label="Vipin Yadav" withArrow>
-                                <Avatar src="avatar.png" radius="xl" />
+                                <Avatar src="dhoni.jpg" radius="xl" />
                             </Tooltip>
                             <Tooltip label="Deepak Yadav" withArrow>
-                                <Avatar src="avatar1.png" radius="xl" />
+                                <Avatar src="dhoni.jpg" radius="xl" />
                             </Tooltip>
                             <Tooltip label="Kamalesh Yadav" withArrow>
-                                <Avatar src="avatar2.png" radius="xl" />
+                                <Avatar src="dhoni.jpg" radius="xl" />
                             </Tooltip>
                             <Tooltip
                                 withArrow

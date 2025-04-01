@@ -10,13 +10,11 @@ const JobCategories = () => {
             <div className='text-4xl mb-4 font-semibold text-center'>
                 Browse <span className='text-bright-sun-400 [text-shadow:_0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_0px_-1px_3px_#f99b07] tracking-wider'>Job</span> Categories
             </div>
-            <div className='text-mine-shaft-300 text-lg text-center w-1/2 mx-auto'>Explore diverse job opportunities tailored to your skills. Start your career journey today!</div>
+            <div className='text-mine-shaft-300 text-lg text-center w-1/2 mx-auto mb-10'>Explore diverse job opportunities tailored to your skills. Start your career journey today!</div>
             <Carousel onMouseEnter={() => {
                 setControl(true)
-                console.log(control)
             }} onMouseLeave={() => {
                 setControl(false)
-                console.log(control)
             }} className='mt-5' slideSize="22%" slideGap="xs" align={"center"} controlsOffset="xl" controlSize={40} loop dragFree withControls={control ? true : false} >
                 {
                     jobCategory
