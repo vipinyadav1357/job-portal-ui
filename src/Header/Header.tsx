@@ -4,7 +4,7 @@ import React from "react";
 import NavLinks from "./NavLinks";
 const Header = () => {
   return (
-    <div className="w-full bg-mine-shaft-950 text-white h-24 px-8 flex justify-between items-center">
+    <div className="w-full font-['poppins'] bg-mine-shaft-950 text-white h-24 px-8 flex justify-between items-center">
       <div className="flex gap-1 items-center text-bright-sun-400">
         <IconAnchor className="h-9 w-9" stroke={"4.5"} />
         <div className=" text-4xl font-bold tracking-wider [text-shadow:_0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_0px_-1px_3px_#f99b07]">ViJobS</div>

@@ -20,13 +20,13 @@ const DreamJob = () => {
                         variant="unstyled"
                         label="Job Title"
                         placeholder="Software Engineer"
-                        icon={<IconBriefcase2Filled className='text-mine-shaft-100' />}
+                        icon={<IconBriefcase2Filled className='text-bright-sun-300' />}
                     />
                     <TextInput className='bg-mine-shaft-900 px-2 py-1 w-[40%] rounded-lg [&>label]:!text-bright-sun-400  [&_input]:!text-mine-shaft-100'
                         variant="unstyled"
                         label="Job Type"
                         placeholder="Full-Time"
-                        icon={<IconId className='text-mine-shaft-100' />}
+                        icon={<IconId className='text-bright-sun-300' />}
                     />
                     <div className='text-mine-shaft-100 w-[15%] h-full px-2 py-1 rounded-lg bg-bright-sun-400 flex items-center justify-center hover:bg-bright-sun-500 cursor-pointer'>
                         <IconSearch className='h-[90%] w-[90%] p-1.5' />

@@ -15,11 +15,11 @@ const Testimonials = () => {
                 setControl(true)
             }} onMouseLeave={() => {
                 setControl(false)
-            }} className='mt-5' slideSize="22%" slideGap="xl" align={"center"} controlsOffset="xl" controlSize={50} loop dragFree withControls={control ? true : false} withIndicators>
+            }} className='mt-20' slideSize="22%" slideGap="xl" align={"center"} controlsOffset="xl" controlSize={50} loop dragFree withControls={control} withIndicators>
                 {
                     testimonials.map((testimonial, index) =>
                         <Carousel.Slide key={index}>
-                            <div className='hover:cursor-pointer flex flex-col items-start gap-3 mt-10 border border-bright-sun-300 rounded-lg mx-4 py-4 px-2 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-300 transition-all duration-500 ease-in-out '>
+                            <div className='hover:cursor-pointer flex flex-col items-start gap-3  border border-bright-sun-300 rounded-lg mx-4 py-4 w-64 px-2 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-300 transition-all duration-500 ease-in-out '>
                                 <div className='flex items-center gap-2'>
                                     <Avatar className='!h-14 !w-14' src="avatar.png" alt='avatar' radius={"xl"} />
                                     <div>
@@ -30,7 +30,7 @@ const Testimonials = () => {
                                     </div>
                                 </div>
                                 <Textarea classNames={{
-                                    input: 'w-[140%] px-1 bg-mine-shaft-950 text-white p-2 rounded-lg border-0 text-sm text-wrap overflow-y-auto scrollbar-hide'
+                                    input: 'w-[140%] px-1 bg-mine-shaft-950 text-mine-shaft-100 p-2 border-0 text-sm text-wrap overflow-y-auto scrollbar-hide'
                                 }} minRows={4} maxRows={10} size='xl' bg="black" value={testimonial.testimonial} readOnly />
                             </div>
                         </Carousel.Slide>)

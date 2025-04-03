@@ -108,6 +108,10 @@ const testimonials = [
         "name": "Pavan Barnana",
         "testimonial": "Highly efficient job portal with excellent resources. Helped me land a great position. I secured a job offer within days of applying. Exceptional user experience and support.",
         "rating": 4
+    }, {
+        "name": "Vipin Yadav ",
+        "testimonial": "Highly efficient ",
+        "rating": 2.5
     }
 ]
 const footerLinks = [

@@ -15,7 +15,7 @@ const JobCategories = () => {
                 setControl(true)
             }} onMouseLeave={() => {
                 setControl(false)
-            }} className='mt-5' slideSize="22%" slideGap="xs" align={"center"} controlsOffset="xl" controlSize={50} loop dragFree withControls={control ? true : false} >
+            }} className='mt-5' slideSize="22%" slideGap="xs" align={"center"} controlsOffset="xl" controlSize={50} loop dragFree withControls={control} >
                 {
                     jobCategory
                         .map((category, index) =>

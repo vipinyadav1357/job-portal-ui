@@ -2,6 +2,9 @@ import './App.css';
 import { MantineProvider, MantineThemeOverride } from '@mantine/core';
 import HomePage from './pages/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import FindJob from './pages/FindJob/FindJob';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -14,19 +17,22 @@ const theme: MantineThemeOverride = {
       "#f99b07", "#dd7302", "#b75006", "#943c0c", "#7a330d"
     ]
   },
-  primaryColor: "brightSun"
+  primaryColor: "brightSun",
+  colorScheme: 'dark'
 };
 function App() {
 
   return (
     <MantineProvider theme={theme}>
       <BrowserRouter>
+        <Header />
         <Routes>
-          <Route path='about' element={<HomePage />} />
+          <Route path='/find-jobs' element={<FindJob />} />
+          <Route path='*' element={<HomePage />} />
         </Routes>
-        <HomePage />
+        <Footer />
       </BrowserRouter>
-    </MantineProvider>
+    </MantineProvider >
   );
 }
 
