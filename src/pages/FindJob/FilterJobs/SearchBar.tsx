@@ -1,10 +1,13 @@
 import React from 'react'
-import MultiSelect from './MultiSelect/MultiSelect'
+import { dropdownData } from '../../../Data/JobsData'
+import MultiSelectComponent from './MultiSelect/MultiSelect'
 
 const SearchBar = () => {
     return (
-        <div>
-            <MultiSelect />
+        <div className='flex justify-evenly'>
+            {
+                dropdownData.map((item, index) => <div key={index}> <MultiSelectComponent item={item} /></div>)
+            }
         </div>
     )
 }

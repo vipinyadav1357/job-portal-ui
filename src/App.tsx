@@ -18,7 +18,8 @@ const theme: MantineThemeOverride = {
     ]
   },
   primaryColor: "brightSun",
-  colorScheme: 'dark'
+  colorScheme: 'dark',
+  fontFamily: "poppins,sans-serif"
 };
 function App() {
 
