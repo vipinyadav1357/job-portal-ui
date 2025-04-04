@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FindJob from './pages/FindJob/FindJob';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
+import CursorFollower from './Animition/CursorAnimition/CursorFollower';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -26,6 +27,7 @@ function App() {
   return (
     <MantineProvider theme={theme}>
       <BrowserRouter>
+        <CursorFollower />
         <Header />
         <Routes>
           <Route path='/find-jobs' element={<FindJob />} />
