@@ -1,7 +1,9 @@
 import React from 'react'
-import SortJobs from './SortJobs/SortJobs'
+
 import JobCard from './JobCard/JobCard'
 import { jobList } from '../../../Data/JobsData'
+import SortJobs from './SortJobs/SortJobs'
+
 
 const Jobs = () => {
     return (

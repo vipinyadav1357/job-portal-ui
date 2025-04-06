@@ -17,7 +17,6 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
     const [search, setSearch] = useState('');
     useEffect(() => {
         setData(item.options)
-        console.log("Initial Data:", item);
     }, [item])
     // const [disabled, setDisabled] = useState(false);
     // const [label, setLabel] = useState('Creatable MultiSelect');
