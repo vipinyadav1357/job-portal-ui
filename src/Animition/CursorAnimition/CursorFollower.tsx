@@ -45,6 +45,7 @@ const CursorFollower: React.FC = () => {
             opacity: 0,
             duration: 0.5,
             ease: "bounce",
+            smoothOrigin: true,
             onComplete: () => smoke.remove(),
         });
     };

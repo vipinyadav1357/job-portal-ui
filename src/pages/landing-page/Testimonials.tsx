@@ -8,18 +8,18 @@ const Testimonials = () => {
 
     return (
         <div className='mt-10 text-mine-shaft-100 pb-10'>
-            <div className='text-4xl mb-4 font-semibold text-center'>
+            <div className='text-4xl font-semibold text-center'>
                 What <span className='text-bright-sun-400 [text-shadow:_0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_0px_-1px_3px_#f99b07] tracking-wider'>Users Talks</span> About Us
             </div>
             <Carousel onMouseEnter={() => {
                 setControl(true)
             }} onMouseLeave={() => {
                 setControl(false)
-            }} className='mt-20' slideSize="22%" slideGap="xl" align={"center"} controlsOffset="xl" controlSize={50} loop dragFree withControls={control} withIndicators>
+            }} className='mt-10' slideSize="22%" slideGap="xl" align={"center"} controlsOffset="xl" controlSize={50} loop dragFree withControls={control} >
                 {
                     testimonials.map((testimonial, index) =>
                         <Carousel.Slide key={index}>
-                            <div className='hover:cursor-pointer flex flex-col items-start gap-3  border border-bright-sun-300 rounded-lg mx-4 py-4 w-64 px-2 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-300 transition-all duration-500 ease-in-out '>
+                            <div className='hover:cursor-pointer flex flex-col items-start gap-3  border border-bright-sun-300 rounded-xl mx-4 my-4 py-4 w-64 px-2 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-300 transition-all duration-500 ease-in-out '>
                                 <div className='flex items-center gap-2'>
                                     <Avatar className='!h-14 !w-14' src="avatar.png" alt='avatar' radius={"xl"} />
                                     <div>
