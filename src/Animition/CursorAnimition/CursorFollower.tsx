@@ -12,8 +12,9 @@ const CursorFollower: React.FC = () => {
             gsap.to(dot, {
                 x: e.clientX,
                 y: e.clientY,
-                duration: 0.5,
-                ease: "power3.out",
+                duration: 1,
+                smoothOrigin: true,
+                ease: "back.out",
             });
             createSmokeTrail(e.clientX, e.clientY); // Create smoke trail on mouse move
         };
@@ -31,27 +32,26 @@ const CursorFollower: React.FC = () => {
 
     const createSmokeTrail = (x: number, y: number) => {
         const smoke = document.createElement("div");
-        smoke.className = "w-1 h-1 bg-white rounded-full absolute pointer-events-none mix-blend-difference";
+        smoke.className = "w-1 h-1 bg-white rounded-full fixed pointer-events-none mix-blend-difference opacity-60";
         smoke.style.left = `${x}px`;
         smoke.style.top = `${y}px`;
+        smoke.style.zIndex = "49"; // Just behind the main dot
         document.body.appendChild(smoke);
 
         gsap.to(smoke, {
-            scale: 1,
+            x: gsap.utils.random(-10, 10),
+            y: gsap.utils.random(-10, 10),
+            scale: gsap.utils.random(1, 2),
             opacity: 0,
-            duration: 1,
-            ease: "ease.in",
-            onComplete: () => {
-                if (smoke.parentNode) {
-                    smoke.parentNode.removeChild(smoke);
-                }
-            },
+            duration: 0.5,
+            ease: "bounce",
+            onComplete: () => smoke.remove(),
         });
     };
     return (
         <div
             ref={dotRef}
-            className="w-2 h-2 bg-mine-shaft-50 fixed top-0 left-0 pointer-events-none rounded-full z-50 mix-blend-difference"
+            className="w-2 h-2 bg-bright-sun-400 fixed top-0 left-0 pointer-events-none rounded-full z-50 mix-blend-difference shadow-[0_0_15px_5px_rgba(255,223,0,0.6)]"
         />
     );
 };

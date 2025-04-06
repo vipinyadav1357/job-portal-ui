@@ -14,14 +14,11 @@ interface DropdownFiltersProps {
 const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
     const [data, setData] = useState<string[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
-    // const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('');
     useEffect(() => {
         setData(item.options)
-
-    }, [item.options])
-    useEffect(() => {
-        console.log("Updated Data:", data);
-    }, [data]);
+        console.log("Initial Data:", item);
+    }, [item])
     // const [disabled, setDisabled] = useState(false);
     // const [label, setLabel] = useState('Creatable MultiSelect');
     // const [placeholder, setPlaceholder] = useState('Select items');
@@ -31,10 +28,11 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
     // const [disabledValue, setDisabledValue] = useState('Disabled');
     // const [labelValue, setLabelValue] = useState('Label');
     return (
-        <div className=''>
+        <div className='text-bright-sun-400'>
             <MultiSelect
                 key={item.title}
                 label={item.title}
+                title={item.title}
                 data={data.map((option, index) => ({ value: option, label: option }))}
                 placeholder={`Select ${item.title}`}
                 value={selected}
@@ -42,18 +40,20 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
                     console.log("New selection:", selectedValues);
                     setSelected(selectedValues)
                 }}
+                searchValue={search}
+                onSearchChange={setSearch}
                 searchable
                 creatable
                 clearable
                 rightSection={<IconChevronDown size={14} />}
                 icon={<item.icon className='text-bright-sun-400 bg-mine-shaft-900 size-7 rounded-xl p-1' />}
                 getCreateLabel={(query: any) => `+ Create ${query}`}
+                dropdownPosition="bottom"
                 onCreate={(query: string) => {
                     const newItem = { value: query, label: query };
                     // setSelected((prevData) => [...prevData, query]);
                     return newItem;
                 }}
-                maxSelectedValues={5}
             />
         </div>
     )
