@@ -1,5 +1,5 @@
-import { Divider, RangeSlider } from '@mantine/core'
-import { IconCurrencyRupee } from '@tabler/icons-react'
+import { Divider, Input, RangeSlider } from '@mantine/core'
+import { IconCurrencyRupee, IconUserCircle } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import MultiSelectComponent from '../../../MultiSelect/MultiSelect'
 import { searchFields } from '../../../Data/TalentData'
@@ -8,7 +8,15 @@ const SearchBar = () => {
     const [rangeValue, setRangeValue] = useState<[number, number]>([1, 100]);
 
     return (
-        <div className='flex justify-evenly px-5 py-8'>
+        <div className='flex justify-evenly items-end px-5 py-8'>
+            <div className='flex items-end gap-3'>
+                <div className='text-bright-sun-400 bg-mine-shaft-900 rounded-full p-1'>
+                    <IconUserCircle size={20} />
+                </div>
+                <Input.Wrapper id={"vip"} label="Find Talent By Name">
+                    <Input className='[&_input]:!placeholder-mine-shaft-300' variant='unstyled' id="vip" placeholder="search talent"></Input>
+                </Input.Wrapper>
+            </div>
             {
                 searchFields.map((item, index) => <React.Fragment key={index}>
                     <div> <MultiSelectComponent item={item} />
