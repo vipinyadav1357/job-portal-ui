@@ -1,8 +1,8 @@
 import React from 'react'
 
-import JobCard from './TalentCard/TalentCard'
-import { jobList } from '../../../Data/JobsData'
 import SortJobs from '../../FindJob/Jobs/SortJobs/SortJobs'
+import { talents } from '../../../Data/TalentData'
+import TalentCard from './TalentCard/TalentCard'
 
 
 
@@ -10,12 +10,12 @@ const Talents = () => {
     return (
         <div className='px-8 pt-16'>
             <div className='flex justify-between '>
-                <div className='text-3xl font-semibold'>Recommended Job</div>
+                <div className='text-3xl font-semibold'>Talents</div>
                 <SortJobs />
             </div>
-            <div className='mt-8 flex flex-wrap justify-center gap-5 '>
+            <div className='mt-8 flex flex-wrap justify-center gap-10 '>
                 {
-                    jobList.map((job, index) => <div key={index}><JobCard {...job} /></div>)
+                    talents.map((job, index) => <div key={index}><TalentCard talentData={job} /></div>)
                 }
             </div>
         </div>
