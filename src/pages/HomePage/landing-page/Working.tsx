@@ -1,5 +1,5 @@
 import React from 'react'
-import { work } from '../../Data/Data'
+import { work } from '../../../Data/Data'
 import { Avatar } from '@mantine/core'
 
 const Working = () => {

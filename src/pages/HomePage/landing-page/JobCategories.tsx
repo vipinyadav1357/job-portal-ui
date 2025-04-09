@@ -1,6 +1,6 @@
 import { Carousel } from '@mantine/carousel'
 import React, { useState } from 'react'
-import { jobCategory } from '../../Data/Data'
+import { jobCategory } from '../../../Data/Data'
 
 
 const JobCategories = () => {

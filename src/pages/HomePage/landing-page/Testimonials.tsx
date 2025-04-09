@@ -1,7 +1,7 @@
 import { Avatar, Rating, Textarea } from '@mantine/core'
 import React, { useState } from 'react'
-import { testimonials } from '../../Data/Data'
 import { Carousel } from '@mantine/carousel';
+import { testimonials } from '../../../Data/Data';
 
 const Testimonials = () => {
     const [control, setControl] = useState(false);

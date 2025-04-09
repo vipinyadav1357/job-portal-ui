@@ -6,7 +6,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import CursorFollower from './Animition/CursorAnimition/CursorFollower';
 import FindTalent from './pages/FindTalent/FindTalent';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import TalentProfile from './pages/TalentProfile/TalentProfile';
 
 const theme: MantineThemeOverride = {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Marquee from 'react-fast-marquee'
-import { companies } from '../../Data/Data'
+import { companies } from '../../../Data/Data'
 
 const Companies = () => {
     return (

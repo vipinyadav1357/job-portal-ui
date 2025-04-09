@@ -1,10 +1,10 @@
 import React from 'react'
-import DreamJob from './landing-page/DreamJob';
 import Companies from './landing-page/Companies';
+import DreamJob from './landing-page/DreamJob';
 import JobCategories from './landing-page/JobCategories';
-import Working from './landing-page/Working';
-import Testimonials from './landing-page/Testimonials';
 import Subscribe from './landing-page/Subscribe';
+import Testimonials from './landing-page/Testimonials';
+import Working from './landing-page/Working';
 
 const HomePage = () => {
   return (
