@@ -21,7 +21,7 @@ const SearchBar = () => {
                 searchFields.map((item, index) => <React.Fragment key={index}>
                     <div> <MultiSelectComponent item={item} />
                     </div>
-                    <Divider mr="xs" size={"xs"} orientation='vertical' />
+                    <Divider size={"xs"} orientation='vertical' />
                 </React.Fragment>)
             }
             <div className='flex flex-col gap-7 w-fit'>

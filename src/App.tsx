@@ -7,7 +7,7 @@ import Footer from './Footer/Footer';
 import CursorFollower from './Animition/CursorAnimition/CursorFollower';
 import FindTalent from './pages/FindTalent/FindTalent';
 import HomePage from './pages/HomePage/HomePage';
-import TalentProfile from './pages/TalentProfile/TalentProfile';
+import TalentProfilePage from './pages/TalentProfile/TalentProfilePage';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -34,7 +34,7 @@ function App() {
         <Routes>
           <Route path='/find-jobs' element={<FindJob />} />
           <Route path='/find-talent' element={<FindTalent />} />
-          <Route path='/talent-profile' element={<TalentProfile />} />
+          <Route path='/talent-profile' element={<TalentProfilePage />} />
           <Route path='*' element={<HomePage />} />
         </Routes>
         <Footer />
