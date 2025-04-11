@@ -1,13 +1,14 @@
 import './App.css';
 import { MantineProvider, MantineThemeOverride } from '@mantine/core';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import FindJob from './pages/FindJob/FindJob';
+import FindJob from './pages/FindJob/FindJobPage';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import CursorFollower from './Animition/CursorAnimition/CursorFollower';
-import FindTalent from './pages/FindTalent/FindTalent';
+import FindTalent from './pages/FindTalent/FindTalentPage';
 import HomePage from './pages/HomePage/HomePage';
 import TalentProfilePage from './pages/TalentProfile/TalentProfilePage';
+import UploadJobsPage from './pages/UploadJobs/UploadJobsPage';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -21,8 +22,10 @@ const theme: MantineThemeOverride = {
     ]
   },
   primaryColor: "brightSun",
+  primaryShade: 4,
   colorScheme: 'dark',
-  fontFamily: "poppins,sans-serif"
+  fontFamily: "poppins,sans-serif",
+  focusRing: 'never'
 };
 function App() {
 
@@ -35,6 +38,7 @@ function App() {
           <Route path='/find-jobs' element={<FindJob />} />
           <Route path='/find-talent' element={<FindTalent />} />
           <Route path='/talent-profile' element={<TalentProfilePage />} />
+          <Route path='/post-job' element={<UploadJobsPage />} />
           <Route path='*' element={<HomePage />} />
         </Routes>
         <Footer />

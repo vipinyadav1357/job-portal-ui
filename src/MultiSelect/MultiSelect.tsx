@@ -32,11 +32,10 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
                 key={item.title}
                 label={item.title}
                 title={item.title}
-                data={data.map((option, index) => ({ value: option, label: option }))}
+                data={data.map((option) => ({ value: option, label: option }))}
                 placeholder={`Select ${item.title}`}
                 value={selected}
                 onChange={(selectedValues) => {
-                    console.log("New selection:", selectedValues);
                     setSelected(selectedValues)
                 }}
                 searchValue={search}
@@ -49,9 +48,8 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
                 getCreateLabel={(query: any) => `+ Create ${query}`}
                 dropdownPosition="bottom"
                 onCreate={(query: string) => {
-                    const newItem = { value: query, label: query };
-                    // setSelected((prevData) => [...prevData, query]);
-                    return newItem;
+                    setData((prevData) => [...prevData, query]);
+                    return query;
                 }}
             />
         </div>

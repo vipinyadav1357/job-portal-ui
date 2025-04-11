@@ -28,7 +28,7 @@ const TalentCard: React.FC<talentData> = ({ talentData }) => {
                         <div className='text-xs text-mine-shaft-300'>{talentData.role}<IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {talentData.company}</div>
                     </div>
                 </div>
-                <IconHeart className='text-mine-shaft-300 hover:fill-red-500 hover:stroke-red-500 transition-all duration-200' stroke={1.5} />
+                <IconHeart className='text-red-500 hover:fill-red-500 hover:stroke-red-500 transition-all duration-200' stroke={1.5} />
             </div>
             <div className='flex gap-2 items-center justify-evenly [&>div]:!px-2 [&>div]:!py-1 [&>div]:!bg-mine-shaft-800 [&>div]:!text-bright-sun-700 [&>div]:!rounded-lg [&>div]:!text-xs [&>div]:!font-semibold [&>div:hover]:!bg-bright-sun-500 [&>div:hover]:!text-mine-shaft-900'>
                 {
