@@ -127,13 +127,15 @@ const profile = {
       name: "Google Professional Cloud Architect",
       issuer: "Google",
       issueDate: "Aug 2023",
-      certificateId: "CB72982GG"
+      certificateId: "CB72982GG",
+      location: "New York, United States"
     },
     {
       name: "Microsoft Certified: Azure Solutions Architect Expert",
       issuer: "Microsoft",
       issueDate: "May 2022",
-      certificateId: "MS12345AZ"
+      certificateId: "MS12345AZ",
+      location: "Benguluru, India"
     }
   ]
 }
