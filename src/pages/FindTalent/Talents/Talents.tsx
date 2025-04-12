@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SortJobs from '../../FindJob/Jobs/SortJobs/SortJobs'
+import SortJobs from '../../FindJob/JobLists/SortJobs/SortJobs'
 import { talents } from '../../../Data/TalentData'
 import TalentCard from './TalentCard/TalentCard'
 

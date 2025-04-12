@@ -5,7 +5,7 @@ import { jobList } from '../../../Data/JobsData'
 import SortJobs from './SortJobs/SortJobs'
 
 
-const Jobs = () => {
+const JobLists = () => {
     return (
         <div className='px-8 pt-16'>
             <div className='flex justify-between '>
@@ -21,4 +21,4 @@ const Jobs = () => {
     )
 }
 
-export default Jobs
+export default JobLists

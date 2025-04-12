@@ -44,14 +44,22 @@ const TalentProfile = ({ props }: any) => {
             <div>
                 <div className='font-semibold text-2xl mb-5'>experience</div>
                 <div className='flex flex-col gap-5 px-5'>
-                    {props.experience.map((exp: any, index: any) => <ExperienceCard key={index} props={exp} />)}
+                    {props
+                        .experience
+                        .map((exp: any, index: any) =>
+                            <ExperienceCard key={index} props={exp} />
+                        )}
                 </div>
             </div>
             <Divider size={"xs"} my="xl" color='brightSun.4' />
             <div>
                 <div className='font-semibold text-2xl mb-5'>Certification</div>
                 <div className='flex flex-col gap-5 px-5'>
-                    {props.certifications.map((cert: any, index: any) => <CertificationCard key={index} props={cert} />)}
+                    {props
+                        .certifications
+                        .map((cert: any, index: any) =>
+                            <CertificationCard key={index} props={cert} />
+                        )}
                 </div>
             </div>
         </div>

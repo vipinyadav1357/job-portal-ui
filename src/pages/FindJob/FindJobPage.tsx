@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchBar from './SearchBar/SearchBar'
 import { Divider } from '@mantine/core'
-import Jobs from './Jobs/Jobs'
+import Jobs from './JobLists/JobLists'
 
 const FindJobPage = () => {
     return (

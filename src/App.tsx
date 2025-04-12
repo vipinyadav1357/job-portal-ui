@@ -9,6 +9,7 @@ import FindTalent from './pages/FindTalent/FindTalentPage';
 import HomePage from './pages/HomePage/HomePage';
 import TalentProfilePage from './pages/TalentProfile/TalentProfilePage';
 import UploadJobsPage from './pages/UploadJobs/UploadJobsPage';
+import JobProfilePage from './pages/JobProfile/JobProfilePage';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -39,6 +40,7 @@ function App() {
           <Route path='/find-talent' element={<FindTalent />} />
           <Route path='/talent-profile' element={<TalentProfilePage />} />
           <Route path='/post-job' element={<UploadJobsPage />} />
+          <Route path='/job-profile' element={<JobProfilePage />} />
           <Route path='*' element={<HomePage />} />
         </Routes>
         <Footer />
