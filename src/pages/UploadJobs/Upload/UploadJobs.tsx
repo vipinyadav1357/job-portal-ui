@@ -29,7 +29,6 @@ const UploadJobs = () => {
             <div className='flex gap-10 m-10'>
                 <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >publish job</Button>
                 <Button variant='outline' color='brightSun.4' >save as draft</Button>
-
             </div>
         </div>
     )

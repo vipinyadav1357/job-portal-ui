@@ -14,7 +14,7 @@ const SearchBar = () => {
                     <IconUserCircle size={20} />
                 </div>
                 <Input.Wrapper id={"vip"} label="Find Talent By Name">
-                    <Input className='[&_input]:!placeholder-mine-shaft-300' variant='unstyled' id="vip" placeholder="search talent"></Input>
+                    <Input type="text" className='[&_input]:!placeholder-mine-shaft-300' variant='unstyled' id="vip" placeholder="search talent" />
                 </Input.Wrapper>
             </div>
             {
