@@ -4,3 +4,12 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+ @layer base{
+  ul,ol,li{
+    list-style: revert;
+    font-size: medium;
+  }
+  p{
+    font-size: medium;
+  }
+ }
