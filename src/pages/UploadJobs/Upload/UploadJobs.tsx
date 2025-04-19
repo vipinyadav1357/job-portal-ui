@@ -13,10 +13,10 @@ const UploadJobs = () => {
             <Divider size={"xs"} my="md" color='brightSun.4' />
 
             <div>
-                <div className='flex flex-wrap [&>*]:px-16 py-10 gap-y-14 [&>*]:w-1/2'>
+                <div className='flex flex-wrap [&>*]:px-16 py-10 gap-y-10 [&>*]:w-1/2'>
                     {data.map((item, index) => <SelectInput key={index} props={item} />)}
                 </div>
-                <div className='flex flex-wrap [&>*]:px-16 py-10 gap-y-14 [&>*]:w-full'>
+                <div className='[&>*]:px-16 py-10 [&>*]:w-full'>
                     <TagsInput />
                 </div>
                 <div className='flex flex-col gap-3 [&_button[data-active="true"]]:text-bright-sun-400 [&_button[data-active="true"]]:bg-bright-sun-400/20'>

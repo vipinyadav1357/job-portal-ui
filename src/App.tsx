@@ -11,6 +11,7 @@ import TalentProfilePage from './pages/TalentProfile/TalentProfilePage';
 import UploadJobsPage from './pages/UploadJobs/UploadJobsPage';
 import JobProfilePage from './pages/JobProfile/JobProfilePage';
 import ApplyJobsPage from './pages/ApplyJobs/ApplyJobsPage';
+import { useEffect } from 'react';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -30,7 +31,9 @@ const theme: MantineThemeOverride = {
   focusRing: 'never'
 };
 function App() {
-
+  useEffect(() => {
+    window.scroll(0, 0);
+  })
   return (
     <MantineProvider theme={theme}>
       <BrowserRouter>

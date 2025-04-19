@@ -18,14 +18,6 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
     useEffect(() => {
         setData(item.options)
     }, [item])
-    // const [disabled, setDisabled] = useState(false);
-    // const [label, setLabel] = useState('Creatable MultiSelect');
-    // const [placeholder, setPlaceholder] = useState('Select items');
-    // const [clearableValue, setClearableValue] = useState(false);
-    // const [valueLabel, setValueLabel] = useState('Selected items');
-    // const [searchableValue, setSearchableValue] = useState('Searchable');
-    // const [disabledValue, setDisabledValue] = useState('Disabled');
-    // const [labelValue, setLabelValue] = useState('Label');
     return (
         <div className='text-bright-sun-400'>
             <MultiSelect
