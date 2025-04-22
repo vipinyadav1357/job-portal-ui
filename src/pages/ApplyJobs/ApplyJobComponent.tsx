@@ -3,6 +3,7 @@ import { IconPointFilled, IconClockHour3, IconUpload, IconCheck } from '@tabler/
 import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom';
+import { easeInOut, motion } from 'framer-motion';
 
 const ApplyJobComponent = (props: any) => {
     const notifRef = useRef(null);
@@ -36,7 +37,7 @@ const ApplyJobComponent = (props: any) => {
                     onComplete: () => {
                         navigate('/find-jobs')
                     },
-                    ease: 'bounce.out',
+                    ease: 'back.out',
                 });
             }, 4500);
         }
@@ -133,8 +134,18 @@ const ApplyJobComponent = (props: any) => {
                 </div>
             </div>
             {
-                submit && <Notification ref={notifRef} className="border-bright-sun-400 backdrop-blur-md fixed top-20 right-3 w-1/4 bg-mine-shaft-900/20 z-[1001]" icon={<IconCheck size={18} />} color="teal" title="Application Submitted" disallowClose>
-                    redirecting to find jobs after {sec} seconds...
+                submit && <Notification ref={notifRef} className="border-bright-sun-400 w-1/3  backdrop-blur-md fixed top-20 right-3  bg-mine-shaft-900/20 z-[1001] [&_.mantine-Notification-body]:flex [&_.mantine-Notification-body]:flex-col [&_.mantine-Notification-body]:justify-center p-4" icon={<IconCheck size={18} stroke={3} className='bg-bright-sun-400 text-mine-shaft-100' />} title="Application Submitted" disallowClose>
+                    <div className='flex gap-3 justify-start items-center'>
+                        {`redirecting to find jobs after ${sec}`}
+                        <div className='flex items-center justify-center gap-2 mb-1 w-fit'>
+                            {[...Array(sec)].map((_, index) => <motion.div key={index} className='w-2 h-2 bg-bright-sun-400 rounded-full'
+                                animate={{ y: [0, 5, 0], scale: [1, 0.5, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity, ease: easeInOut, delay: index * 0.3 }}
+                            >
+                            </motion.div>)}
+                        </div>
+                    </div>
+                    <motion.div animate={{ width: ["100%", "0%"], opacity: [1] }} transition={{ duration: 5.5 }} className='border-2 border-bright-sun-400'></motion.div>
                 </Notification>
             }
         </>
