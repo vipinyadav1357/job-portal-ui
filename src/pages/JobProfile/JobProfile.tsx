@@ -101,7 +101,7 @@ const JobProfile = (props: any) => {
                                 </Avatar.Group>employees</div>
                         </div>
                     </div>
-                    <Link to={""} >
+                    <Link to={"/company-profile"} >
                         <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >visit </Button>
                     </Link>
                 </div>

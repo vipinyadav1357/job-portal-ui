@@ -9,7 +9,7 @@ const ApplyJobComponent = (props: any) => {
     const [value, setValue] = useState('');
     const [prev, setPrev] = useState(false);
     const [submit, setSubmit] = useState(false);
-    const [sec, setSec] = useState(0);
+    const [sec, setSec] = useState(5);
     const navigate = useNavigate();
     useEffect(() => {
         if (submit) {
@@ -25,31 +25,34 @@ const ApplyJobComponent = (props: any) => {
                     ease: 'bounce',
                 }
             );
-
             // auto-hide after 5s
             setTimeout(() => {
                 gsap.to(notifRef.current, {
                     x: 500,
                     y: 0,
                     opacity: 0,
-                    duration: 1,
-                    // delay: 1,
+                    duration: 1.5,
+                    delay: 0.5,
+                    onComplete: () => {
+                        navigate('/find-jobs')
+                    },
                     ease: 'bounce.out',
                 });
-            }, 6000);
+            }, 4500);
         }
-    }, [submit]);
+    }, [navigate, submit]);
     const handlePrev = () => {
         setPrev(!prev)
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     const handleSubmit = () => {
-        setSubmit(!submit);
-        let a = 6;
-        setInterval(() => {
+        setSubmit(true);
+        let a = 5;
+        const countDown = setInterval(() => {
             setSec(--a)
             if (a === 0)
-                navigate('/find-jobs')
+                clearInterval(countDown);
+            // navigate('/find-jobs')
         }, 1000);
     }
     return (
