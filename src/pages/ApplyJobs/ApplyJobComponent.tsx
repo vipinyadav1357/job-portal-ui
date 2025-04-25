@@ -138,7 +138,7 @@ const ApplyJobComponent = (props: any) => {
                     <div className='flex gap-3 justify-start items-center'>
                         {`redirecting to find jobs after ${sec}`}
                         <div className='flex items-center justify-center gap-2 mb-1 w-fit'>
-                            {[...Array(sec)].map((_, index) => <motion.div key={index} className='w-2 h-2 bg-bright-sun-400 rounded-full'
+                            {[...Array(sec)].map((_, index) => <motion.div key={Math.random() + 10} className='w-2 h-2 bg-bright-sun-400 rounded-full'
                                 animate={{ y: [0, 5, 0], scale: [1, 0.5, 1] }}
                                 transition={{ duration: 1.5, repeat: Infinity, ease: easeInOut, delay: index * 0.3 }}
                             >

@@ -4,7 +4,7 @@ import { Divider, Text } from '@mantine/core'
 import { Link } from 'react-router-dom'
 const JobCard = (props: any) => {
     return (
-        <Link to={"/job-profile"} className='cursor-pointer bg-mine-shaft-900 w-96 p-4 rounded-xl flex flex-col gap-3 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-400 transition-all duration-500 ease-in-out'>
+        <Link to={"/job-profile"} className='cursor-pointer bg-mine-shaft-900 w-80 p-4 rounded-xl flex flex-col gap-3 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-400 transition-all duration-500 ease-in-out'>
             <div className='flex justify-between'>
                 <div className='flex items-center gap-2'>
                     <div className='p-2 bg-mine-shaft-800 rounded-md'>
