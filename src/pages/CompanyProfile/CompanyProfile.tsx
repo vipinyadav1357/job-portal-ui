@@ -45,9 +45,9 @@ const CompanyProfile = (props: any) => {
             <Divider size={"xs"} my="xl" color='brightSun.4' />
             <div>
                 <div>
-                    <Tabs defaultValue="gallery">
-                        <Tabs.List className='mb-5 [&_button]:text-lg font-semibold [&_button[data-active=true]]:bg-bright-sun-400 [&_button[data-active=true]]:transition [&_button[data-active=true]]:duration-300 [&_button[data-active=true]]:ease-in-out flex gap-5 items-center'>
-                            <Tabs.Tab value="about" icon={<IconPhoto size={14} />}>about</Tabs.Tab>
+                    <Tabs defaultValue="about">
+                        <Tabs.List className='mb-5 [&_button]:text-lg font-semibold [&_button[aria-selected=true]]:bg-bright-sun-400 [&_button[data-active=true]]:transition [&_button[data-active=true]]:duration-300 [&_button[data-active=true]]:ease-in-out flex gap-5 items-center'>
+                            <Tabs.Tab value="about" icon={<IconPhoto size={14} />} >about</Tabs.Tab>
                             <Tabs.Tab value="jobs" icon={<IconBriefcase2Filled size={14} />}>jobs</Tabs.Tab>
                             <Tabs.Tab value="employees" icon={<IconUsers size={14} />}>employees</Tabs.Tab>
                         </Tabs.List>
