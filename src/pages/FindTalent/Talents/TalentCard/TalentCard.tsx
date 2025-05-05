@@ -1,7 +1,9 @@
-import { IconCurrencyRupee, IconHeart, IconMapPin, IconPointFilled } from '@tabler/icons-react'
-import React from 'react'
-import { Avatar, Button, Divider, Text } from '@mantine/core'
+import { IconCalendar, IconCurrencyRupee, IconHeart, IconMapPin, IconPointFilled } from '@tabler/icons-react'
+import React, { useState } from 'react'
+import { Avatar, Button, Divider, Modal, Text } from '@mantine/core'
+import { Calendar, TimeInput } from '@mantine/dates'
 import { Link } from 'react-router-dom'
+
 interface talent {
     name: string,
     role: string,
@@ -17,6 +19,10 @@ interface talentData {
     posted?: boolean
 }
 const TalentCard: React.FC<talentData> = ({ talentData, posted }) => {
+    const [opened, setOpened] = useState(false);
+    const [date, setDate] = useState<Date | null>(null);
+    const [time, setTime] = useState(new Date());
+
     return (
         <div className='cursor-pointer bg-mine-shaft-900 w-96 p-4 rounded-xl flex flex-col gap-3 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-400 transition-all duration-500 ease-in-out'>
             <div className='flex justify-between'>
@@ -51,9 +57,28 @@ const TalentCard: React.FC<talentData> = ({ talentData, posted }) => {
             <div className='flex [&>*]:w-1/2 [&>*]:p-1'>
                 <Link to="/talent-profile"><Button variant='light' color='brightSun.4' fullWidth>go to profile</Button></Link>
                 <div>
-                    <Button variant='outline' color='brightSun.4' fullWidth>message</Button>
+                    {posted ?
+                        <Button onClick={() => setOpened(true)} leftIcon={<IconCalendar />} variant='outline' color='brightSun.4' fullWidth>schedule</Button>
+                        :
+                        <Button variant='outline' color='brightSun.4' fullWidth>message</Button>
+                    }
                 </div>
             </div>
+            <Modal
+                opened={opened}
+                title="Choose a date and time"
+                onClose={() => setOpened(false)}
+                overlayOpacity={0.25}
+                overlayBlur={1}
+                centered
+                overlayColor="#c5c5c5"
+                size="xs"
+
+            >
+                {/* <DatePicker placeholder="Pick date" label="Event date" withAsterisk onChange={setValue} value={value} /> */}
+                <Calendar value={date} onChange={setDate} onClick={() => { setOpened(false) }} minDate={new Date()} maxDate={new Date(new Date().setDate(new Date().getDate() + 15))} />
+                <TimeInput value={time} onChange={setTime} format='12' label='choose time' />
+            </Modal>
         </div>
     )
 }
