@@ -15,7 +15,7 @@ const JobProfilePage = () => {
             <Link to="/find-jobs" className='inline-block mx-5'><Button variant='light' color='brightSun.4' leftIcon={<IconArrowBackUp className='' />} >go Back</Button></Link>
             <Divider size={"xs"} my="md" color='brightSun.4' />
             <div className='flex gap-5'>
-                <JobProfile {...jobList[0]} />
+                <JobProfile {...jobList[0]} edit={false} />
                 <RecommandedJobs />
             </div>
         </div>

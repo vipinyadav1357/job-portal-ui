@@ -2,12 +2,11 @@ import { ActionIcon, Avatar, Button, Divider, Tooltip } from '@mantine/core'
 import { IconBookmark, IconClockHour3, IconPointFilled } from '@tabler/icons-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { card, desc } from '../../Data/JobDescData'
-import { profile } from '../../Data/TalentData'
+import { card, desc, skills } from '../../Data/JobDescData'
 //@ts-ignore
 import DOMPurify from 'dompurify';
 
-const JobProfile = (props: any) => {
+const JobProfile = ({ edit, ...props }: { edit: boolean;[key: string]: any }) => {
     const data = DOMPurify.sanitize(desc)
     return (
         <div className='w-2/3 mx-5 pb-3'>
@@ -20,17 +19,22 @@ const JobProfile = (props: any) => {
                         <div className=' font-semibold text-2xl tracking-wide'>{props.jobTitle}</div>
                         <div className='text-lg text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props.applicants} applicants</div>
                         <div className='text-sm text-mine-shaft-300'>
-                            <IconClockHour3 className='inline-block text-bright-sun-400' />12 Days ago
+                            <IconClockHour3 className='inline-block text-bright-sun-400' />{props.postedDaysAgo} Days ago
                         </div>
                     </div>
                 </div>
                 <div className='flex flex-col justify-between items-center '>
                     <div className='text-sm'>
-                        <Link to={"/apply-job"} >
-                            <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >Apply</Button>
+                        <Link to={edit ? "" : "/apply-job"} >
+                            <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >{edit ? "edit" : "Apply"}</Button>
                         </Link>
                     </div>
-                    <IconBookmark className='text-bright-sun-400 hover:fill-bright-sun-400 hover:stroke-bright-sun-400 transition-all duration-200' stroke={1.5} />
+                    {
+                        edit ?
+                            <Button variant='outline' color='red.5' bg={"mineShaft.7"} >delete</Button>
+                            :
+                            <IconBookmark className='text-bright-sun-400 hover:fill-bright-sun-400 hover:stroke-bright-sun-400 transition-all duration-200' stroke={1.5} />
+                    }
                 </div>
             </div>
             <Divider size={"sm"} my="md" color='brightSun.0' />
@@ -52,8 +56,8 @@ const JobProfile = (props: any) => {
                 <div className='font-semibold text-2xl mb-3'>Required Skills</div>
                 <div className='flex flex-wrap gap-3  px-10'>
                     {
-                        profile
-                            .skills
+
+                        skills
                             .map((skill: any, index: any) =>
                                 <div key={index} className='bg-bright-sun-300 font-medium bg-opacity-15 rounded-3xl px-3 py-1 text-center'><ActionIcon className='h-fit w-fit' color="brightSun.4" variant="transparent" >
                                     {skill}

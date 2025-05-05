@@ -6,7 +6,7 @@ import PostedJobCard from './PostedJobCard'
 
 const PostedJobComponent = () => {
     return (
-        <div className='w-1/6 bg-red-600'>
+        <div className='w-1/6 ml-5 mt-5'>
             <div className='text-2xl font-semibold text-center mt-3'>Jobs</div>
             <div>
                 <Tabs variant='pills' defaultValue="Active">
