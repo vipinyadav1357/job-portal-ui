@@ -1,4 +1,4 @@
-import { IconCalendar, IconCurrencyRupee, IconHeart, IconMapPin, IconPointFilled } from '@tabler/icons-react'
+import { IconCalendar, IconCalendarMonth, IconCurrencyRupee, IconHeart, IconMapPin, IconPointFilled } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import { Avatar, Button, Divider, Modal, Text } from '@mantine/core'
 import { Calendar, TimeInput } from '@mantine/dates'
@@ -16,11 +16,12 @@ interface talent {
 }
 interface talentData {
     talentData: talent,
-    posted?: boolean
+    posted?: boolean,
+    invite?: boolean
 }
-const TalentCard: React.FC<talentData> = ({ talentData, posted }) => {
+const TalentCard: React.FC<talentData> = ({ talentData, posted, invite }) => {
     const [opened, setOpened] = useState(false);
-    const [date, setDate] = useState<Date | null>(null);
+    const [date, setDate] = useState<Date | null>(new Date());
     const [time, setTime] = useState(new Date());
 
     return (
@@ -48,21 +49,40 @@ const TalentCard: React.FC<talentData> = ({ talentData, posted }) => {
                 {talentData.about}
             </Text>
             <Divider mr="xs" color='mine-shaft-700' />
+            {
+                invite
+                    ?
+                    <div className='flex justify-between text-sm text-mine-shaft-400 items-center'>
+                        <IconCalendarMonth />Interview scheduled on <span className='text-bright-sun-400'>{date?.toLocaleDateString()}</span> at <span className='text-bright-sun-400'>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                    :
+                    <div className='flex justify-between text-xs text-mine-shaft-400 items-center'>
+                        <div className='text-mine-shaft-200 font-semibold text-sm [text-shadow:_0px_0px_2px_#b0b0b0,_-0px_0px_2px_#b0b0b0,_-0px_0px_2px_#b0b0b0,_0px_-0px_2px_#b0b0b0]'><IconCurrencyRupee className='inline-block' width={16} height={16} stroke={3} />{talentData.expectedCtc}</div>
+                        <div className='flex items-center gap-1'>
+                            <IconMapPin className='inline-block text-bright-sun-400' stroke={1.5} />{talentData.location}
+                        </div>
+                    </div>
+            }
 
-            <div className='flex justify-between text-xs text-mine-shaft-400 items-center'>
-                <div className='text-mine-shaft-200 font-semibold text-sm [text-shadow:_0px_0px_2px_#b0b0b0,_-0px_0px_2px_#b0b0b0,_-0px_0px_2px_#b0b0b0,_0px_-0px_2px_#b0b0b0]'><IconCurrencyRupee className='inline-block' width={16} height={16} stroke={3} />{talentData.expectedCtc}</div>
-                <div className='flex items-center gap-1'><IconMapPin className='inline-block text-bright-sun-400' stroke={1.5} />{talentData.location}</div>
-            </div>
             <Divider mr="xs" color='mine-shaft-700' />
-            <div className='flex [&>*]:w-1/2 [&>*]:p-1'>
-                <Link to="/talent-profile"><Button variant='light' color='brightSun.4' fullWidth>go to profile</Button></Link>
-                <div>
-                    {posted ?
-                        <Button onClick={() => setOpened(true)} leftIcon={<IconCalendar />} variant='outline' color='brightSun.4' fullWidth>schedule</Button>
-                        :
-                        <Button variant='outline' color='brightSun.4' fullWidth>message</Button>
-                    }
-                </div>
+            <div className='flex [&>*]:w-1/2 [&>*]:p-1 items-center'>
+                {!invite && <>
+                    <Link to="/talent-profile"><Button variant='light' color='brightSun.4' fullWidth>go to profile</Button></Link>
+                    <div>
+                        {posted ?
+                            <Button onClick={() => setOpened(true)} leftIcon={<IconCalendar />} variant='outline' color='brightSun.4' fullWidth>schedule</Button>
+                            :
+                            <Button variant='outline' color='brightSun.4' fullWidth>message</Button>
+                        }
+                    </div>
+                </>
+                }
+                {
+                    invite && <>
+                        <Button variant='light' color='brightSun.4' fullWidth>Accept</Button>
+                        <Button variant='outline' color='brightSun.4' fullWidth>Reject</Button>
+                    </>
+                }
             </div>
             <Modal
                 opened={opened}

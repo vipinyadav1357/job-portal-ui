@@ -4,7 +4,6 @@ import React from 'react'
 import CompanyEmployee from '../CompanyProfile/CompanyEmployee'
 import { jobList } from '../../Data/JobsData'
 import JobProfile from '../JobProfile/JobProfile'
-import CopmanyJobsComponent from '../CompanyProfile/CopmanyJobsComponent'
 import { talents } from '../../Data/TalentData'
 import TalentCard from '../FindTalent/Talents/TalentCard/TalentCard'
 
@@ -28,13 +27,27 @@ const PostedJobDescription = () => {
                     </Tabs.Panel>
 
                     <Tabs.Panel value="Applicants" pt="xs">
-                        <div className=' flex flex-wrap gap-10 '>
+                        <div className=' flex flex-wrap gap-10 justify-around'>
                             {
-                                talents.map((job, index) => <div key={index}><TalentCard talentData={job} posted /></div>)
+                                talents
+                                    .map((job, index) =>
+                                        <div key={index}>
+                                            <TalentCard talentData={job} posted />
+                                        </div>
+                                    )
                             }
                         </div>                    </Tabs.Panel>
                     <Tabs.Panel value="Invited" pt="xs">
-                        <CompanyEmployee />
+                        <div className=' flex flex-wrap gap-10 justify-around'>
+                            {
+                                talents
+                                    .map((job, index) =>
+                                        <div key={index}>
+                                            <TalentCard talentData={job} invite />
+                                        </div>
+                                    )
+                            }
+                        </div>
                     </Tabs.Panel>
                 </Tabs>
             </div>
