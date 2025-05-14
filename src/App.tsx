@@ -14,6 +14,7 @@ import ApplyJobsPage from './pages/ApplyJobs/ApplyJobsPage';
 import { useEffect } from 'react';
 import CompanyProfilePage from './pages/CompanyProfile/CompanyProfilePage';
 import PostedJobsPage from './pages/PostedJobs/PostedJobsPage';
+import JobHistoryPage from './pages/JobHistory/JobHistoryPage';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -50,6 +51,7 @@ function App() {
           <Route path='/apply-job' element={<ApplyJobsPage />} />
           <Route path='/company-profile' element={<CompanyProfilePage />} />
           <Route path='/posted-job' element={<PostedJobsPage />} />
+          <Route path='/job-history' element={<JobHistoryPage />} />
           <Route path='*' element={<HomePage />} />
         </Routes>
         <Footer />

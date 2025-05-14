@@ -5,7 +5,8 @@ const links: { name: string, url: string }[] = [
     { name: "Find Jobs", url: "find-jobs" },
     { name: "Find Talent", url: "find-talent" },
     { name: "Post Jobs", url: "post-job" },
-    { name: "Posted jobs", url: "posted-job" }
+    { name: "Posted jobs", url: "posted-job" },
+    { name: "Job history", url: "job-history" },
 ]
 const renderlinks = (location: any) => {
     return (links.map((link, index) =>
