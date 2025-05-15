@@ -3,8 +3,11 @@ import { IconAnchor, IconBell, IconSettings } from "@tabler/icons-react";
 import React, { useEffect, useRef } from "react";
 import NavLinks from "./NavLinks";
 import gsap from "gsap";
+import { useLocation } from "react-router-dom";
 const Header = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       const ref = divRef.current;
@@ -24,7 +27,7 @@ const Header = () => {
     return () => clearTimeout(timeout);
   }, [])
   return (
-    <div ref={divRef} className="w-full font-['poppins'] bg-mine-shaft-950 text-white h-24 px-8 flex justify-between items-center">
+    (location.pathname !== "/sign-up" && location.pathname !== "/log-in") ? <div ref={divRef} className="w-full font-['poppins'] bg-mine-shaft-950 text-white h-24 px-8 flex justify-between items-center">
       <div className="flex gap-1 items-center text-bright-sun-400">
         <IconAnchor className="h-9 w-9" stroke={"4.5"} />
         <div className=" text-4xl font-bold tracking-wider [text-shadow:_0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_-0px_1px_3px_#f99b07,_0px_-1px_3px_#f99b07]">ViJobS</div>
@@ -53,7 +56,7 @@ const Header = () => {
           </Indicator>
         </div>
       </div>
-    </div >
+    </div > : <></>
   );
 };
 

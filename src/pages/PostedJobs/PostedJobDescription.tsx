@@ -1,7 +1,6 @@
 import { Badge, Tabs } from '@mantine/core'
 import { IconPhoto, IconBriefcase2Filled, IconUsers } from '@tabler/icons-react'
 import React from 'react'
-import CompanyEmployee from '../CompanyProfile/CompanyEmployee'
 import { jobList } from '../../Data/JobsData'
 import JobProfile from '../JobProfile/JobProfile'
 import { talents } from '../../Data/TalentData'
@@ -11,7 +10,7 @@ import TalentCard from '../FindTalent/Talents/TalentCard/TalentCard'
 const PostedJobDescription = () => {
 
     return (
-        <div className='mt-5 w-3/4 px-5'>
+        <div className='mt-5 w-5/6'>
             <div className='text-2xl font-semibold  mt-3 flex items-center'>Software Engineer <Badge mr={"md"} mb={"lg"} size='xs' variant='light' color='BrightSun.4' >new</Badge></div>
             <div className='font-medium text-mine-shaft-300 mb-5'>Benguluru, India</div>
             <div>
@@ -22,12 +21,12 @@ const PostedJobDescription = () => {
                         <Tabs.Tab value="Invited" icon={<IconUsers size={14} />}>Invited</Tabs.Tab>
                     </Tabs.List>
 
-                    <Tabs.Panel value="Overview" pt="xs" className='[&>div]:w-full '>
+                    <Tabs.Panel value="Overview" pt="xs" className='[&>div]:w-fit '>
                         <JobProfile {...jobList[0]} edit={true} />
                     </Tabs.Panel>
 
                     <Tabs.Panel value="Applicants" pt="xs">
-                        <div className=' flex flex-wrap gap-10 justify-around'>
+                        <div className=' flex flex-wrap gap-10 justify-center'>
                             {
                                 talents
                                     .map((job, index) =>
@@ -36,9 +35,10 @@ const PostedJobDescription = () => {
                                         </div>
                                     )
                             }
-                        </div>                    </Tabs.Panel>
+                        </div>
+                    </Tabs.Panel>
                     <Tabs.Panel value="Invited" pt="xs">
-                        <div className=' flex flex-wrap gap-10 justify-around'>
+                        <div className=' flex flex-wrap gap-10 justify-center'>
                             {
                                 talents
                                     .map((job, index) =>
