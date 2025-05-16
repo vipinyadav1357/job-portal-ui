@@ -16,6 +16,7 @@ import CompanyProfilePage from './pages/CompanyProfile/CompanyProfilePage';
 import PostedJobsPage from './pages/PostedJobs/PostedJobsPage';
 import JobHistoryPage from './pages/JobHistory/JobHistoryPage';
 import SignUpPage from './pages/SignUp/SignUpPage';
+import UserProfilePage from './pages/UserProfile/UserProfilePage';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -55,6 +56,7 @@ function App() {
           <Route path='/job-history' element={<JobHistoryPage />} />
           <Route path='/sign-up' element={<SignUpPage />} />
           <Route path='/log-in' element={<SignUpPage />} />
+          <Route path='/user-profile' element={<UserProfilePage />} />
           <Route path='*' element={<HomePage />} />
         </Routes>
         <Footer />
