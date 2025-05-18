@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Input, Badge, CloseButton } from '@mantine/core';
 import { IconAsterisk } from '@tabler/icons-react';
 
-const TagsInput = () => {
-    const [tags, setTags] = useState<string[]>([]);
+const TagsInput = (props: any) => {
+    const [tags, setTags] = useState<string[]>(props.skills || []);
     const [inputValue, setInputValue] = useState('');
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -11,6 +11,7 @@ const TagsInput = () => {
             event.preventDefault();
             if (!tags.includes(inputValue.trim())) {
                 setTags([...tags, inputValue.trim()]);
+                props.updateSkill(inputValue.trim());
                 setInputValue('');
             }
         }
@@ -18,6 +19,7 @@ const TagsInput = () => {
 
     const removeTag = (tagToRemove: string) => {
         setTags(tags.filter((tag) => tag !== tagToRemove));
+        props.handleDelete(tagToRemove);
     };
 
     return (

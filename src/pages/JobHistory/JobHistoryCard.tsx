@@ -1,6 +1,5 @@
 import { Button, Divider, Text } from '@mantine/core'
 import { IconPointFilled, IconBookmark, IconCurrencyRupee, IconClockHour3, IconBookmarkFilled, IconCalendarMonth } from '@tabler/icons-react'
-import { time } from 'console'
 import React from 'react'
 import { Link } from 'react-router-dom'
 

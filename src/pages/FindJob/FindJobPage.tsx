@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import SearchBar from './SearchBar/SearchBar'
 import { Divider } from '@mantine/core'
-import Jobs from './JobLists/JobLists'
+import JobLists from './JobLists/JobLists'
 
 const FindJobPage = () => {
     useEffect(() => {
@@ -12,7 +12,7 @@ const FindJobPage = () => {
             <Divider size={"xs"} mx="md" />
             <SearchBar />
             <Divider size={"xs"} mx="md" />
-            <Jobs />
+            <JobLists />
         </div >
     )
 }

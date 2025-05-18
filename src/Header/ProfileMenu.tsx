@@ -1,5 +1,5 @@
-import { Menu, Avatar, Switch, useMantineTheme, Group } from '@mantine/core';
-import { IconMessageCircle, IconTrash, IconArrowsLeftRight } from '@tabler/icons';
+import { Menu, Avatar, Switch, useMantineTheme } from '@mantine/core';
+import { IconMessageCircle } from '@tabler/icons';
 import { IconFileText, IconLogout2, IconMoon, IconMoonStars, IconSun, IconUserCircle } from '@tabler/icons-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';

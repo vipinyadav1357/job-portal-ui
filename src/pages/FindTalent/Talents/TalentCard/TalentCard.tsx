@@ -1,5 +1,5 @@
 import { IconCalendar, IconCalendarMonth, IconCurrencyRupee, IconHeart, IconMapPin, IconPointFilled } from '@tabler/icons-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar, Button, Divider, Modal, Text } from '@mantine/core'
 import { Calendar, TimeInput } from '@mantine/dates'
 import { Link } from 'react-router-dom'
@@ -21,9 +21,9 @@ interface talentData {
 }
 const TalentCard: React.FC<talentData> = ({ talentData, posted, invite }) => {
     const [opened, setOpened] = useState(false);
-    const [date, setDate] = useState<Date | null>(new Date());
+    const [date, setDate] = useState<Date | null>(null);
     const [time, setTime] = useState(new Date());
-
+    useEffect(() => { console.log(date) }, [date])
     return (
         <div className='cursor-pointer bg-mine-shaft-900 w-96 p-4 rounded-xl flex flex-col gap-3 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-400 transition-all duration-500 ease-in-out'>
             <div className='flex justify-between'>
