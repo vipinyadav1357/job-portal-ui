@@ -4,7 +4,6 @@ import fields from '../../../Data/Profile'
 import { Textarea, Modal, Button, Anchor, Checkbox } from '@mantine/core'
 import { Calendar } from '@mantine/dates';
 import { IconCalendar } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
 
 const ExpInput = (props: any) => {
     const [desc, setDesc] = useState<string>("As a Software Engineer at Google, I am responsible for designing, developing, and maintaining scalable software solutions that enhance user experience and improve operational efficiency. My role involves collaborating with cross-functional teams to define project requirements, develop technical specifications, and implement robust applications using cutting-edge technologies. I actively participate in code reviews, ensuring adherence to best practices and coding standards, and contribute to the continuous improvement of the development process.")
@@ -15,8 +14,6 @@ const ExpInput = (props: any) => {
     const [checked, setChecked] = useState(false);
 
     useEffect(() => {
-
-
         if (checked) {
             setDate2(new Date());
         }

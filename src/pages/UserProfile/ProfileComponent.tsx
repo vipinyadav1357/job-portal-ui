@@ -8,11 +8,14 @@ import fields from '../../Data/Profile'
 import TagsInput from './SelectInput/TagsInput'
 import { profile } from '../../Data/TalentData'
 import ExpInput from './Cards/ExpInput'
+import CertiInput from './Cards/CertiInput'
 
 const ProfileComponent = ({ props }: any) => {
     const [edit, setEdit] = useState([false, false, false, false, false]);
     const [about, setAbout] = useState(props.about);
     const [addexp, setAddExp] = useState(false);
+    const [addcerti, setAddCerti] = useState(false);
+
     const handleEdit = (index: number) => {
         const newEdit = [...edit];
         newEdit[index] = !newEdit[index];
@@ -132,16 +135,22 @@ const ProfileComponent = ({ props }: any) => {
             <Divider size={"xs"} my="xl" color='brightSun.4' />
             <div>
                 <div className='font-semibold text-2xl mb-5 flex justify-between items-center pr-5'>Certification
-                    <ActionIcon onClick={() => handleEdit(4)} color="brightSun.4" variant="subtle" size={40} className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
-                        {edit[4] ? <IconDeviceFloppy size={30} stroke={1.5} /> : <IconPencil size={30} />}
-                    </ActionIcon>
+                    <div className='flex gap-5'>
+                        <ActionIcon onClick={() => setAddCerti(!addcerti)} color="brightSun.4" variant="subtle" size={40} className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
+                            {<IconPlus size={30} />}
+                        </ActionIcon>
+                        <ActionIcon onClick={() => handleEdit(4)} color="brightSun.4" variant="subtle" size={40} className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
+                            {edit[4] ? <IconDeviceFloppy size={30} stroke={1.5} /> : <IconPencil size={30} />}
+                        </ActionIcon>
+                    </div>
                 </div>
                 <div className='flex flex-col gap-5 px-5'>
                     {props
                         .certifications
                         .map((cert: any, index: any) =>
-                            <CertificationCard key={index} props={cert} />
+                            <CertificationCard key={index} props={cert} edit={edit[4]} />
                         )}
+                    {addcerti && <CertiInput setAddCerti={setAddCerti} />}
                 </div>
             </div>
         </div>
