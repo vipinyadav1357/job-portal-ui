@@ -2,8 +2,6 @@ import { Button, Modal, TextInput } from '@mantine/core';
 import { Calendar } from '@mantine/dates';
 import { IconCalendar } from '@tabler/icons-react';
 import React, { useState } from 'react'
-import SelectInput from '../SelectInput/SelectInput';
-import fields from '../../../Data/Profile';
 
 const CertiInput = (props: any) => {
     const [date1, setDate1] = useState<Date | null>(null);
