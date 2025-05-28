@@ -14,6 +14,7 @@ interface talent {
     location: string,
     image: string
 }
+
 interface talentData {
     talentData: talent,
     posted?: boolean,

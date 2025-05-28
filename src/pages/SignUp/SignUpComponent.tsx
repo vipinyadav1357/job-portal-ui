@@ -1,12 +1,49 @@
 import { Anchor, Button, Checkbox, PasswordInput, Radio, TextInput } from '@mantine/core'
 import { IconAt, IconLock } from '@tabler/icons-react'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerUser } from '../../services/UserServices';
+import { RegisterRequest } from '../../services/models/RegisterRequest';
 
 const SignUpComponent = () => {
+    const navigate = useNavigate();
     const [checked, setChecked] = useState(false);
-    const [role, setRole] = useState<"APPLICANT" | "EMPLOYER">("APPLICANT");
+    const [form, setForm] = useState<RegisterRequest>({
+        name: "vipin yadav",
+        email: "yadavvipinysy063@gmail.com",
+        password: "099609960996",
+        confirmPassword: "099609960996",
+        AccountType: "APPLICANT" as "APPLICANT" | "EMPLOYER"
+    });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | "APPLICANT" | "EMPLOYER") => {
+        if (typeof (e) == "string")
+            setForm({ ...form, AccountType: e as "APPLICANT" | "EMPLOYER" });
+        else
+            setForm({ ...form, [e.target.name]: e.target.value })
+    }
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await registerUser(form)
+            .then((res) => {
+                console.log(res);
+                navigate("/log-in");
+            }).catch((err) => {
+                console.error("Error during registration:", err.response.data.error);
+            }
+            );
+        // Reset form after submission
+        setForm({
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            AccountType: "APPLICANT" as "APPLICANT" | "EMPLOYER"
+        });
+        setChecked(false); // Reset checkbox state
+        // Optionally, redirect or show a success message
+        // Uncomment if you want to redirect after registration
+    }
     return (
         <div className='w-1/2 px-20 flex flex-col justify-center items-center gap-5'>
             <div className='text-2xl font-semibold'>
@@ -23,6 +60,9 @@ const SignUpComponent = () => {
                 size="md"
                 // icon={}
                 withAsterisk
+                value={form.name}
+                onChange={handleChange}
+                name='name'
             />
 
             <TextInput
@@ -37,6 +77,9 @@ const SignUpComponent = () => {
                 type='email'
                 icon={<IconAt className='text-bright-sun-400' />}
                 withAsterisk
+                value={form.email}
+                onChange={handleChange}
+                name='email'
             />
 
             <PasswordInput
@@ -50,8 +93,10 @@ const SignUpComponent = () => {
                 size="md"
                 icon={<IconLock className='text-bright-sun-400' />}
                 withAsterisk
+                value={form.password}
+                onChange={handleChange}
+                name='password'
             />
-
             <PasswordInput
                 className='w-3/4'
                 placeholder="Your Password"
@@ -63,14 +108,18 @@ const SignUpComponent = () => {
                 size="md"
                 icon={<IconLock className='text-bright-sun-400' />}
                 withAsterisk
+                value={form.confirmPassword}
+                onChange={handleChange}
+                name='confirmPassword'
             />
             <div className='flex justify-start w-3/4 gap-5'>
                 <Radio.Group
                     name="favoriteFramework"
                     label="Select your Account Type"
-                    value={role}
-                    onChange={(value) => setRole(value as "APPLICANT" | "EMPLOYER")}
+                    value={form.AccountType}
+                    // onChange={(value) => setRole(value as "APPLICANT" | "EMPLOYER")}
                     withAsterisk
+                    onChange={handleChange as any} // TypeScript workaround for union type
                 >
                     <Radio className='px-4 py-4 hover:bg-mine-shaft-900 has-[:checked]:bg-bright-sun-400/5 has-[:checked]:border-bright-sun-400 border border-mine-shaft-800 rounded-lg' value="APPLICANT" label="APPLICANT" />
                     <Radio className='px-4 py-4 hover:bg-mine-shaft-900 has-[:checked]:bg-bright-sun-400/5 has-[:checked]:border-bright-sun-400 border border-mine-shaft-800 rounded-lg' value="EMPLOYER" label="EMPLOYER" />
@@ -83,7 +132,7 @@ const SignUpComponent = () => {
                 />
             </div>
 
-            <Button component={Link} to="/log-in" variant='filled' color='brightSun.4' bg={"mineShaft.7"} className='w-3/4'>Create Account</Button>
+            <Button onClick={handleSubmit} variant='filled' color='brightSun.4' bg={"mineShaft.7"} className='w-3/4'>Create Account</Button>
             <div className='text-sm text-mine-shaft-300'>
                 Already have an account?<Anchor component={Link} to="/log-in">Login</Anchor>
             </div>

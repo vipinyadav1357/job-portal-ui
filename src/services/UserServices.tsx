@@ -10,7 +10,7 @@ const registerUser = async (userData: any) => {
             throw error;
         });
 }
-const login = async (userData: any) => {
+const loginUser = async (userData: any) => {
     return axios.post(BASE_URL + "login", userData)
         .then(response => response.data)
         .catch(error => {
@@ -19,4 +19,4 @@ const login = async (userData: any) => {
         });
 }
 
-export { registerUser, login };
+export { registerUser, loginUser };
