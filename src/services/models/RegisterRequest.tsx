@@ -3,5 +3,5 @@ export interface RegisterRequest {
     email: string;
     password: string;
     confirmPassword: string;
-    AccountType: "APPLICANT" | "EMPLOYER";
+    accountType: "APPLICANT" | "EMPLOYER";
 }

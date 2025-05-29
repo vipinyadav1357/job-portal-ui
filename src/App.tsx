@@ -2,6 +2,7 @@ import './App.css';
 import { MantineProvider, MantineThemeOverride } from '@mantine/core';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FindJob from './pages/FindJob/FindJobPage';
+
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import CursorFollower from './Animition/CursorAnimition/CursorFollower';
