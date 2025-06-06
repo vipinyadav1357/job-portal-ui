@@ -6,9 +6,12 @@ import { loginUser } from '../../services/UserServices';
 import { LoginRequest } from '../../services/models/LoginRequest';
 import { SignUpValidation } from '../../services/FormValidation';
 import { UserLogInAndSignUpError } from '../../services/models/UserLogInAndSignUpError';
+import { useDisclosure } from '@mantine/hooks';
+import ResetPassword from '../SignUp/ResetPassword';
 
 const LogInComponent = () => {
     const navigate = useNavigate();
+    const [opened, { close, open }] = useDisclosure(false);
     const [form, setForm] = useState<LoginRequest>({
         email: "yadavvipinysy063@gmail.com",
         password: "099609960996",
@@ -31,7 +34,7 @@ const LogInComponent = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let isValid = true;
-        // Validate form fields        // Validate form fields
+        // Validate form fields        
         for (let key in form) {
             if (key === "accountType") continue; // Skip accountType validation here
             if (form[key as keyof LoginRequest] === "") {
@@ -44,7 +47,6 @@ const LogInComponent = () => {
         }
         await loginUser(form)
             .then((res) => {
-                console.log(res);
                 navigate("/");
             }).catch((err) => {
                 console.error("Error during registration:", err.response.data.error);
@@ -102,7 +104,11 @@ const LogInComponent = () => {
             <div className='text-sm text-mine-shaft-300'>
                 Not a member yet? <Anchor onClick={clearForm} component={Link} to="/sign-up" size="xs" color='brightSun.4' className='text-bright-sun-400'>Sign Up</Anchor>
             </div>
-
+            <div onClick={open} className='text-bright-sun-400 text-sm hover:underline text-center cursor-pointer'>forget password ?</div>
+            <ResetPassword
+                opened={opened}
+                close={close}
+            />
         </div>
     )
 }
