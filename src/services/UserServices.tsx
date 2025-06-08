@@ -32,7 +32,7 @@ const sendOtp = async (email: string) => {
 }
 const verifyOtp = async (otp: string, email: string) => {
     const encodedEmail = encodeURIComponent(email);
-    return axios.get(BASE_URL + `verifyOtp/${encodedEmail}/${otp}`)
+    return axios.get(BASE_URL + `otp/${encodedEmail}/${otp}`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error verifying the OTP!", error);
