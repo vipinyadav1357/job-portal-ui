@@ -1,8 +1,9 @@
-import { Modal, TextInput, Button } from '@mantine/core';
+import { Modal, TextInput, Button, PasswordInput } from '@mantine/core';
 import React, { useState } from 'react'
-import { sendOtp, verifyOtp } from '../../services/UserServices';
+import { resetPassword, sendOtp, verifyOtp } from '../../services/UserServices';
 import OTPInput, { InputProps } from 'react-otp-input';
 import { useNavigate } from 'react-router-dom';
+import { LoginRequest } from '../../services/models/LoginRequest';
 
 interface Props {
     opened: boolean;
@@ -14,7 +15,8 @@ const ResetPassword = ({ opened, close }: Props) => {
     const [otpSent, setOtpSent] = useState<boolean>(false);
     const [otpSending, setOtpSending] = useState<boolean>(false);
     const [otp, setOtp] = useState<string>("");
-    // const [otpVerifing, setOtpVerifing] = useState<boolean>(false);
+    const [otpVerifed, setOtpVerifed] = useState<boolean>(false);
+    const [passwordReq, setPasswordReq] = useState<LoginRequest>({} as LoginRequest);
     const handleOtpSend = async () => {
         // Logic to send OTP to the provided email
         setOtpSending(true);
@@ -34,14 +36,28 @@ const ResetPassword = ({ opened, close }: Props) => {
         await verifyOtp(otp, email)
             .then((res) => {
                 setOtpSending(false);
-                naviagte("/log-in"); // Redirect to reset password page
-                close(); // Close the modal
+                setOtpVerifed(true);
+                setOtp("")
                 console.log("OTP verified successfully:", res);
                 // Here you can redirect to the reset password page or show a success message
             }).catch((err) => {
                 setOtpSending(false);
+                setOtpVerifed(false);
+                setOtp("");
                 console.error("Error verifying OTP:", err.response.data.error);
             });
+    }
+    const changePassword = async () => {
+        if (passwordReq.password !== passwordReq.confirmPassword)
+            return console.error("Passwords do not match");
+        setPasswordReq({ ...passwordReq, email: email })
+        await resetPassword(passwordReq).then((res) => {
+            console.log("Password changed successfully:", res);
+            naviagte("/log-in"); // Redirect to login page after successful password change
+            close(); // Close the modal
+        }).catch((err) => {
+            console.error("Error changing password:", err.response.data.error);
+        });
     }
     return (
         <Modal
@@ -56,7 +72,7 @@ const ResetPassword = ({ opened, close }: Props) => {
         >
             <div className="flex flex-col items-center justify-center gap-6 ">
                 {otpSent ? (
-                    <><OTPInput
+                    !otpVerifed ? <><OTPInput
                         value={otp}
                         onChange={setOtp}
                         numInputs={6}
@@ -85,6 +101,42 @@ const ResetPassword = ({ opened, close }: Props) => {
                             verify otp
                         </Button>
                     </>
+                        :
+                        <>
+                            <PasswordInput
+                                className='w-3/5'
+                                value={passwordReq.password}
+                                onChange={(e) => setPasswordReq({ ...passwordReq, password: e.target.value })}
+                                label="Password"
+                                name="password"
+                                placeholder="Enter your email"
+                                size="md"
+                                withAsterisk
+                            />
+                            <PasswordInput
+                                className='w-3/5'
+                                value={passwordReq.confirmPassword}
+                                onChange={(e) => setPasswordReq({ ...passwordReq, confirmPassword: e.target.value })}
+                                label="Confirm Password"
+                                name="confirmPassword"
+                                placeholder="Enter your new password"
+                                size="md"
+                                type="password"
+                                withAsterisk
+                            />
+                            <Button
+                                variant="filled"
+                                className='w-3/5'
+                                color="brightSun.4 "
+                                bg={"brightSun.4/10"}
+                                size="md"
+                                loading={otpSending}
+                                loaderPosition="center"
+                                onClick={changePassword}
+                            >
+                                reset password
+                            </Button>
+                        </>
                 ) : (
                     <div
                         className={`w-full ${otpSending ? '!cursor-not-allowed' : '!cursor-pointer'}`}

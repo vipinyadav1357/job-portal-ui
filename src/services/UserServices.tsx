@@ -39,12 +39,12 @@ const verifyOtp = async (otp: string, email: string) => {
             throw error;
         });
 }
-const ResetPassword = async (userData: LoginRequest) => {
-    return axios.post(BASE_URL + "changePassword", userData)
+const resetPassword = async (userData: LoginRequest) => {
+    return axios.post(BASE_URL + "changePass", userData)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error resetting the password!", error);
             throw error;
         });
 }
-export { registerUser, loginUser, ResetPassword, sendOtp, verifyOtp };
+export { registerUser, loginUser, resetPassword, sendOtp, verifyOtp };
