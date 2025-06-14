@@ -16,7 +16,11 @@ const ResetPassword = ({ opened, close }: Props) => {
     const [otpSending, setOtpSending] = useState<boolean>(false);
     const [otp, setOtp] = useState<string>("");
     const [otpVerifed, setOtpVerifed] = useState<boolean>(false);
-    const [passwordReq, setPasswordReq] = useState<LoginRequest>({} as LoginRequest);
+    const [passwordReq, setPasswordReq] = useState<LoginRequest>({
+        password: '',
+        confirmPassword: '',
+        email: email,
+    });
     const handleOtpSend = async () => {
         // Logic to send OTP to the provided email
         setOtpSending(true);
@@ -50,7 +54,6 @@ const ResetPassword = ({ opened, close }: Props) => {
     const changePassword = async () => {
         if (passwordReq.password !== passwordReq.confirmPassword)
             return console.error("Passwords do not match");
-        setPasswordReq({ ...passwordReq, email: email })
         await resetPassword(passwordReq).then((res) => {
             console.log("Password changed successfully:", res);
             naviagte("/log-in"); // Redirect to login page after successful password change
@@ -72,35 +75,37 @@ const ResetPassword = ({ opened, close }: Props) => {
         >
             <div className="flex flex-col items-center justify-center gap-6 ">
                 {otpSent ? (
-                    !otpVerifed ? <><OTPInput
-                        value={otp}
-                        onChange={setOtp}
-                        numInputs={6}
-                        inputStyle={{
-                            width: "3rem",
-                            height: "3rem",
-                            margin: "0 0.5rem",
-                            fontSize: "1.5rem",
-                            borderRadius: 4,
-                            border: "3px solid #ffbd20",
-                            color: "#3d3d3d",
-                            backgroundColor: "white",
-                        }}
-                        renderInput={(props: InputProps) => <input {...props} />}
-                    />
-                        <Button
-                            variant="filled"
-                            className='w-3/5'
-                            color="brightSun.4 "
-                            bg={"brightSun.4/10"}
-                            size="md"
-                            loading={otpSending}
-                            loaderPosition="center"
-                            onClick={otpVerify}
-                        >
-                            verify otp
-                        </Button>
-                    </>
+                    !otpVerifed ?
+                        <>
+                            <OTPInput
+                                value={otp}
+                                onChange={setOtp}
+                                numInputs={6}
+                                inputStyle={{
+                                    width: "3rem",
+                                    height: "3rem",
+                                    margin: "0 0.5rem",
+                                    fontSize: "1.5rem",
+                                    borderRadius: 4,
+                                    border: "3px solid #ffbd20",
+                                    color: "#3d3d3d",
+                                    backgroundColor: "white",
+                                }}
+                                renderInput={(props: InputProps) => <input {...props} />}
+                            />
+                            <Button
+                                variant="filled"
+                                className='w-3/5'
+                                color="brightSun.4 "
+                                bg={"brightSun.4/10"}
+                                size="md"
+                                loading={otpSending}
+                                loaderPosition="center"
+                                onClick={otpVerify}
+                            >
+                                verify otp
+                            </Button>
+                        </>
                         :
                         <>
                             <PasswordInput
@@ -121,7 +126,6 @@ const ResetPassword = ({ opened, close }: Props) => {
                                 name="confirmPassword"
                                 placeholder="Enter your new password"
                                 size="md"
-                                type="password"
                                 withAsterisk
                             />
                             <Button
