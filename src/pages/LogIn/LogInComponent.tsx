@@ -8,8 +8,11 @@ import { SignUpValidation } from '../../services/FormValidation';
 import { UserLogInAndSignUpError } from '../../services/models/UserLogInAndSignUpError';
 import { useDisclosure } from '@mantine/hooks';
 import ResetPassword from '../SignUp/ResetPassword';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../slices/UserSlice';
 
 const LogInComponent = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [opened, { close, open }] = useDisclosure(false);
     const [form, setForm] = useState<LoginRequest>({
@@ -47,6 +50,7 @@ const LogInComponent = () => {
         }
         await loginUser(form)
             .then((res) => {
+                dispatch(setUser(res))
                 navigate("/");
             }).catch((err) => {
                 console.error("Error during registration:", err.response.data.error);

@@ -18,6 +18,8 @@ import PostedJobsPage from './pages/PostedJobs/PostedJobsPage';
 import JobHistoryPage from './pages/JobHistory/JobHistoryPage';
 import SignUpPage from './pages/SignUp/SignUpPage';
 import UserProfilePage from './pages/UserProfile/UserProfilePage';
+import { Provider } from 'react-redux';
+import store from './store'
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -41,28 +43,30 @@ function App() {
     window.scroll(0, 0);
   })
   return (
-    <MantineProvider theme={theme}>
-      <BrowserRouter>
-        <CursorFollower />
-        <Header />
-        <Routes>
-          <Route path='/find-jobs' element={<FindJob />} />
-          <Route path='/find-talent' element={<FindTalent />} />
-          <Route path='/talent-profile' element={<TalentProfilePage />} />
-          <Route path='/post-job' element={<UploadJobsPage />} />
-          <Route path='/job-profile' element={<JobProfilePage />} />
-          <Route path='/apply-job' element={<ApplyJobsPage />} />
-          <Route path='/company-profile' element={<CompanyProfilePage />} />
-          <Route path='/posted-job' element={<PostedJobsPage />} />
-          <Route path='/job-history' element={<JobHistoryPage />} />
-          <Route path='/sign-up' element={<SignUpPage />} />
-          <Route path='/log-in' element={<SignUpPage />} />
-          <Route path='/user-profile' element={<UserProfilePage />} />
-          <Route path='*' element={<HomePage />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </MantineProvider >
+    <Provider store={store}>
+      <MantineProvider theme={theme}>
+        <BrowserRouter>
+          <CursorFollower />
+          <Header />
+          <Routes>
+            <Route path='/find-jobs' element={<FindJob />} />
+            <Route path='/find-talent' element={<FindTalent />} />
+            <Route path='/talent-profile' element={<TalentProfilePage />} />
+            <Route path='/post-job' element={<UploadJobsPage />} />
+            <Route path='/job-profile' element={<JobProfilePage />} />
+            <Route path='/apply-job' element={<ApplyJobsPage />} />
+            <Route path='/company-profile' element={<CompanyProfilePage />} />
+            <Route path='/posted-job' element={<PostedJobsPage />} />
+            <Route path='/job-history' element={<JobHistoryPage />} />
+            <Route path='/sign-up' element={<SignUpPage />} />
+            <Route path='/log-in' element={<SignUpPage />} />
+            <Route path='/user-profile' element={<UserProfilePage />} />
+            <Route path='*' element={<HomePage />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </MantineProvider >
+    </Provider>
   );
 }
 

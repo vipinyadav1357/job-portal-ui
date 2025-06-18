@@ -3,11 +3,13 @@ import { IconAnchor, IconBell, IconSettings } from "@tabler/icons-react";
 import React, { useEffect, useRef } from "react";
 import NavLinks from "./NavLinks";
 import gsap from "gsap";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu";
+import { useSelector } from "react-redux";
 const Header = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
+  const user = useSelector((state: any) => state.user);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -38,8 +40,7 @@ const Header = () => {
       </div>
 
       <div className="flex gap-3 items-center">
-        <div>Marshal</div>
-        <ProfileMenu />
+        {user ? <ProfileMenu /> : <Link to="/log-in" className="text-bright-sun-400 hover:text-bright-sun-500 transition-colors duration-200" >log-in</Link>}
         <div className="bg-mine-shaft-900 p-2 rounded-full">
           <Indicator color="brightSun.4" processing size={9} offset={3} disabled>
             <IconSettings stroke={1.25} />
