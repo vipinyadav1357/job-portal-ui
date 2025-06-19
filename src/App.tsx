@@ -1,25 +1,9 @@
 import './App.css';
 import { MantineProvider, MantineThemeOverride } from '@mantine/core';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import FindJob from './pages/FindJob/FindJobPage';
-
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
-import CursorFollower from './Animition/CursorAnimition/CursorFollower';
-import FindTalent from './pages/FindTalent/FindTalentPage';
-import HomePage from './pages/HomePage/HomePage';
-import TalentProfilePage from './pages/TalentProfile/TalentProfilePage';
-import UploadJobsPage from './pages/UploadJobs/UploadJobsPage';
-import JobProfilePage from './pages/JobProfile/JobProfilePage';
-import ApplyJobsPage from './pages/ApplyJobs/ApplyJobsPage';
 import { useEffect } from 'react';
-import CompanyProfilePage from './pages/CompanyProfile/CompanyProfilePage';
-import PostedJobsPage from './pages/PostedJobs/PostedJobsPage';
-import JobHistoryPage from './pages/JobHistory/JobHistoryPage';
-import SignUpPage from './pages/SignUp/SignUpPage';
-import UserProfilePage from './pages/UserProfile/UserProfilePage';
 import { Provider } from 'react-redux';
 import store from './store'
+import AppRoutes from './routes/AppRoutes';
 
 const theme: MantineThemeOverride = {
   colors: {
@@ -45,7 +29,7 @@ function App() {
   return (
     <Provider store={store}>
       <MantineProvider theme={theme}>
-        <BrowserRouter>
+        {/* <BrowserRouter>
           <CursorFollower />
           <Header />
           <Routes>
@@ -64,7 +48,8 @@ function App() {
             <Route path='*' element={<HomePage />} />
           </Routes>
           <Footer />
-        </BrowserRouter>
+        </BrowserRouter> */}
+        <AppRoutes />
       </MantineProvider >
     </Provider>
   );

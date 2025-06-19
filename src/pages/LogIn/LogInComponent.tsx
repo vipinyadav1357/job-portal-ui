@@ -15,6 +15,7 @@ const LogInComponent = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [opened, { close, open }] = useDisclosure(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const [form, setForm] = useState<LoginRequest>({
         email: "yadavvipinysy063@gmail.com",
         password: "099609960996",
@@ -36,6 +37,7 @@ const LogInComponent = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true);
         let isValid = true;
         // Validate form fields        
         for (let key in form) {
@@ -50,9 +52,11 @@ const LogInComponent = () => {
         }
         await loginUser(form)
             .then((res) => {
+                setLoading(false);
                 dispatch(setUser(res))
                 navigate("/");
             }).catch((err) => {
+                setLoading(false);
                 console.error("Error during registration:", err.response.data.error);
             }
             );
@@ -104,7 +108,7 @@ const LogInComponent = () => {
                 withAsterisk
             />
 
-            <Button onClick={handleSubmit} variant='filled' color='brightSun.4' bg={"mineShaft.7"} className='w-3/4'>Log In</Button>
+            <Button onClick={handleSubmit} loading={loading} variant='filled' color='brightSun.4' bg={"mineShaft.7"} className='w-3/4'>Log In</Button>
             <div className='text-sm text-mine-shaft-300'>
                 Not a member yet? <Anchor onClick={clearForm} component={Link} to="/sign-up" size="xs" color='brightSun.4' className='text-bright-sun-400'>Sign Up</Anchor>
             </div>

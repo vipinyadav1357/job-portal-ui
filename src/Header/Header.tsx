@@ -40,12 +40,21 @@ const Header = () => {
       </div>
 
       <div className="flex gap-3 items-center">
-        {user ? <ProfileMenu /> : <Link to="/log-in" className="text-bright-sun-400 hover:text-bright-sun-500 transition-colors duration-200" >log-in</Link>}
-        <div className="bg-mine-shaft-900 p-2 rounded-full">
+        {
+          user ?
+            <ProfileMenu />
+            :
+            <Link
+              to="/log-in"
+              className="text-bright-sun-400 hover:text-bright-sun-500 transition-colors duration-200"
+            >
+              log-in
+            </Link>}
+        {/* <div className="bg-mine-shaft-900 p-2 rounded-full">
           <Indicator color="brightSun.4" processing size={9} offset={3} disabled>
             <IconSettings stroke={1.25} />
           </Indicator>
-        </div>
+        </div> */}
         <div className="bg-mine-shaft-900 p-2 rounded-full ">
           <Indicator color="brightSun.4" processing size={9} offset={3}>
             <IconBell stroke={1.25} />
