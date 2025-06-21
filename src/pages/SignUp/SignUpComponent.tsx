@@ -8,13 +8,15 @@ import { UserLogInAndSignUpError } from '../../services/models/UserLogInAndSignU
 import { SignUpValidation } from '../../services/FormValidation';
 
 const SignUpComponent = () => {
+
     const navigate = useNavigate();
     const [checked, setChecked] = useState(false);
+    const [isError, setIsError] = useState<boolean>(false);
     const [form, setForm] = useState<RegisterRequest>({
-        name: "vipin yadav",
-        email: "yadavvipinysy063@gmail.com",
-        password: "099609960996",
-        confirmPassword: "099609960996",
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
         accountType: "APPLICANT" as "APPLICANT" | "EMPLOYER"
     });
     const [formerror, setFormerror] = useState<UserLogInAndSignUpError>({
@@ -25,6 +27,8 @@ const SignUpComponent = () => {
         AccountType: "",
         checked: ""
     });
+
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | "APPLICANT" | "EMPLOYER") => {
         if (typeof (e) == "string") {
             setForm({ ...form, accountType: e as "APPLICANT" | "EMPLOYER" });
@@ -35,15 +39,23 @@ const SignUpComponent = () => {
             let value = e.target.value;
             setForm({ ...form, [name]: value })
             SignUpValidation(name, value) === "" ? setFormerror({ ...formerror, [name]: "" }) : setFormerror({ ...formerror, [name]: SignUpValidation(name, value) });
+
+            if (SignUpValidation(name, value) !== "")
+                setIsError(true);
+            else
+                setIsError(false);
+
             if (name === "confirmPassword" && value !== form.password) {
                 if (formerror.password === "") {
-                    setFormerror({ ...formerror, confirmPassword: "Passwords do not match" });
+                    setFormerror({ ...formerror, confirmPassword: "Passwords do not match re" });
+                    setIsError(true); // Set error if passwords do not match
                 } else {
                     setForm({ ...form, confirmPassword: "" }); // Clear confirm password if it doesn't match
                 }
             } else if (name === "password" && form.confirmPassword !== "" && value !== form.confirmPassword) {
                 setFormerror({ ...formerror, confirmPassword: "Passwords do not match" });
                 setForm({ ...form, confirmPassword: "" }); // Clear confirm password if it doesn't match
+                setIsError(true); // Set error if passwords do not match
             }
         }
     }
@@ -64,7 +76,7 @@ const SignUpComponent = () => {
             return;
         }
 
-        if (!isValid) {
+        if (!isValid || isError) {
             return; // Stop submission if validation fails
         }
 
@@ -158,7 +170,7 @@ const SignUpComponent = () => {
             />
             <div className='flex justify-start w-3/4 gap-5'>
                 <Radio.Group
-                    name="favoriteFramework"
+                    name="AccountType"
                     label="Select your Account Type"
                     value={form.accountType}
                     error={formerror.AccountType}

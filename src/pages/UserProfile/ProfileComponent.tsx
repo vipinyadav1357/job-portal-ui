@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CertificationCard from './Cards/CertificationCard'
 import { ActionIcon, Divider, Textarea } from '@mantine/core'
 import { IconBriefcase2Filled, IconPointFilled, IconMapPin, IconPencil, IconDeviceFloppy, IconPlus } from '@tabler/icons-react'
@@ -9,12 +9,27 @@ import TagsInput from './SelectInput/TagsInput'
 import { profile } from '../../Data/TalentData'
 import ExpInput from './Cards/ExpInput'
 import CertiInput from './Cards/CertiInput'
+import { useSelector } from 'react-redux'
+import { getProfile } from '../../services/ProfileService'
 
 const ProfileComponent = ({ props }: any) => {
     const [edit, setEdit] = useState([false, false, false, false, false]);
     const [about, setAbout] = useState(props.about);
     const [addexp, setAddExp] = useState(false);
     const [addcerti, setAddCerti] = useState(false);
+    const user = useSelector((state: any) => state.user);
+
+    useEffect(() => {
+        getProfile("1").then((res) => {
+            if (res) {
+                console.log("Profile fetched successfully:", res);
+            }
+        }
+        ).catch((err) => {
+            console.error("Error fetching profile:", err);
+        }
+        );
+    }, []);
 
     const handleEdit = (index: number) => {
         const newEdit = [...edit];
