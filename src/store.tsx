@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/UserSlice"; // Adjust the import path as necessary
+import profileReducer from "./slices/ProfileSlice";
 export default configureStore({
     reducer: {
         user: userReducer,
-        // Add other slices here as needed
+        profile: profileReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

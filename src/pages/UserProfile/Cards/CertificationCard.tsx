@@ -1,6 +1,7 @@
 import { ActionIcon } from '@mantine/core'
 import { IconMapPin, IconTrash } from '@tabler/icons-react'
 import React from 'react'
+import { formatToMonthYear } from '../../../services/Utilities/Utilities'
 
 const CertificationCard = ({ props, edit }: any) => {
 
@@ -23,7 +24,7 @@ const CertificationCard = ({ props, edit }: any) => {
                 </div>
                 <div className='flex gap-2 items-center'>
                     <div className='flex flex-col gap-1 items-end'>
-                        <div className='text-sm text-bright-sun-400 underline '>{props.issueDate}</div>
+                        <div className='text-sm text-bright-sun-400 underline '>{formatToMonthYear(props.issueDate)}</div>
                         <div className='text-sm text-bright-sun-400 underline '>ID: {props.certificateId}</div>
                     </div>
                     {edit && <ActionIcon color="brightSun.4" variant="subtle" size={40} className=' hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>

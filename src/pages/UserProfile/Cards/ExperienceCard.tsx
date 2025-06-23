@@ -2,6 +2,8 @@ import { Button } from '@mantine/core'
 import { IconMapPin } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import ExpInput from './ExpInput'
+import dayjs from 'dayjs'
+import { formatToMonthYear } from '../../../services/Utilities/Utilities'
 
 const ExperienceCard = ({ props, edit }: any) => {
     const [editexp, setEditexp] = useState(false)
@@ -23,7 +25,7 @@ const ExperienceCard = ({ props, edit }: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className='text-sm text-bright-sun-400 underline '>{props.startDate} - {props.endDate}</div>
+                    <div className='text-sm text-bright-sun-400 underline '>{formatToMonthYear(props.startDate)} - {formatToMonthYear(props?.endDate)}</div>
                 </div>
                 <div className='text-mine-shaft-300 text-sm text-justify p-1'>{props.description}</div>
                 {

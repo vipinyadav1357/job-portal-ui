@@ -1,7 +1,7 @@
 import { Menu, Avatar, Switch, useMantineTheme } from '@mantine/core';
 import { IconMessageCircle } from '@tabler/icons';
 import { IconFileText, IconLogout2, IconMoon, IconMoonStars, IconSun, IconUserCircle } from '@tabler/icons-react';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeUser } from '../slices/UserSlice';
