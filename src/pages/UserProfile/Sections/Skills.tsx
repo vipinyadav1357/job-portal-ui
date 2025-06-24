@@ -3,7 +3,6 @@ import { IconCheck, IconPencil, IconX } from '@tabler/icons'
 import React, { useState } from 'react'
 import TagsInput from '../SelectInput/TagsInput'
 import { useDispatch, useSelector } from 'react-redux'
-import { useForm } from '@mantine/form'
 import { changeProfile } from '../../../slices/ProfileSlice'
 
 const Skills = () => {
