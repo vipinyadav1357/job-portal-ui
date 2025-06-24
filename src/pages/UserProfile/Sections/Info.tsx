@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import fields from '../../../Data/Profile'
 import { ActionIcon } from '@mantine/core'
-import { IconDeviceFloppy, IconPencil, IconMapPin } from '@tabler/icons'
+import { IconPencil, IconMapPin, IconCheck, IconX } from '@tabler/icons'
 import { IconBriefcase2Filled, IconPointFilled } from '@tabler/icons-react'
 import SelectInput from '../SelectInput/SelectInput'
 import { useForm } from '@mantine/form'
@@ -12,7 +12,7 @@ const Info = () => {
     const [edit, setEdit] = useState(false);
     const userProfile = useSelector((state: any) => state.profile);
     const dispatch = useDispatch();
-    const user = useSelector((state: any) => state.user);
+    // const user = useSelector((state: any) => state.user);
     const form = useForm({
         initialValues: {
             jobTitle: '',
@@ -31,21 +31,29 @@ const Info = () => {
             });
             console.log("Form submitted with values:", form.getValues());
         } else {
-            let profile = { ...userProfile, ...form.getValues() }
-            console.log("updated profile", profile);
-            dispatch(changeProfile(profile));
-            form.reset();
             setEdit(false);
         }
+    }
+    const handleSave = () => {
+        let updateProfile = { ...userProfile, ...form.getValues() }
+        console.log("updated profile", updateProfile);
+        dispatch(changeProfile(updateProfile));
+        form.reset();
+        setEdit(false);
     }
     return (
         <>
             <div className='px-5 mt-20 flex flex-col gap-1'>
                 <div className='text-3xl flex justify-between items-center font-semibold'>
                     {userProfile?.name}
-                    <ActionIcon onClick={handleEdit} color="brightSun.4" variant="subtle" size={40} className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
-                        {edit ? <IconDeviceFloppy size={30} stroke={1.5} /> : <IconPencil size={30} />}
-                    </ActionIcon>
+                    <div className='flex justify-between items-center'>
+                        {edit && <ActionIcon onClick={handleSave} color="green.8" variant="subtle" size={40} className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
+                            {edit ? <IconCheck size={30} stroke={1.5} /> : <IconPencil size={30} />}
+                        </ActionIcon>}
+                        <ActionIcon onClick={handleEdit} color={edit ? "red.8" : "brightSun.4"} variant="subtle" size={40} className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
+                            {edit ? <IconX size={30} stroke={1.5} /> : <IconPencil size={30} />}
+                        </ActionIcon>
+                    </div>
                 </div>
                 {
                     edit ?
