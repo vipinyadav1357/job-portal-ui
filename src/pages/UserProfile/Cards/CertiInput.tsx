@@ -1,12 +1,36 @@
 import { Button, Modal, TextInput } from '@mantine/core';
 import { Calendar } from '@mantine/dates';
+import { useForm } from '@mantine/form';
 import { IconCalendar } from '@tabler/icons-react';
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { changeProfile } from '../../../slices/ProfileSlice';
 
 const CertiInput = (props: any) => {
     const [date1, setDate1] = useState<Date | null>(null);
     const [opened1, setOpened1] = useState(false);
-
+    const userProfile = useSelector((state: any) => state.profile);
+    const dispatch = useDispatch();
+    const form = useForm({
+        initialValues: {
+            certificateId: '' as string,
+            issueDate: new Date() as Date,
+            issuer: '' as string,
+            location: '' as string,
+            name: '' as string,
+        },
+        mode: 'controlled',
+    });
+    const handleSave = () => {
+        let certificate = [...userProfile.certifications]
+        certificate.push(form.getValues());
+        certificate[certificate.length - 1].issueDate = new Date(certificate[certificate.length - 1].issueDate).toISOString();
+        let updatedProfile = { ...userProfile, certifications: certificate }
+        dispatch(changeProfile(updatedProfile))
+        console.log(updatedProfile)
+        props.setEdit(false);
+        props.setAddCerti(false);
+    }
     return (
         <div className='flex flex-col gap-3'>
             <div className='text-2xl font-semibold text-center'>Add Certificate</div>
@@ -14,6 +38,7 @@ const CertiInput = (props: any) => {
                 <div className='flex flex-col gap-3'>
                     <div className='flex justify-start gap-10 items-center'>
                         <TextInput
+                            {...form.getInputProps('name')}
                             className='w-3/4'
                             placeholder="Write your title"
                             label="Title"
@@ -21,7 +46,9 @@ const CertiInput = (props: any) => {
                             radius="lg"
                             size="md"
                             withAsterisk
-                        />                       <TextInput
+                        />
+                        <TextInput
+                            {...form.getInputProps('issuer')}
                             className='w-3/4'
                             placeholder="Write your company"
                             label="Company"
@@ -35,6 +62,7 @@ const CertiInput = (props: any) => {
                     </div>
                     <div className='flex justify-start gap-10 items-center'>
                         <TextInput
+                            {...form.getInputProps('location')}
                             className='w-3/4'
                             placeholder="Write your location"
                             label="Location"
@@ -59,6 +87,7 @@ const CertiInput = (props: any) => {
                         </>
                     }
                     <TextInput
+                        {...form.getInputProps('certificateId')}
                         className='w-3/4'
                         placeholder="Write your certificate Id"
                         label="certificate Id"
@@ -80,13 +109,16 @@ const CertiInput = (props: any) => {
                         size="xs"
                     >
                         {/* <DatePicker placeholder="Pick date" label="Event date" withAsterisk onChange={setValue} value={value} /> */}
-                        <Calendar value={date1} onChange={setDate1} />
+                        <Calendar {...form.getInputProps('issueDate')} value={date1} onChange={(val) => {
+                            setDate1(val);
+                            form.setFieldValue('issueDate', val as Date);
+                        }} />
                     </Modal>
 
                 </div>
             </div>
             <div className='flex justify-start gap-10 items-center'>
-                <Button onClick={() => { props.setAddCerti(false) }} variant='outline' color='brightSun.4' className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out' >Save</Button>
+                <Button onClick={() => { handleSave() }} variant='outline' color='brightSun.4' className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out' >Save</Button>
                 <Button onClick={() => { props.setAddCerti(false) }} variant='subtle' color='red' className='bg-mine-shaft-950 hover:bg-bright-sun-400/20 transition duration-300 ease-in-out' >Cancel</Button>
             </div>
         </div>

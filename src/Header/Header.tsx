@@ -1,5 +1,5 @@
 import { Indicator, } from "@mantine/core";
-import { IconAnchor, IconBell, IconSettings } from "@tabler/icons-react";
+import { IconAnchor, IconBell } from "@tabler/icons-react";
 import React, { useEffect, useRef } from "react";
 import NavLinks from "./NavLinks";
 import gsap from "gsap";

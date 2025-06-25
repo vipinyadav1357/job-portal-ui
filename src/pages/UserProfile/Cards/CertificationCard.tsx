@@ -3,7 +3,7 @@ import { IconMapPin, IconTrash } from '@tabler/icons-react'
 import React from 'react'
 import { formatToMonthYear } from '../../../services/Utilities/Utilities'
 
-const CertificationCard = ({ props, edit }: any) => {
+const CertificationCard = ({ props, edit, index }: any) => {
 
     return (
         <div className='bg-mine-shaft-900 p-4 rounded-xl'>
