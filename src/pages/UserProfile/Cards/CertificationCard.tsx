@@ -2,9 +2,20 @@ import { ActionIcon } from '@mantine/core'
 import { IconMapPin, IconTrash } from '@tabler/icons-react'
 import React from 'react'
 import { formatToMonthYear } from '../../../services/Utilities/Utilities'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeProfile } from '../../../slices/ProfileSlice'
 
-const CertificationCard = ({ props, edit, index }: any) => {
-
+const CertificationCard = ({ props, edit, index, setEdit }: any) => {
+    const userProfile = useSelector((state: any) => state.profile);
+    const dispatch = useDispatch();
+    const hadleDelete = () => {
+        let cert = [...userProfile.certifications];
+        cert.splice(index, 1);
+        let updatedProfile = { ...userProfile, certifications: cert }
+        console.log(updatedProfile)
+        dispatch(changeProfile(updatedProfile));
+        setEdit(false)
+    }
     return (
         <div className='bg-mine-shaft-900 p-4 rounded-xl'>
             <div className='flex items-center justify-between'>
@@ -27,7 +38,7 @@ const CertificationCard = ({ props, edit, index }: any) => {
                         <div className='text-sm text-bright-sun-400 underline '>{formatToMonthYear(props.issueDate)}</div>
                         <div className='text-sm text-bright-sun-400 underline '>ID: {props.certificateId}</div>
                     </div>
-                    {edit && <ActionIcon color="brightSun.4" variant="subtle" size={40} className=' hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
+                    {edit && <ActionIcon onClick={hadleDelete} color="brightSun.4" variant="subtle" size={40} className=' hover:bg-bright-sun-400/20 transition duration-300 ease-in-out'>
                         <IconTrash size={23} stroke={1.5} color='red' />
                     </ActionIcon>}
                 </div>

@@ -6,7 +6,7 @@ import { formatToMonthYear } from '../../../services/Utilities/Utilities'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeProfile } from '../../../slices/ProfileSlice'
 
-const ExperienceCard = ({ props, edit, setEdit, index }: any) => {
+const ExperienceCard = ({ props, edit, setEdit, index, }: any) => {
     const [editexp, setEditexp] = useState(false)
     const userProfile = useSelector((state: any) => state.profile);
     const dispatch = useDispatch();

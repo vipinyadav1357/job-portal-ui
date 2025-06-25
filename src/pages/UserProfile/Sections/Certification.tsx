@@ -42,7 +42,7 @@ const Certification = () => {
                 {userProfile
                     ?.certifications
                     ?.map((cert: any, index: any) =>
-                        <CertificationCard key={index} props={cert} edit={edit} index={index} />
+                        <CertificationCard key={index} props={cert} edit={edit} index={index} setEdit={handleEdit} />
                     )}
                 {addcerti && <CertiInput setAddCerti={setAddCerti} setEdit={handleEdit} />}
             </div>
