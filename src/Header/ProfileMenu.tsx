@@ -12,6 +12,7 @@ function ProfileMenu() {
     const user = useSelector((state: any) => state.user);
     const [checked, setChecked] = useState(false);
     const [opened, setOpened] = useState(false);
+    const userProfile = useSelector((state: any) => state.profile)
     const handleLogOut = () => {
         dispatch(removeUser());
     }
@@ -20,7 +21,7 @@ function ProfileMenu() {
             <Menu.Target>
                 <div className="flex gap-3 items-center cursor-pointer">
                     <div>{user.password}</div>
-                    <Avatar className="w-10 h-10 rounded-full overflow-hidden object-cover" src="dhoni.jpg" />
+                    <Avatar className="w-10 h-10 rounded-full overflow-hidden object-cover" src={userProfile.profilePicture ? `data:image/jpeg;base64,${userProfile.profilePicture}` : `Avatar.png`} />
                 </div>
             </Menu.Target>
 

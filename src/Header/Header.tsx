@@ -5,11 +5,27 @@ import NavLinks from "./NavLinks";
 import gsap from "gsap";
 import { Link, useLocation } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setProfile } from "../slices/ProfileSlice";
+import { getProfile } from "../services/ProfileService";
 const Header = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
   const user = useSelector((state: any) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getProfile("1").then((res) => {
+      if (res) {
+        console.log("Profile fetched successfully:", res);
+        // dispatch({ type: 'SET_PROFILE', payload: res });
+        dispatch(setProfile(res));
+      }
+    }
+    ).catch((err) => {
+      console.error("Error fetching profile:", err);
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
