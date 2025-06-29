@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import JobCard from './JobCard/JobCard'
-import { jobList } from '../../../Data/JobsData'
 import SortJobs from './SortJobs/SortJobs'
+import { getAllJob } from '../../../services/JobService'
 
 
 const JobLists = () => {
+    const [jobList, setJobList] = useState([{}]);
+    useEffect(() => {
+        getAllJob()
+            .then((res) => {
+                setJobList(res)
+            })
+            .catch(() => { });
+    }, [])
     return (
         <div className='px-8 pt-16'>
             <div className='flex justify-between '>

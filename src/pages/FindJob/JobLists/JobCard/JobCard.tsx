@@ -12,7 +12,7 @@ const JobCard = (props: any) => {
                     </div>
                     <div className='flex flex-col gap-1'>
                         <div className=' font-semibold tracking-wide'>{props.jobTitle}</div>
-                        <div className='text-xs text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props.applicants} applicants</div>
+                        <div className='text-xs text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props.applicants ? props.applicants.length : 0} applicants</div>
                     </div>
                 </div>
                 <IconBookmark className='text-mine-shaft-300 hover:fill-mine-shaft-300 hover:stroke-mine-shaft-300 transition-all duration-200' stroke={1.5} />
@@ -23,7 +23,7 @@ const JobCard = (props: any) => {
                 <div>{props.location}</div>
             </div>
             <Text lineClamp={3} className='text-justify leading-4 text-xs text-mine-shaft-300'>
-                {props.description}
+                {props.about}
             </Text>
             <Divider mr="xs" color='mine-shaft-700' />
 

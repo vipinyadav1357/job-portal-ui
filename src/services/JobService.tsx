@@ -4,7 +4,10 @@ const BASE_URL = "http://localhost:8080/job/"
 
 const postJob = async (jobData: any) => {
     return await axios.post(BASE_URL + `post`, jobData)
-        .then(response => response.data)
+        .then(response => {
+            console.log("response is", response)
+            return response.data
+        })
         .catch(error => {
             console.error("There was an error while posting the job!", error);
             throw error;
@@ -19,8 +22,11 @@ const getJobById = async (id: any) => {
         });
 }
 const getAllJob = async () => {
-    return await axios.post(BASE_URL, `getAll`)
-        .then(response => response.data)
+    return await axios.get(BASE_URL + `getAll`)
+        .then(response => {
+            console.log("response is", response)
+            return response.data
+        })
         .catch(error => {
             console.error("There was an error while getting the All jobs!", error);
             throw error;
