@@ -25,7 +25,6 @@ const ExpInput = (props: any) => {
             startDate: new Date() as Date,
             endDate: new Date() as Date,
             working: false,
-            // experiance: {} as Object,
         },
         mode: 'controlled',
     });

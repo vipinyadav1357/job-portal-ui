@@ -2,22 +2,28 @@ import { Select } from '@mantine/core';
 import { IconChevronDown, IconAdjustments } from '@tabler/icons-react';
 import React, { useEffect, useState } from 'react'
 
-const SelectInput = ({ props }: any) => {
+const SelectInput = (props: any) => {
     const [data, setData] = useState<string[]>([]);
-    const [selected, setSelected] = useState<string | null>('Relevance');
-
+    const selected = props.form.values[props.label];
+    const setSelected = (value: string | number | null) => props.form.setFieldValue(props.label, value);
     useEffect(() => {
+        // let updatedOptions = [...props.options]
+        // if (props.value && !updatedOptions.includes(props.value)) {
+        //     console.log("Adding value to options:", props.value);
+        //     updatedOptions.push(props.value);
+        // }
+        console.log(props.type + "" + props.label)
         setData(props.options);
-    }, [props])
-
+    }, [props.options]);
     return (
         <div className='[&_input]:font-medium'>
             <Select className='[&_.mantine-Select-input]:!text-bright-sun-400 [&_.mantine-Select-required]:!text-bright-sun-400'
                 key={selected}
                 label={props.label}
+                type={props.type}
                 data={data.map((option) => ({ value: option, label: option }))}
                 value={selected}
-                onChange={(selectedValues) => setSelected(selectedValues)}
+                onChange={setSelected}
                 rightSection={<IconChevronDown size={14} />}
                 icon={<IconAdjustments className='text-bright-sun-400 bg-mine-shaft-900 size-7 rounded-xl p-1' />}
                 dropdownPosition="bottom"
