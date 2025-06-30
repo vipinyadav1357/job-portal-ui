@@ -1,31 +1,32 @@
 import { ActionIcon, Avatar, Button, Divider, Tooltip } from '@mantine/core'
 import { IconBookmark, IconClockHour3, IconPointFilled } from '@tabler/icons-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { card, desc, skills } from '../../Data/JobDescData'
+import { Link, useParams } from 'react-router-dom'
+import { card } from '../../Data/JobDescData'
 //@ts-ignore
 import DOMPurify from 'dompurify';
+import { formatDateToDayFromCurrentDate } from '../../services/Utilities/Utilities'
 
-const JobProfile = ({ edit, ...props }: { edit: boolean;[key: string]: any }) => {
-    const data = DOMPurify.sanitize(desc)
+const JobProfile = ({ edit, props, job }: any) => {
+    const { id } = useParams();
+    const data = DOMPurify.sanitize(job?.description)
     return (
         <div className='w-2/3 mx-5 pb-3'>
             <div className='flex justify-between '>
                 <div className='flex items-center gap-2'>
                     <div className='p-4 bg-mine-shaft-700 rounded-md'>
-                        <img className='h-16' src={`/Icons/${props.company}.png`} alt="hi" />
+                        <img className='h-16' src={`/Icons/${job?.company}.png`} alt="hi" />
                     </div>
                     <div className='flex flex-col gap-1'>
-                        <div className=' font-semibold text-2xl tracking-wide'>{props.jobTitle}</div>
-                        <div className='text-lg text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props.applicants} applicants</div>
+                        <div className=' font-semibold text-2xl tracking-wide'>{job?.jobTitle}</div>
+                        <div className='text-lg text-mine-shaft-300'>{job?.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {job?.applicants ? job.applicants.length : 0} applicants</div>
                         <div className='text-sm text-mine-shaft-300'>
-                            <IconClockHour3 className='inline-block text-bright-sun-400' />{props.postedDaysAgo} Days ago
+                            <IconClockHour3 className='inline-block text-bright-sun-400' />{" " + formatDateToDayFromCurrentDate(job?.postTime)}ago
                         </div>
                     </div>
                 </div>
                 <div className='flex flex-col justify-between items-center '>
                     <div className='text-sm'>
-                        <Link to={edit ? "" : "/apply-job"} >
+                        <Link to={edit ? "" : `/apply-job/${id}`} >
                             <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >{edit ? "edit" : "Apply"}</Button>
                         </Link>
                     </div>
@@ -41,13 +42,13 @@ const JobProfile = ({ edit, ...props }: { edit: boolean;[key: string]: any }) =>
             <div className='flex items-center py-10 justify-around'>
                 {
                     card
-                        .map((item, index) =>
-                            <div key={index} className='flex flex-col w-fit items-center'>
+                        .map((item) =>
+                            <div key={item.id} className='flex flex-col w-fit items-center'>
                                 <ActionIcon className='h-12 w-12' color="brightSun.4" radius="xl" variant="light" bg={"mineShaft.7"} >
                                     <item.icon size={30} />
                                 </ActionIcon>
                                 <div className='text-sm font-semibold'>{item.name}</div>
-                                <div className='font-semibold'>{item.value}</div>
+                                <div className='font-semibold'>{job?.[item.id] ?? " "}{" "}{item.id === "packageOffered" && <>lpa</>}</div>
                             </div>
                         )}
             </div>
@@ -57,7 +58,7 @@ const JobProfile = ({ edit, ...props }: { edit: boolean;[key: string]: any }) =>
                 <div className='flex flex-wrap gap-3  px-10'>
                     {
 
-                        skills
+                        job?.skillRequired
                             .map((skill: any, index: any) =>
                                 <div key={index} className='bg-bright-sun-300 font-medium bg-opacity-15 rounded-3xl px-3 py-1 text-center'><ActionIcon className='h-fit w-fit' color="brightSun.4" variant="transparent" >
                                     {skill}
@@ -77,10 +78,10 @@ const JobProfile = ({ edit, ...props }: { edit: boolean;[key: string]: any }) =>
                 <div className='flex justify-between '>
                     <div className='flex items-center gap-2'>
                         <div className='p-4 bg-mine-shaft-700 rounded-md'>
-                            <img className='h-10' src={`/Icons/${props.company}.png`} alt="hi" />
+                            <img className='h-10' src={`/Icons/${job?.company}.png`} alt="hi" />
                         </div>
                         <div className='flex flex-col gap-1'>
-                            <div className=' font-medium text-lg tracking-wide'>{props.company}</div>
+                            <div className=' font-medium text-lg tracking-wide'>{job?.company}</div>
                             <div className='text-lg text-mine-shaft-300 flex gap-1 items-center'>
                                 <Avatar.Group spacing="sm">
                                     <Tooltip label="Vipin Yadav" withArrow>
@@ -105,7 +106,7 @@ const JobProfile = ({ edit, ...props }: { edit: boolean;[key: string]: any }) =>
                                 </Avatar.Group>employees</div>
                         </div>
                     </div>
-                    <Link to={"/company-profile"} >
+                    <Link to={`/company-profile/${job?.company}`} >
                         <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >visit </Button>
                     </Link>
                 </div>

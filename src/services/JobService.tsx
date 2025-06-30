@@ -14,7 +14,7 @@ const postJob = async (jobData: any) => {
         });
 }
 const getJobById = async (id: any) => {
-    return await axios.post(BASE_URL + `get/${id}`)
+    return await axios.get(BASE_URL + `get/${id}`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error while getting the specific jobs!", error);
