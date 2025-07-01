@@ -8,10 +8,8 @@ import { getJobById } from '../../services/JobService'
 
 const JobProfilePage = () => {
     const { id } = useParams();
-
-    useEffect(() => {
-    });
     const [job, setJob] = useState<any>(null);
+
     useEffect(() => {
         window.scroll(0, 0);
         getJobById(id)

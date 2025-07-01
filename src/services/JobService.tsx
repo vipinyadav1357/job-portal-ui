@@ -32,4 +32,15 @@ const getAllJob = async () => {
             throw error;
         });
 }
-export { postJob, getAllJob, getJobById }
+const applyJob = async (applicantDto: any, jobId: any) => {
+    return await axios.post(BASE_URL + `apply/${jobId}`, applicantDto)
+        .then(response => {
+            console.log("response is", response)
+            return response.data
+        })
+        .catch(error => {
+            console.error("There was an error while getting the All jobs!", error);
+            throw error;
+        });
+}
+export { postJob, getAllJob, getJobById, applyJob }

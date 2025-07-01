@@ -1,61 +1,11 @@
-import { Button, Divider, FileInput, NumberInput, Textarea, TextInput, Notification, LoadingOverlay } from '@mantine/core'
-import { IconPointFilled, IconClockHour3, IconUpload, IconCheck } from '@tabler/icons-react'
-import React, { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap';
-import { useNavigate } from 'react-router-dom';
-import { easeInOut, motion } from 'framer-motion';
+import { Divider, LoadingOverlay } from '@mantine/core'
+import { IconPointFilled, IconClockHour3 } from '@tabler/icons-react'
+import React, { useState } from 'react'
+import ApplyJobForm from './sections/ApplyJobForm';
+import { formatDateToDayFromCurrentDate } from '../../services/Utilities/Utilities';
 
 const ApplyJobComponent = (props: any) => {
-    const notifRef = useRef(null);
-    const [value, setValue] = useState('');
-    const [prev, setPrev] = useState(false);
-    const [submit, setSubmit] = useState(false);
-    const [sec, setSec] = useState(5);
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (submit) {
-            gsap.fromTo(
-                notifRef.current,
-                { x: 500, y: 0, opacity: 0 },
-                {
-                    x: 0,
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    delay: 0,
-                    ease: 'bounce',
-                }
-            );
-            // auto-hide after 5s
-            setTimeout(() => {
-                gsap.to(notifRef.current, {
-                    x: 500,
-                    y: 0,
-                    opacity: 0,
-                    duration: 1.5,
-                    delay: 0.5,
-                    onComplete: () => {
-                        navigate('/find-jobs')
-                    },
-                    ease: 'back.out',
-                });
-            }, 4500);
-        }
-    }, [navigate, submit]);
-    const handlePrev = () => {
-        setPrev(!prev)
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    const handleSubmit = () => {
-        setSubmit(true);
-        let a = 5;
-        const countDown = setInterval(() => {
-            setSec(--a)
-            if (a === 0)
-                clearInterval(countDown);
-            // navigate('/find-jobs')
-        }, 1000);
-    }
+    const [isLoading, setIsLoading] = useState(false);
     return (
         <>
             <div className='w-2/3 mx-auto'>
@@ -65,7 +15,7 @@ const ApplyJobComponent = (props: any) => {
                     overlayBlur={2}
                     zIndex={1000}
                     overlayColor="#c5c5c5"
-                    visible={submit}
+                    visible={isLoading}
                 />
                 <div className='flex justify-between px-5'>
                     <div className='flex items-center gap-2'>
@@ -75,91 +25,17 @@ const ApplyJobComponent = (props: any) => {
                         <div className='flex flex-col gap-1'>
                             <div className=' font-semibold text-2xl tracking-wide'>{props.jobTitle}</div>
                             <div className='flex gap-1 items-center'>
-                                <div className='text-lg text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props.applicants} applicants</div>
+                                <div className='text-lg text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props.applicants ? props.applicants.length : 0} applicants</div>
                                 <div className='text-lg text-mine-shaft-300'>
-                                    <IconClockHour3 className='inline-block text-bright-sun-400' />12 Days ago
+                                    <IconClockHour3 className='inline-block text-bright-sun-400' />{formatDateToDayFromCurrentDate(props.postTime)} ago
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <Divider size={"xs"} my="md" color='brightSun.4' />
-                <div className='text-xl font-semibold mb-5'>Submit Your Application</div>
-                <div >
-                    <div className='flex flex-wrap gap-y-10 [&>*]:px-12 [&>*]:w-1/2'>
-                        <TextInput className={`${prev ? "[&_.mantine-Input-input]:text-bright-sun-400  font-semibold" : ""}`} label={"full name"} placeholder={"Your full name"} readOnly={prev}
-                            variant={prev ? "unstyled" : "default"} value={value} onChange={(event) => setValue(event.currentTarget.value)} withAsterisk />
-                        <TextInput className={`${prev ? "[&_.mantine-Input-input]:text-bright-sun-400  font-semibold" : ""}`} type='email' label={"email"} placeholder={"Your email address"} readOnly={prev}
-                            variant={prev ? "unstyled" : "default"} value={value} onChange={(event) => setValue(event.currentTarget.value)} withAsterisk />
-                        <NumberInput className={`${prev ? "[&_.mantine-Input-input]:text-bright-sun-400  font-semibold" : ""}`} label={"contact number"} placeholder={"Your phone number"} readOnly={prev}
-                            variant={prev ? "unstyled" : "default"} withAsterisk maxLength={10} hideControls />
-                        <TextInput className={`${prev ? "[&_.mantine-Input-input]:text-bright-sun-400  font-semibold" : ""}`} label={"Link"} placeholder={"Your portfolio link"} readOnly={prev}
-                            variant={prev ? "unstyled" : "default"} value={value} onChange={(event) => setValue(event.currentTarget.value)} withAsterisk />
-                    </div>
-                    <div className='px-12 py-5 flex flex-col gap-3'>
-                        <FileInput
-                            className={`${prev ? "[&_.mantine-Input-input]:text-bright-sun-400  font-semibold" : ""}`}
-                            label="Your resume"
-                            description="Upload your CV in .pdf or .docx format"
-                            icon={<IconUpload size={18} stroke={2.5} />}
-                            accept=".pdf,.doc,.docx"
-                            withAsterisk
-                            readOnly={prev}
-                            variant={prev ? "unstyled" : "default"}
-                        />
-                        <Textarea
-                            classNames={{
-                                input: 'text-sm text-wrap overflow-y-auto scrollbar-hide'
-                            }}
-                            className={`${prev ? "[&_.mantine-Input-input]:text-bright-sun-400 font-semibold" : ""}`}
-                            placeholder="about you self"
-                            label="Cover letter"
-                            autosize
-                            minRows={4}
-                            maxRows={8}
-                            withAsterisk
-                            readOnly={prev}
-                            variant={prev ? "unstyled" : "default"}
-                        />
-                        {
-                            !prev && <Button onClick={handlePrev} variant='light' color='brightSun.4' bg={"mineShaft.7"} >preview</Button>
-                        }
-                        {
-                            prev && <div className='flex gap-10 [&>*]:w-1/2'>
-                                <Button fullWidth onClick={handlePrev} variant='outline' color='brightSun.4' bg={"mineShaft.7"} >edit</Button>
-                                <Button fullWidth onClick={handleSubmit} variant='light' color='brightSun.4' bg={"mineShaft.7"} >submit</Button>
-                            </div>
-                        }
-                    </div>
-                </div>
+                <ApplyJobForm setLoading={setIsLoading} />
             </div>
-            {
-                submit && <Notification ref={notifRef} className="border-bright-sun-400 w-1/3  backdrop-blur-md fixed top-20 right-3  bg-mine-shaft-900/20 z-[1001] [&_.mantine-Notification-body]:flex [&_.mantine-Notification-body]:flex-col [&_.mantine-Notification-body]:justify-center p-4" icon={<IconCheck size={18} stroke={3} className='bg-bright-sun-400 text-mine-shaft-100' />} title="Application Submitted" disallowClose>
-                    <div className='flex gap-3 justify-start items-center'>
-                        {`redirecting to find jobs after ${sec}`}
-                        <div className='flex items-center justify-center gap-2 mb-1 w-fit'>
-                            {[...Array(sec)].map((_, index) => <motion.div key={index} className='w-2 h-2 bg-bright-sun-400 rounded-full'
-                                animate={
-                                    {
-                                        y: [0, 5, 0],
-                                        scale: [1, 0.5, 1]
-                                    }
-                                }
-                                transition={
-                                    {
-                                        duration: 1.5,
-                                        repeat: Infinity,
-                                        ease: easeInOut,
-                                        delay: index * 0.3
-                                    }
-                                }
-                            >
-                            </motion.div>)}
-                        </div>
-                    </div>
-                    <motion.div animate={{ width: ["100%", "0%"], opacity: [1] }} transition={{ duration: 5.5 }} className='border-2 border-bright-sun-400'></motion.div>
-                </Notification>
-            }
         </>
     )
 }
