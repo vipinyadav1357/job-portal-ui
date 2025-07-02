@@ -13,7 +13,7 @@ const JobLists = () => {
                 setJobList(res)
             })
             .catch(() => { });
-    }, []);
+    }, [])
     return (
         <div className='px-8 pt-16'>
             <div className='flex justify-between '>
