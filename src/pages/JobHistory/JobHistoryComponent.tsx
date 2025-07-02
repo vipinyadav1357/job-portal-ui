@@ -1,10 +1,11 @@
 import { Tabs } from '@mantine/core'
 import { IconPhoto, IconBriefcase2Filled, IconUsers } from '@tabler/icons-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { jobList } from '../../Data/JobsData'
 import JobHistoryCard from './JobHistoryCard'
 
 const JobHistoryComponent = () => {
+    const [activeTab, setActiveTab] = useState("");
     return (
         <div className='w-fit'>
             <div className='text-2xl font-semibold text-center mt-3'>Jobs history</div>

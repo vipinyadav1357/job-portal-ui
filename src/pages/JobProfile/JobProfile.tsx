@@ -1,14 +1,44 @@
 import { ActionIcon, Avatar, Button, Divider, Tooltip } from '@mantine/core'
-import { IconBookmark, IconClockHour3, IconPointFilled } from '@tabler/icons-react'
+import { IconBookmark, IconBookmarkFilled, IconClockHour3, IconPointFilled } from '@tabler/icons-react'
 import { Link, useParams } from 'react-router-dom'
 import { card } from '../../Data/JobDescData'
 //@ts-ignore
 import DOMPurify from 'dompurify';
 import { formatDateToDayFromCurrentDate } from '../../services/Utilities/Utilities'
+import { useDispatch, useSelector } from 'react-redux';
+import { changeProfile } from '../../slices/ProfileSlice';
+import { useEffect, useState } from 'react';
 
 const JobProfile = ({ edit, props, job }: any) => {
     const { id } = useParams();
-    const data = DOMPurify.sanitize(job?.description)
+    const userProfile = useSelector((state: any) => state.profile);
+    const data = DOMPurify.sanitize(job?.description);
+    const [applied, setApplied] = useState<boolean>(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (job?.applicants?.filter((applicant: any) => applicant.applicantId === 1).length > 0) {
+            setApplied(true);
+        } else {
+            setApplied(false);
+        }
+        console.log(applied)
+    }, [job?.applicants, applied]);
+    const handleSavedJob = () => {
+        let savedJobs = [...userProfile?.savedJobs || []];
+        const index = savedJobs.indexOf(job?.id);
+        if (index > -1) {
+            savedJobs.splice(index, 1);
+            console.log(savedJobs);
+            let updatedProfile = { ...userProfile, savedJobs: savedJobs }
+            dispatch(changeProfile(updatedProfile));
+        } else {
+            savedJobs = [...savedJobs, job?.id];
+            console.log(savedJobs);
+            let updatedProfile = { ...userProfile, savedJobs: savedJobs }
+            dispatch(changeProfile(updatedProfile));
+        }
+    }
     return (
         <div className='w-2/3 mx-5 pb-3'>
             <div className='flex justify-between '>
@@ -26,15 +56,18 @@ const JobProfile = ({ edit, props, job }: any) => {
                 </div>
                 <div className='flex flex-col justify-between items-center '>
                     <div className='text-sm'>
-                        <Link to={edit ? "" : `/apply-job/${id}`} >
+                        {(!applied || edit) && <Link to={edit ? "" : `/apply-job/${id}`} >
                             <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >{edit ? "edit" : "Apply"}</Button>
-                        </Link>
+                        </Link>}
+                        {
+                            applied && !edit && <Button variant='outline' disabled  >Applied</Button>
+                        }
                     </div>
                     {
                         edit ?
                             <Button variant='outline' color='red.5' bg={"mineShaft.7"} >delete</Button>
                             :
-                            <IconBookmark className='text-bright-sun-400 hover:fill-bright-sun-400 hover:stroke-bright-sun-400 transition-all duration-200' stroke={1.5} />
+                            userProfile?.savedJobs?.includes(Number(id)) ? <IconBookmarkFilled onClick={handleSavedJob} className='text-bright-sun-400 transition-all duration-200' stroke={1.5} /> : <IconBookmark onClick={handleSavedJob} className='text-bright-sun-400 hover:fill-bright-sun-400 hover:stroke-bright-sun-400 transition-all duration-200' stroke={1.5} />
                     }
                 </div>
             </div>
@@ -114,8 +147,9 @@ const JobProfile = ({ edit, props, job }: any) => {
             </div>
             <Divider size={"sm"} my="md" color='brightSun.0' />
 
-        </div>
+        </div >
     )
 }
 
 export default JobProfile
+

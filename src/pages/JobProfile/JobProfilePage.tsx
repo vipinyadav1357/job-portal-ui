@@ -5,11 +5,11 @@ import { Link, useParams } from 'react-router-dom'
 import JobProfile from './JobProfile'
 import RecommandedJobs from './RecommandedJobs'
 import { getJobById } from '../../services/JobService'
+import { useSelector } from 'react-redux'
 
 const JobProfilePage = () => {
     const { id } = useParams();
     const [job, setJob] = useState<any>(null);
-
     useEffect(() => {
         window.scroll(0, 0);
         getJobById(id)
