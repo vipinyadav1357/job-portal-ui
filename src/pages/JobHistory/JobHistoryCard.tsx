@@ -2,6 +2,7 @@ import { Button, Divider, Text } from '@mantine/core'
 import { IconPointFilled, IconBookmark, IconCurrencyRupee, IconClockHour3, IconBookmarkFilled, IconCalendarMonth } from '@tabler/icons-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { formatDateToDayFromCurrentDate } from '../../services/Utilities/Utilities'
 
 const JobHistoryCard = (props: any) => {
     return (
@@ -13,7 +14,7 @@ const JobHistoryCard = (props: any) => {
                     </div>
                     <div className='flex flex-col gap-1'>
                         <div className=' font-semibold tracking-wide'>{props.jobTitle}</div>
-                        <div className='text-xs text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props.applicants} applicants</div>
+                        <div className='text-xs text-mine-shaft-300'>{props.company} <IconPointFilled width={16} height={16} className='inline-block text-bright-sun-400' /> {props?.applicants.length} applicants</div>
                     </div>
                 </div>
                 {
@@ -30,12 +31,12 @@ const JobHistoryCard = (props: any) => {
                 <div>{props.location}</div>
             </div>
             <Text lineClamp={3} className='text-justify leading-4 text-xs text-mine-shaft-300'>
-                {props.description}
+                {props.about}
             </Text>
             <Divider mr="xs" color='mine-shaft-700' />
             <div className='flex justify-between text-xs text-mine-shaft-400 items-center'>
                 <div className='text-mine-shaft-200 [text-shadow:_0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_0px_-0px_3px_#b0b0b0]'><IconCurrencyRupee className='inline-block' width={16} height={16} stroke={3} />{props.package}</div>
-                <div className='flex items-center gap-1'><IconClockHour3 className='inline-block text-bright-sun-400' />{props.applied || props.interviewing ? "applied " : props.offered ? "interviewed " : "posted "}{props.postedDaysAgo} Days ago</div>
+                <div className='flex items-center gap-1'><IconClockHour3 className='inline-block text-bright-sun-400' />{props.applied || props.interviewing ? "applied " : props.offered ? "interviewed " : "posted "}{formatDateToDayFromCurrentDate(props.postTime)} Days ago</div>
             </div>
 
             {
