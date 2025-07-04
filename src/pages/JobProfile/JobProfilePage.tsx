@@ -5,7 +5,6 @@ import { Link, useParams } from 'react-router-dom'
 import JobProfile from './JobProfile'
 import RecommandedJobs from './RecommandedJobs'
 import { getJobById } from '../../services/JobService'
-import { useSelector } from 'react-redux'
 
 const JobProfilePage = () => {
     const { id } = useParams();

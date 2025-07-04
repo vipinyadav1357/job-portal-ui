@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { jobList } from '../../Data/JobsData'
 import JobCard from '../FindJob/JobLists/JobCard/JobCard'
 import { getAllJob } from '../../services/JobService';
 import { useParams } from 'react-router-dom';

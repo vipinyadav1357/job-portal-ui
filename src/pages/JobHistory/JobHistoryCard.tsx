@@ -35,8 +35,8 @@ const JobHistoryCard = (props: any) => {
             </Text>
             <Divider mr="xs" color='mine-shaft-700' />
             <div className='flex justify-between text-xs text-mine-shaft-400 items-center'>
-                <div className='text-mine-shaft-200 [text-shadow:_0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_0px_-0px_3px_#b0b0b0]'><IconCurrencyRupee className='inline-block' width={16} height={16} stroke={3} />{props.package}</div>
-                <div className='flex items-center gap-1'><IconClockHour3 className='inline-block text-bright-sun-400' />{props.applied || props.interviewing ? "applied " : props.offered ? "interviewed " : "posted "}{formatDateToDayFromCurrentDate(props.postTime)} Days ago</div>
+                <div className='text-mine-shaft-200 [text-shadow:_0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_-0px_0px_3px_#b0b0b0,_0px_-0px_3px_#b0b0b0]'><IconCurrencyRupee className='inline-block' width={16} height={16} stroke={3} />{props.packageOffered + " "}lpa</div>
+                <div className='flex items-center gap-1'><IconClockHour3 className='inline-block text-bright-sun-400' />{props.applied || props.interviewing ? "applied " : props.offered ? "interviewed " : "posted "}{formatDateToDayFromCurrentDate(props.postTime)} ago</div>
             </div>
 
             {
