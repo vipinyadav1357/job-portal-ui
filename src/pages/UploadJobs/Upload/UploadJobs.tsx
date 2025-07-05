@@ -7,9 +7,12 @@ import TextEditorWindow from '../TextEditor/TextEditorWindow';
 import { useForm } from '@mantine/form';
 import { postJob } from '../../../services/JobService';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { stat } from 'fs';
 
 const UploadJobs = () => {
     const data = fields;
+    const userProfile = useSelector((state: any) => state.profile)
     const navigate = useNavigate();
     const [skill, setSkill] = useState<string[]>([]);
     const form = useForm({
@@ -46,8 +49,13 @@ const UploadJobs = () => {
         form.setFieldValue('skillRequired', updatedSkills);
     }
     const handlePost = () => {
-        postJob(form.getValues())
-            .then((res) => { navigate('/find-jobs') })
+        postJob({ ...form.getValues(), postedBy: userProfile.id, jobStatus: "ACTIVE" })
+            .then((res) => { navigate(`/posted-job/${res.id}`) })
+            .catch((error) => { console.log("na post bhail") });
+    }
+    const handleDraft = () => {
+        postJob({ ...form.getValues(), postedBy: userProfile.id, jobStatus: "DRAFT" })
+            .then((res) => { navigate(`/posted-job/${res.id}`) })
             .catch((error) => { console.log("na post bhail") });
     }
     return (
@@ -74,7 +82,7 @@ const UploadJobs = () => {
             </div>
             <div className='flex gap-10 m-10'>
                 <Button onClick={handlePost} variant='light' color='brightSun.4' bg={"mineShaft.7"} >publish job</Button>
-                <Button variant='outline' color='brightSun.4' >save as draft</Button>
+                <Button onClick={handleDraft} variant='outline' color='brightSun.4' >save as draft</Button>
             </div>
         </div>
     )

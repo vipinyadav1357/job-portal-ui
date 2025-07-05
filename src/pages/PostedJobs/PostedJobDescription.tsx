@@ -1,18 +1,26 @@
 import { Badge, Tabs } from '@mantine/core'
 import { IconPhoto, IconBriefcase2Filled, IconUsers } from '@tabler/icons-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { jobList } from '../../Data/JobsData'
 import JobProfile from '../JobProfile/JobProfile'
 import { talents } from '../../Data/TalentData'
 import TalentCard from '../FindTalent/Talents/TalentCard/TalentCard'
+import { useParams } from 'react-router-dom'
+import { getJobById } from '../../services/JobService'
 
 
 const PostedJobDescription = () => {
-
+    const { id } = useParams();
+    const [job, setJob] = useState<any>({})
+    useEffect(() => {
+        getJobById(Number(id))
+            .then(res => setJob(res))
+            .catch(e => console.log(e))
+    }, [id])
     return (
         <div className='mt-5 w-5/6'>
-            <div className='text-2xl font-semibold  mt-3 flex items-center'>Software Engineer <Badge mr={"md"} mb={"lg"} size='xs' variant='light' color='BrightSun.4' >new</Badge></div>
-            <div className='font-medium text-mine-shaft-300 mb-5'>Benguluru, India</div>
+            <div className='text-2xl font-semibold  mt-3 flex items-center'>{job.jobTitle} <Badge mr={"md"} mb={"lg"} size='xs' variant='light' color='BrightSun.4' >new</Badge></div>
+            <div className='font-medium text-mine-shaft-300 mb-5'>{job.location}</div>
             <div>
                 <Tabs defaultValue="Overview">
                     <Tabs.List className='mb-5 [&_button]:text-lg font-semibold [&_button[aria-selected=true]]:bg-bright-sun-400 [&_button[data-active=true]]:transition [&_button[data-active=true]]:duration-300 [&_button[data-active=true]]:ease-in-out flex gap-5 items-center'>
