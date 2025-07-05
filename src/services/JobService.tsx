@@ -43,4 +43,26 @@ const applyJob = async (applicantDto: any, jobId: any) => {
             throw error;
         });
 }
-export { postJob, getAllJob, getJobById, applyJob }
+const jobPostedBy = async (userId: any) => {
+    return await axios.get(BASE_URL + `postedBy/${userId}`)
+        .then(response => {
+            console.log("response is", response)
+            return response.data
+        })
+        .catch(error => {
+            console.error("There was an error while getting the All jobs!", error);
+            throw error;
+        });
+}
+const changeApplicationStatus = async (application: any) => {
+    return await axios.post(BASE_URL + `changeAppStatus`, application)
+        .then(response => {
+            console.log("response is", response)
+            return response.data
+        })
+        .catch(error => {
+            console.error("There was an error while getting the All jobs!", error);
+            throw error;
+        });
+}
+export { postJob, getAllJob, getJobById, applyJob, jobPostedBy, changeApplicationStatus }

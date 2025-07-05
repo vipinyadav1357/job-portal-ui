@@ -1,10 +1,12 @@
 import { Tabs } from '@mantine/core'
 import { IconPhoto, IconBriefcase2Filled } from '@tabler/icons-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { activeJobs } from '../../Data/PostedJob'
 import PostedJobCard from './PostedJobCard'
 
 const PostedJobComponent = () => {
+
+    useEffect(() => { })
     return (
         <div className='w-1/6 ml-5 mt-5'>
             <div className='text-2xl font-semibold text-center mt-3'>Jobs</div>
