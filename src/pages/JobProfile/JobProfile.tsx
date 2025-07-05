@@ -22,7 +22,6 @@ const JobProfile = ({ edit, props, job }: any) => {
         } else {
             setApplied(false);
         }
-        console.log(applied)
     }, [job?.applicants, applied]);
     const handleSavedJob = () => {
         let savedJobs = [...userProfile?.savedJobs || []];
@@ -90,14 +89,12 @@ const JobProfile = ({ edit, props, job }: any) => {
                 <div className='font-semibold text-2xl mb-3'>Required Skills</div>
                 <div className='flex flex-wrap gap-3  px-10'>
                     {
-
-                        job?.skillRequired
-                            .map((skill: any, index: any) =>
-                                <div key={index} className='bg-bright-sun-300 font-medium bg-opacity-15 rounded-3xl px-3 py-1 text-center'><ActionIcon className='h-fit w-fit' color="brightSun.4" variant="transparent" >
-                                    {skill}
-                                </ActionIcon>
-                                </div>
-                            )}
+                        job?.skillRequired?.map((skill: any, index: any) =>
+                            <div key={index} className='bg-bright-sun-300 font-medium bg-opacity-15 rounded-3xl px-3 py-1 text-center'><ActionIcon className='h-fit w-fit' color="brightSun.4" variant="transparent" >
+                                {skill}
+                            </ActionIcon>
+                            </div>
+                        )}
                 </div>
             </div>
             <Divider size={"sm"} my="md" color='brightSun.0' />

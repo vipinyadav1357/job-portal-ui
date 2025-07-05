@@ -31,7 +31,7 @@ const PostedJobsPage = () => {
             <div className='flex justify-between'>
                 <PostedJobComponent jobList={jobList} job={job} />
                 <Divider orientation='vertical' size={"xs"} color='brightSun.4' mx={"lg"} my={"xs"} />
-                <PostedJobDescription {...job} />
+                <PostedJobDescription job={job} />
             </div>
         </div >
     )
