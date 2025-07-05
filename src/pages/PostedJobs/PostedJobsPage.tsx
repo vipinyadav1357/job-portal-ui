@@ -4,7 +4,7 @@ import PostedJobComponent from './PostedJobComponent';
 import PostedJobDescription from './PostedJobDescription';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getAllJob, getJobById, jobPostedBy } from '../../services/JobService';
+import { jobPostedBy } from '../../services/JobService';
 
 const PostedJobsPage = () => {
     const { id } = useParams();

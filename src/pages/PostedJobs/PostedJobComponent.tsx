@@ -1,7 +1,6 @@
 import { Tabs } from '@mantine/core'
 import { IconPhoto, IconBriefcase2Filled } from '@tabler/icons-react'
 import React, { useEffect, useState } from 'react'
-import { activeJobs } from '../../Data/PostedJob'
 import PostedJobCard from './PostedJobCard'
 
 const PostedJobComponent = (props: any) => {
@@ -11,7 +10,7 @@ const PostedJobComponent = (props: any) => {
     useEffect(() => {
         setActiveTab(props.job?.jobStatus || 'ACTIVE')
         setJobs(props.jobList)
-    }, [props.job]);
+    }, [props.jobList, props.job]);
     const handleTabChange = (value: string) => {
         setActiveTab(value);
     };

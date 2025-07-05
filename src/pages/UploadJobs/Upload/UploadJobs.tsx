@@ -8,7 +8,6 @@ import { useForm } from '@mantine/form';
 import { postJob } from '../../../services/JobService';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { stat } from 'fs';
 
 const UploadJobs = () => {
     const data = fields;

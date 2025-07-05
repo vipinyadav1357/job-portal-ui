@@ -30,7 +30,7 @@ const PostedJobDescription = () => {
                     </Tabs.List>
 
                     <Tabs.Panel value="Overview" pt="xs" className='[&>div]:w-fit '>
-                        <JobProfile {...jobList[0]} edit={true} />
+                        <JobProfile job={job} edit={true} />
                     </Tabs.Panel>
 
                     <Tabs.Panel value="Applicants" pt="xs">
