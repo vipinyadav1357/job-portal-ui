@@ -46,7 +46,6 @@ const applyJob = async (applicantDto: any, jobId: any) => {
 const jobPostedBy = async (userId: any) => {
     return await axios.get(BASE_URL + `postedBy/${userId}`)
         .then(response => {
-            console.log("response is", response)
             return response.data
         })
         .catch(error => {

@@ -18,12 +18,15 @@ const PostedJobsPage = () => {
         if (userProfile?.id) {
             jobPostedBy(userProfile.id)
                 .then((jobList) => {
-                    setJob(jobList.filter((job: any) => job.id === Number(id))[0]);
+                    console.log("jobList", jobList)
                     setJobList(jobList.filter((job: any) => job.jobStatus === "DRAFT" || job.jobStatus === "ACTIVE"));
                 })
                 .catch((e) => console.log(e));
         }
-    }, [id, userProfile]);
+    }, [userProfile]);
+    useEffect(() => {
+        setJob(jobList.filter((job: any) => job.id === Number(id))[0]);
+    }, [id, jobList]);
     return (
         <div className="min-h-[100vh] text-mine-shaft-100 bg-mine-shaft-950 font-['poppins'] pt-4 " >
             <Divider size={"xs"} color='brightSun.4' />
