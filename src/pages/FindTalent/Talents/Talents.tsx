@@ -15,7 +15,7 @@ const Talents = () => {
             </div>
             <div className='mt-8 flex flex-wrap justify-center gap-10 '>
                 {
-                    talents.map((job, index) => <div key={index}><TalentCard talentData={job} /></div>)
+                    talents.map((job, index) => <div key={index}><TalentCard talent={job} /></div>)
                 }
             </div>
         </div>

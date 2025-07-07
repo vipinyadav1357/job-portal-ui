@@ -8,7 +8,7 @@ const RecommandedTalent = () => {
             <div className='font-semibold text-xl mb-5 ml-5'>Recommanded Talents</div>
             <div className='flex flex-wrap flex-col items-center gap-5'>
                 {
-                    talents.map((job, index) => index < 5 && <div key={index}><TalentCard talentData={job} /></div>)
+                    talents.map((job, index) => index < 5 && <div key={index}><TalentCard talent={job} /></div>)
                 }
             </div>
         </div>

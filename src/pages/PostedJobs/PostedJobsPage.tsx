@@ -2,12 +2,13 @@ import { Divider } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import PostedJobComponent from './PostedJobComponent';
 import PostedJobDescription from './PostedJobDescription';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { jobPostedBy } from '../../services/JobService';
 
 const PostedJobsPage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const userProfile = useSelector((state: any) => state.profile);
     const [job, setJob] = useState<any>({});
     const [jobList, setJobList] = useState<any[]>([]);
@@ -19,11 +20,12 @@ const PostedJobsPage = () => {
             jobPostedBy(userProfile.id)
                 .then((jobList) => {
                     console.log("jobList", jobList)
+                    if (jobList && jobList.length > 0 && Number(id) === 0) navigate(`/posted-job/${jobList[0].id}`);
                     setJobList(jobList.filter((job: any) => job.jobStatus === "DRAFT" || job.jobStatus === "ACTIVE"));
                 })
                 .catch((e) => console.log(e));
         }
-    }, [userProfile]);
+    }, [navigate, userProfile]);
     useEffect(() => {
         setJob(jobList.filter((job: any) => job.id === Number(id))[0]);
     }, [id, jobList]);
