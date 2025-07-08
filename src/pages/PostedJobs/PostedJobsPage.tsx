@@ -25,7 +25,7 @@ const PostedJobsPage = () => {
                 })
                 .catch((e) => console.log(e));
         }
-    }, [navigate, userProfile]);
+    }, [userProfile]);
     useEffect(() => {
         setJob(jobList.filter((job: any) => job.id === Number(id))[0]);
     }, [id, jobList]);

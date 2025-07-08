@@ -2,8 +2,9 @@ import { IconCalendar, IconCalendarMonth, IconCurrencyRupee, IconHeart, IconMapP
 import React, { useEffect, useState } from 'react'
 import { Avatar, Button, Divider, Modal, Text } from '@mantine/core'
 import { Calendar, TimeInput } from '@mantine/dates'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getProfile } from '../../../../services/ProfileService'
+import { changeApplicationStatus } from '../../../../services/JobService'
 
 interface applicants {
     applicantId: number;
@@ -37,8 +38,9 @@ interface talentData {
 const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }) => {
     const [opened, setOpened] = useState(false);
     const [date, setDate] = useState<Date | null>(null);
-    const [time, setTime] = useState(new Date());
+    const [time, setTime] = useState<{ hours: number; minutes: number }>({ hours: 9, minutes: 0 });
     const [profile, setProfile] = useState<any>({})
+    const { id } = useParams();
     useEffect(() => {
         if (applicants?.applicantId) {
             getProfile(applicants.applicantId.toString()).then((res) => {
@@ -47,7 +49,22 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
         } else {
             setProfile(talent)
         }
+        console.log()
     }, [talent, applicants, posted, invite])
+    const handleOffer = (status: string) => {
+        const choosenDateAndTime = new Date(date ? date : new Date());
+        choosenDateAndTime?.setHours(time.hours, time.minutes, 0, 0);
+        choosenDateAndTime.setSeconds(0, 0); // Set seconds and milliseconds to 0
+        let application = { jobId: Number(id), applicantId: applicants?.applicantId, userId: profile.id, applicationStatus: status, interViewTime: choosenDateAndTime.toJSON() }
+        setDate(choosenDateAndTime);
+        changeApplicationStatus(application).then((res) => {
+            console.log(res)
+        }
+        ).catch((e) => {
+            console.log(e)
+        })
+    }
+
     return (
         <div className='cursor-pointer bg-mine-shaft-900 w-96 p-4 rounded-xl flex flex-col gap-3 hover:shadow-[0_0_15px_5px_rgba(255,223,0,0.5)] !hover:shadow-bright-sun-400 transition-all duration-500 ease-in-out'>
             <div className='flex justify-between'>
@@ -94,9 +111,11 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
                         <IconCalendarMonth />
                         Interview scheduled on
                         <span className='text-bright-sun-400'>
-                            {date?.toLocaleDateString()}</span>
+                            {applicants?.interViewTime &&
+                                new Date(applicants.interViewTime).toLocaleDateString()}</span>
                         at
-                        <span className='text-bright-sun-400'>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span className='text-bright-sun-400'>{applicants?.interViewTime &&
+                            new Date(applicants.interViewTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
                     </div>
                     :
                     <div className='flex justify-between text-xs text-mine-shaft-400 items-center'>
@@ -141,10 +160,23 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
 
             >
                 {/* <DatePicker placeholder="Pick date" label="Event date" withAsterisk onChange={setValue} value={value} /> */}
-                <Calendar value={date} onChange={setDate} onClick={() => { setOpened(false) }} minDate={new Date()} maxDate={new Date(new Date().setDate(new Date().getDate() + 15))} />
-                <TimeInput value={time} onChange={setTime} format='12' label='choose time' />
+                <Calendar value={date} onChange={setDate} minDate={new Date()} maxDate={new Date(new Date().setDate(new Date().getDate() + 15))} />
+                <TimeInput value={new Date(0, 0, 0, time.hours, time.minutes)} onChange={(value) =>
+                    setTime({ hours: value.getHours(), minutes: value.getMinutes() })
+                } format='12' label='choose time' />
+                <Button
+                    onClick={() => {
+                        handleOffer("INTERVIEWING");
+                        setOpened(false); // close modal after saving
+                    }}
+                    color='brightSun.4'
+                    fullWidth
+                    mt="md"
+                >
+                    Confirm
+                </Button>
             </Modal>
-        </div>
+        </div >
     )
 }
 
