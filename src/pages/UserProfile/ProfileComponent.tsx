@@ -52,7 +52,7 @@ const ProfileComponent = ({ props }: any) => {
             <div className='relative'>
                 <img className='rounded-t-2xl w-full h-52' src="/profile/banner.jpg" alt="" />
                 <div ref={ref} className='absolute -bottom-1/3 left-3 flex items-center justify-center'>
-                    <img className='rounded-full h-48 w-48 border-8 border-mine-shaft-600 object-cover' src={userProfile.profilePicture ? `data:image/jpeg;base64,${userProfile.profilePicture}` : `Avatar.png`} alt="" />
+                    <img className='rounded-full h-36 w-36 border-8 border-mine-shaft-600 object-cover' src={userProfile.profilePicture ? `data:image/jpeg;base64,${userProfile.profilePicture}` : `Avatar.png`} alt="" />
                     {hovered && <Overlay opacity={0.25} color="#000" blur={1} className='rounded-full' />}
                     {hovered && <IconPencil stroke={2} className='absolute !w-16 cursor-pointer z-[300] text-bright-sun-400 !h-16  rounded-full p-1 ' />}
                     <FileInput className='absolute opacity-0 w-full z-[301] [&_*]:h-48 [&_*]:rounded-full' variant={'unstyled'} size='lg' radius={'xl'} accept="image/png,image/jpeg" onChange={(file) => handleFileChange(file)} />

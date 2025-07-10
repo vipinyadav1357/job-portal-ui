@@ -2,7 +2,7 @@ import React from 'react'
 import { talents } from '../../Data/TalentData'
 import TalentCard from '../FindTalent/Talents/TalentCard/TalentCard'
 
-const RecommandedTalent = () => {
+const RecommandedTalent = (props: any) => {
     return (
         <div className='w-1/3'>
             <div className='font-semibold text-xl mb-5 ml-5'>Recommanded Talents</div>

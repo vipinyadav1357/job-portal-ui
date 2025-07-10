@@ -138,7 +138,7 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
             <Divider mr="xs" color='mine-shaft-700' />
             <div className='flex [&>*]:w-1/2 [&>*]:p-1 items-center'>
                 {!invite && <>
-                    <Link to="/talent-profile"><Button variant='light' color='brightSun.4' fullWidth>go to profile</Button></Link>
+                    <Link to={`/talent-profile/${profile.id}`}><Button variant='light' color='brightSun.4' fullWidth>go to profile</Button></Link>
                     <div>
                         {posted ?
                             <Button onClick={() => setOpened(true)} leftIcon={<IconCalendar />} variant='outline' color='brightSun.4' fullWidth>schedule</Button>
