@@ -35,7 +35,9 @@ interface talentData {
     talent?: talent,
     applicants?: applicants,
     posted?: boolean,
-    invite?: boolean
+    invite?: boolean,
+    // offered?: boolean,
+    // rejected?: boolean
 }
 const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }) => {
     const [opened, setOpened] = useState(false);
@@ -52,11 +54,11 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
         } else {
             setProfile(talent)
         }
-        console.log()
+        console.log(applicants?.interViewTime)
     }, [talent, applicants, posted, invite])
     const handleOffer = (status: string) => {
         const choosenDateAndTime = new Date(date ? date : new Date());
-        choosenDateAndTime?.setHours(time.hours, time.minutes, 0, 0);
+        choosenDateAndTime?.setHours(time.hours - 1, time.minutes, 0, 0);
         choosenDateAndTime.setSeconds(0, 0); // Set seconds and milliseconds to 0
         let application = { jobId: Number(id), applicantId: applicants?.applicantId, userId: profile.id, applicationStatus: status, interViewTime: choosenDateAndTime.toJSON() }
         setDate(choosenDateAndTime);
@@ -111,7 +113,7 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
             {
                 invite
                     ?
-                    <div className='flex justify-between text-sm text-mine-shaft-400 items-center'>
+                    <div className='flex justify-evenly text-sm text-mine-shaft-400 items-center'>
                         <IconCalendarMonth />
                         Interview scheduled on
                         <span className='text-bright-sun-400'>
@@ -119,7 +121,7 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
                                 new Date(applicants.interViewTime).toLocaleDateString()}</span>
                         at
                         <span className='text-bright-sun-400'>{applicants?.interViewTime &&
-                            new Date(applicants.interViewTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
+                            new Date(applicants.interViewTime).toISOString().split("T")[1].substring(0, 5)}</span>
                     </div>
                     :
                     <div className='flex justify-between text-xs text-mine-shaft-400 items-center'>
@@ -128,7 +130,8 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
                             15 lpa</div>
                         <div className='flex items-center gap-1'>
                             <IconMapPin className='inline-block text-bright-sun-400' stroke={1.5} />
-                            {profile.location}                        </div>
+                            {profile.location}
+                        </div>
                     </div>
             }
 
