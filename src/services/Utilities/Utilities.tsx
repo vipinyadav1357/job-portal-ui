@@ -39,5 +39,25 @@ const formatDateToDayFromCurrentDate = (dateStr: string): string => {
     const yearsDiff = now.diff(givenDate, 'year');
     return `${yearsDiff} year${yearsDiff === 1 ? '' : 's'} `;
 };
-
-export { formatToMonthYear, formatDateToDayFromCurrentDate };
+const openResume = (base64: string) => {
+    openBase64InNewTab(base64);
+};
+const openBase64InNewTab = (base64String: string) => {
+    const newWindow = window.open();
+    if (newWindow) {
+        newWindow.document.writeln(`
+        <iframe 
+          src="${base64String}" 
+          frameborder="0" 
+          style="border:0; top:0; left:0; bottom:0; right:0; 
+                 width:100%; height:100%;" 
+          allowfullscreen>
+        </iframe>
+      `);
+        newWindow.document.title = "Applicant Resume";
+        newWindow?.document.close();
+    } else {
+        console.error("Could not open new window. Check pop-up blockers.");
+    }
+}
+export { formatToMonthYear, formatDateToDayFromCurrentDate, openResume };

@@ -61,6 +61,34 @@ const PostedJobDescription = (props: any) => {
                             }
                         </div>
                     </Tabs.Panel>
+                    <Tabs.Panel value="offered" pt="xs">
+                        <div className=' flex flex-wrap gap-10 justify-center'>
+                            {
+                                job?.applicants?.filter((applicant: any) => applicant.applicationStatus === "OFFERED")
+                                    .map((talent: any, index: any) =>
+                                        <div key={index}>
+                                            {
+                                                <TalentCard applicants={talent} invite />
+                                            }
+                                        </div>
+                                    )
+                            }
+                        </div>
+                    </Tabs.Panel>
+                    <Tabs.Panel value="rejected" pt="xs">
+                        <div className=' flex flex-wrap gap-10 justify-center'>
+                            {
+                                job?.applicants?.filter((applicant: any) => applicant.applicationStatus === "REJECTED")
+                                    .map((talent: any, index: any) =>
+                                        <div key={index}>
+                                            {
+                                                <TalentCard applicants={talent} invite />
+                                            }
+                                        </div>
+                                    )
+                            }
+                        </div>
+                    </Tabs.Panel>
                 </Tabs>
             </div>
         </div>

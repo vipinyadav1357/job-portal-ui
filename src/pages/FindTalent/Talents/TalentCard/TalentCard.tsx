@@ -5,6 +5,8 @@ import { Calendar, TimeInput } from '@mantine/dates'
 import { Link, useParams } from 'react-router-dom'
 import { getProfile } from '../../../../services/ProfileService'
 import { changeApplicationStatus } from '../../../../services/JobService'
+import { useDisclosure } from '@mantine/hooks'
+import { openResume } from '../../../../services/Utilities/Utilities'
 
 interface applicants {
     applicantId: number;
@@ -37,6 +39,7 @@ interface talentData {
 }
 const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }) => {
     const [opened, setOpened] = useState(false);
+    const [app, { open: openApp, close: closeApp }] = useDisclosure(false);
     const [date, setDate] = useState<Date | null>(null);
     const [time, setTime] = useState<{ hours: number; minutes: number }>({ hours: 9, minutes: 0 });
     const [profile, setProfile] = useState<any>({})
@@ -58,6 +61,7 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
         let application = { jobId: Number(id), applicantId: applicants?.applicantId, userId: profile.id, applicationStatus: status, interViewTime: choosenDateAndTime.toJSON() }
         setDate(choosenDateAndTime);
         changeApplicationStatus(application).then((res) => {
+            window.location.reload();
             console.log(res)
         }
         ).catch((e) => {
@@ -143,11 +147,17 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
                 }
                 {
                     invite && <>
-                        <Button variant='light' color='brightSun.4' fullWidth>Accept</Button>
-                        <Button variant='outline' color='brightSun.4' fullWidth>Reject</Button>
+                        <Button onClick={() => handleOffer("OFFERED")} variant='light' color='brightSun.4' fullWidth>Accept</Button>
+                        <Button onClick={() => handleOffer("REJECTED")} variant='outline' color='brightSun.4' fullWidth>Reject</Button>
                     </>
+
                 }
             </div>
+            {(invite || posted)
+                && <>
+                    <Button onClick={openApp} variant='filled' color='brightSun.4' fullWidth>view Application</Button>
+                </>
+            }
             <Modal
                 opened={opened}
                 title="Choose a date and time"
@@ -175,6 +185,44 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
                 >
                     Confirm
                 </Button>
+            </Modal>
+            <Modal
+                opened={app}
+                title="Applicant Details"
+                onClose={closeApp}
+                overlayOpacity={0.25}
+                overlayBlur={1}
+                centered
+                overlayColor="#c5c5c5"
+                size="xs"
+
+            >
+                <div className='flex flex-col gap-2'>
+                    <div >
+                        email:{applicants?.email}
+                    </div>
+                    <div>
+                        contactNumber: {applicants?.contactNumber}
+                    </div>
+                    <div>
+                        portfolioLink: <a href={`http://${applicants?.portfolioLink}`} target="_blank" rel="noopener noreferrer" className='text-bright-sun-400 text-sm hover:underline text-center cursor-pointer'>{applicants?.portfolioLink}</a>
+                    </div>
+                    <div>
+                        resume:<Button
+                            className=' text-sm  text-center cursor-pointer'
+                            onClick={() => {
+                                if (applicants?.resume) {
+                                    // e.preventDefault();
+                                    openResume("data:application/pdf;base64," + applicants.resume);
+                                }
+                            }}
+                            px={5}
+                        >see Resume</Button>
+                    </div>
+                    <div>
+                        CoverLetter:{"  " + applicants?.coverLetter}
+                    </div>
+                </div>
             </Modal>
         </div >
     )
