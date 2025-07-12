@@ -5,8 +5,8 @@ import { Button, Divider, Textarea } from '@mantine/core';
 import TagsInput from '../SelectInput/TagsInput';
 import TextEditorWindow from '../TextEditor/TextEditorWindow';
 import { useForm } from '@mantine/form';
-import { postJob } from '../../../services/JobService';
-import { useNavigate } from 'react-router-dom';
+import { getJobById, postJob } from '../../../services/JobService';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const UploadJobs = () => {
@@ -14,24 +14,30 @@ const UploadJobs = () => {
     const userProfile = useSelector((state: any) => state.profile)
     const navigate = useNavigate();
     const [skill, setSkill] = useState<string[]>([]);
+    const { id } = useParams()
+    const [job, setJob] = useState<any>({});
     const form = useForm({
         initialValues: {
+            id: 0 as number,
             jobTitle: "" as string,
-            company: "Google" as string,
+            company: "" as string,
             experience: "" as string,
             jobType: "" as string,
-            location: "Delhi" as string,
+            location: "" as string,
             packageOffered: 0 as number,
-            skillRequired: [] as string[],
+            skillRequired: job?.skillRequired as string[],
             about: "" as string,
             description: content as string
         },
         mode: 'controlled'
     });
     useEffect(() => {
-
-        console.log(form.getValues())
-    }, [form]);
+        getJobById(Number(id)).then((job) => {
+            setJob(job);
+            form.setValues({ ...form.getValues(), ...job })
+            console.log("Hello", form.getValues().description)
+        }).catch((e) => console.log(e))
+    }, [id]);
 
     const updateSkills = (skillData: string) => {
         let updatedSkills = [...skill]
@@ -67,10 +73,10 @@ const UploadJobs = () => {
                     {data.map((item, index) => <SelectInput key={index} {...item} form={form} type={item.label === "packageOffered" ? "number" : "text"} />)}
                 </div>
                 <div className='[&>*]:px-16 py-10 [&>*]:w-full'>
-                    <TagsInput updateSkill={updateSkills} handleDelete={handleDelete} />
+                    <TagsInput updateSkill={updateSkills} handleDelete={handleDelete} skills={job.skillRequired} />
                 </div>
                 <div className='px-16 py-3'>
-                    <Textarea {...form.getInputProps('about')} label="About" autosize minRows={4} variant='filled' className='[&_*]:border-bright-sun-400' withAsterisk />
+                    <Textarea {...form.getInputProps('about')} value={form.getInputProps('about').value} label="About" autosize minRows={4} variant='filled' className='[&_*]:border-bright-sun-400' withAsterisk />
                 </div>
                 <div className='flex flex-col gap-3 [&_button[data-active="true"]]:text-bright-sun-400 [&_button[data-active="true"]]:bg-bright-sun-400/20'>
                     <div className='text-2xl font-semibold mt-3 border-t border-bright-sun-400 flex items-center justify-center'>

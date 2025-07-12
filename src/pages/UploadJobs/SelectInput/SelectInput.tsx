@@ -12,7 +12,6 @@ const SelectInput = (props: any) => {
         //     console.log("Adding value to options:", props.value);
         //     updatedOptions.push(props.value);
         // }
-        console.log(props.type + "" + props.label)
         setData(props.options);
     }, [props.options]);
     return (
@@ -22,7 +21,7 @@ const SelectInput = (props: any) => {
                 label={props.label}
                 type={props.type}
                 data={data.map((option) => ({ value: option, label: option }))}
-                value={selected}
+                value={props.type === "number" ? String(selected) : selected}
                 onChange={setSelected}
                 rightSection={<IconChevronDown size={14} />}
                 icon={<IconAdjustments className='text-bright-sun-400 bg-mine-shaft-900 size-7 rounded-xl p-1' />}

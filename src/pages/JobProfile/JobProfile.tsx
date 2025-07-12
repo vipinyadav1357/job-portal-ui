@@ -8,6 +8,7 @@ import { formatDateToDayFromCurrentDate } from '../../services/Utilities/Utiliti
 import { useDispatch, useSelector } from 'react-redux';
 import { changeProfile } from '../../slices/ProfileSlice';
 import { useEffect, useState } from 'react';
+import { postJob } from '../../services/JobService';
 
 const JobProfile = ({ edit, props, job }: any) => {
     const { id } = useParams();
@@ -38,6 +39,10 @@ const JobProfile = ({ edit, props, job }: any) => {
             dispatch(changeProfile(updatedProfile));
         }
     }
+    const handleCloseJob = () => {
+        const updatedJob = { ...job, jobStatus: "CLOSED" };
+        postJob(updatedJob).then((res) => console.log("ho gail", res)).catch((e) => console.log(e))
+    }
     return (
         <div className='w-2/3 mx-5 pb-3'>
             <div className='flex justify-between '>
@@ -55,16 +60,16 @@ const JobProfile = ({ edit, props, job }: any) => {
                 </div>
                 <div className='flex flex-col justify-between items-center '>
                     <div className='text-sm'>
-                        {(!applied || edit) && <Link to={edit ? "" : `/apply-job/${id}`} >
-                            <Button variant='light' color='brightSun.4' bg={"mineShaft.7"} >{edit ? "edit" : "Apply"}</Button>
+                        {(!applied || edit) && <Link to={edit || job?.jobStatus === "CLOSED" ? `/post-job/${job.id}` : `/apply-job/${id}`} >
+                            <Button onClick={() => { }} variant='light' color='brightSun.4' bg={"mineShaft.7"} >{edit ? job?.jobStatus === "CLOSED" ? "reopen" : "edit" : "Apply"}</Button>
                         </Link>}
                         {
                             applied && !edit && <Button variant='outline' disabled  >Applied</Button>
                         }
                     </div>
                     {
-                        edit ?
-                            <Button variant='outline' color='red.5' bg={"mineShaft.7"} >delete</Button>
+                        edit ? job?.jobStatus === "CLOSED" ? <></> :
+                            <Button onClick={() => { handleCloseJob() }} variant='outline' color='red.5' bg={"mineShaft.7"} >close</Button>
                             :
                             userProfile?.savedJobs?.includes(Number(id)) ? <IconBookmarkFilled onClick={handleSavedJob} className='text-bright-sun-400 transition-all duration-200' stroke={1.5} /> : <IconBookmark onClick={handleSavedJob} className='text-bright-sun-400 hover:fill-bright-sun-400 hover:stroke-bright-sun-400 transition-all duration-200' stroke={1.5} />
                     }

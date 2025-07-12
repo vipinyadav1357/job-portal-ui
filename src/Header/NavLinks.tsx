@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 const links: { name: string, url: string }[] = [
     { name: "Find Jobs", url: "find-jobs" },
     { name: "Find Talent", url: "find-talent" },
-    { name: "Post Jobs", url: "post-job" },
+    { name: "Post Jobs", url: "post-job/0" },
     { name: "Posted jobs", url: "posted-job/0" },
     { name: "Job history", url: "job-history" },
     { name: "sign-up", url: "sign-up" },

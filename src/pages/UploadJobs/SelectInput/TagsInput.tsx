@@ -3,7 +3,7 @@ import { Input, Badge, CloseButton } from '@mantine/core';
 import { IconAsterisk } from '@tabler/icons-react';
 
 const TagsInput = (props: any) => {
-    const [tags, setTags] = useState<string[]>([]);
+    const [tags, setTags] = useState<string[]>(props?.skills ? props.skills : []);
     const [inputValue, setInputValue] = useState('');
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if ((event.key === 'Enter' || event.key === ' ') && inputValue.trim() !== '') {

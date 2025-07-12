@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Divider } from '@mantine/core'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { IconArrowBackUp } from '@tabler/icons-react'
 import TalentProfile from './TalentProfile'
 import { profile } from '../../Data/TalentData'
@@ -10,21 +10,23 @@ import { useDispatch } from 'react-redux'
 import { setProfile } from '../../slices/ProfileSlice'
 const TalentProfilePage = () => {
     const [profile, setProfile] = useState<any>({})
+    const { id } = useParams();
     useEffect(() => {
         window.scroll(0, 0);
     })
     useEffect(() => {
-        getProfile("1").then((res) => {
-            if (res) {
-                console.log("Profile fetched successfully:", res);
-                // dispatch({ type: 'SET_PROFILE', payload: res });
-                setProfile(res)
+        if (id)
+            getProfile(id).then((res) => {
+                if (res) {
+                    console.log("Profile fetched successfully:", res);
+                    // dispatch({ type: 'SET_PROFILE', payload: res });
+                    setProfile(res)
+                }
             }
-        }
-        ).catch((err) => {
-            console.error("Error fetching profile:", err);
-        });
-    }, []);
+            ).catch((err) => {
+                console.error("Error fetching profile:", err);
+            });
+    }, [id]);
     return (
         <div className="min-h-[100vh] text-mine-shaft-100 bg-mine-shaft-950 font-['poppins'] pt-16 " >
             <Link to="/find-talent" className='inline-block mx-5'><Button variant='light' color='brightSun.4' leftIcon={<IconArrowBackUp className='' />} >go Back</Button></Link>

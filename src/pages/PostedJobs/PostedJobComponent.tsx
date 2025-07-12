@@ -11,6 +11,7 @@ const PostedJobComponent = (props: any) => {
         setActiveTab(props.job?.jobStatus || 'ACTIVE')
         setJobs(props.jobList)
     }, [props.jobList, props.job]);
+
     const handleTabChange = (value: string) => {
         setActiveTab(value);
     };
@@ -19,9 +20,10 @@ const PostedJobComponent = (props: any) => {
             <div className='text-2xl font-semibold text-center mt-3'>Jobs</div>
             <div>
                 <Tabs variant='pills' value={activeTab} onTabChange={handleTabChange}>
-                    <Tabs.List className='mb-5 [&_button]:text-sm font-semibold [&_button[aria-selected=true]]:bg-bright-sun-400 [&_button[data-active=true]]:transition [&_button[data-active=true]]:duration-300 [&_button[data-active=true]]:ease-in-out flex flex-wrap gap-0 items-center justify-evenly'>
+                    <Tabs.List className='mb-5 [&_button]:text-sm font-semibold [&_button[aria-selected=true]]:bg-bright-sun-400 [&_button[data-active=true]]:transition [&_button[data-active=true]]:duration-300 [&_button[data-active=true]]:ease-in-out flex flex-wrap gap-0 items-center justify-start'>
                         <Tabs.Tab value="ACTIVE" icon={<IconPhoto size={14} />} >Active[{jobs?.filter((job: any) => job.jobStatus === "ACTIVE").length}]</Tabs.Tab>
                         <Tabs.Tab value="DRAFT" icon={<IconBriefcase2Filled size={14} />}>Drafts[{jobs?.filter((job: any) => job.jobStatus === "DRAFT").length}]</Tabs.Tab>
+                        <Tabs.Tab value="CLOSED" icon={<IconBriefcase2Filled size={14} />}>Closed[{jobs?.filter((job: any) => job.jobStatus === "CLOSED").length}]</Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel value={activeTab} pt="xs">
