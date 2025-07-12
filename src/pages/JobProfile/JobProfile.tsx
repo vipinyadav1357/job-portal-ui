@@ -60,7 +60,7 @@ const JobProfile = ({ edit, props, job }: any) => {
                 </div>
                 <div className='flex flex-col justify-between items-center '>
                     <div className='text-sm'>
-                        {(!applied || edit) && <Link to={edit || job?.jobStatus === "CLOSED" ? `/post-job/${job.id}` : `/apply-job/${id}`} >
+                        {(!applied || edit) && <Link to={edit || job?.jobStatus === "CLOSED" ? `/post-job/${id}` : `/apply-job/${id}`} >
                             <Button onClick={() => { }} variant='light' color='brightSun.4' bg={"mineShaft.7"} >{edit ? job?.jobStatus === "CLOSED" ? "reopen" : "edit" : "Apply"}</Button>
                         </Link>}
                         {
