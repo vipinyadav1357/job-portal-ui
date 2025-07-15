@@ -1,12 +1,23 @@
 import { Divider, Input, RangeSlider } from '@mantine/core'
-import { IconCurrencyRupee, IconUserCircle } from '@tabler/icons-react'
+import { IconUserCircle } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import MultiSelectComponent from '../../../MultiSelect/MultiSelect'
 import { searchFields } from '../../../Data/TalentData'
+import { changeFilterTalent } from '../../../slices/FilterTalent'
+import { useDispatch } from 'react-redux'
 
 const SearchBar = () => {
-    const [rangeValue, setRangeValue] = useState<[number, number]>([1, 100]);
-
+    const [rangeValue, setRangeValue] = useState<[number, number]>([0, 15]);
+    const [name, setName] = useState<string>("vipin");
+    const dispatch = useDispatch();
+    const handleChange = (name: string, e: any) => {
+        if (name === "exp") {
+            dispatch(changeFilterTalent({ [name]: e }))
+        } else {
+            setName(e.target.value)
+            dispatch(changeFilterTalent({ [name]: e.target.value }))
+        }
+    }
     return (
         <div className='flex justify-evenly items-end px-5 py-8'>
             <div className='flex items-end gap-3'>
@@ -14,7 +25,14 @@ const SearchBar = () => {
                     <IconUserCircle size={20} />
                 </div>
                 <Input.Wrapper id={"vip"} label="Find Talent By Name">
-                    <Input type="text" className='[&_input]:!placeholder-mine-shaft-300' variant='unstyled' id="vip" placeholder="search talent" />
+                    <Input
+                        defaultValue={name}
+                        onChange={(e: any) => handleChange("name", e)}
+                        type="text"
+                        className='[&_input]:!placeholder-mine-shaft-300'
+                        variant='unstyled'
+                        id="vip"
+                        placeholder="search talent" />
                 </Input.Wrapper>
             </div>
             {
@@ -26,8 +44,22 @@ const SearchBar = () => {
                 </React.Fragment>)
             }
             <div className='flex flex-col gap-7 w-fit'>
-                <div className='text-1xl'>Salary<IconCurrencyRupee className='inline-block' /> {rangeValue[0]} lpa - {rangeValue[1]} lpa</div>
-                <RangeSlider min={1} max={100} value={rangeValue} onChange={setRangeValue} labelTransition={'skew-down'} labelTransitionDuration={150} labelTransitionTimingFunction='ease' step={1} color='brightSun.4' />
+                <div
+                    className='text-1xl'>
+                    Experience {rangeValue[0]} year - {rangeValue[1]} year
+                </div>
+                <RangeSlider
+                    min={0}
+                    max={15}
+                    step={1}
+                    value={rangeValue}
+                    onChange={setRangeValue}
+                    labelTransition={'skew-down'}
+                    labelTransitionDuration={150}
+                    labelTransitionTimingFunction='ease'
+                    color='brightSun.4'
+                    onChangeEnd={e => handleChange("exp", e)}
+                />
             </div>
         </div>
     )
