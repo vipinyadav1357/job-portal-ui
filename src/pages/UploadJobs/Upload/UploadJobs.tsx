@@ -18,7 +18,7 @@ const UploadJobs = () => {
     const [job, setJob] = useState<any>({});
     const form = useForm({
         initialValues: {
-            id: 0 as number,
+            id: id ? Number(id) : 0,
             jobTitle: "" as string,
             company: "" as string,
             experience: "" as string,
@@ -32,11 +32,11 @@ const UploadJobs = () => {
         mode: 'controlled'
     });
     useEffect(() => {
-        getJobById(Number(id)).then((job) => {
-            setJob(job);
-            form.setValues({ ...form.getValues(), ...job })
-            console.log("Hello", form.getValues().description)
-        }).catch((e) => console.log(e))
+        if (Number(id) !== 0 && id)
+            getJobById(Number(id)).then((job) => {
+                setJob(job);
+                form.setValues({ ...form.getValues(), ...job })
+            }).catch((e) => console.log(e))
     }, [id]);
 
     const updateSkills = (skillData: string) => {

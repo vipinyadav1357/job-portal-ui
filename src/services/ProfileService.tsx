@@ -19,5 +19,12 @@ const updateProfile = async (profileData: ProfileData) => {
             throw error;
         });
 }
-
-export { getProfile, updateProfile };
+const getAllProfiles = async () => {
+    return axios.get(BASE_URL + `getAll`)
+        .then(response => response.data)
+        .catch(error => {
+            console.error("There was an error fetching all profiles!", error);
+            throw error;
+        });
+}
+export { getProfile, updateProfile, getAllProfiles };
