@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 
 const SearchBar = () => {
     const [rangeValue, setRangeValue] = useState<[number, number]>([0, 15]);
-    const [name, setName] = useState<string>("vipin");
+    const [name, setName] = useState<string>("ja");
     const dispatch = useDispatch();
     const handleChange = (name: string, e: any) => {
         if (name === "exp") {
