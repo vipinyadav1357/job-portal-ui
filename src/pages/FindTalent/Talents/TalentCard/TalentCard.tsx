@@ -54,7 +54,6 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
         } else {
             setProfile(talent)
         }
-        console.log(applicants?.interViewTime)
     }, [talent, applicants, posted, invite])
     const handleOffer = (status: string) => {
         const choosenDateAndTime = new Date(date ? date : new Date());
@@ -126,8 +125,7 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
                     :
                     <div className='flex justify-between text-xs text-mine-shaft-400 items-center'>
                         <div className='text-mine-shaft-200 font-semibold text-sm [text-shadow:_0px_0px_2px_#b0b0b0,_-0px_0px_2px_#b0b0b0,_-0px_0px_2px_#b0b0b0,_0px_-0px_2px_#b0b0b0]'>
-                            <IconCurrencyRupee className='inline-block' width={16} height={16} stroke={3} />
-                            15 lpa</div>
+                            {profile.totalExp ?? 5 + " "}year Exp</div>
                         <div className='flex items-center gap-1'>
                             <IconMapPin className='inline-block text-bright-sun-400' stroke={1.5} />
                             {profile.location}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { MultiSelect } from '@mantine/core'; // Example library import
 import { IconChevronDown, IconProps, } from '@tabler/icons-react';
+import { useDispatch } from 'react-redux';
+import { changeFilterTalent, resetFilterTalent } from '../slices/FilterTalent';
 interface DropdownItem {
     title: string;
     icon: React.FC<IconProps>;
@@ -12,11 +14,14 @@ interface DropdownFiltersProps {
     item: DropdownItem;
 }
 const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
+    const dispatch = useDispatch();
     const [data, setData] = useState<string[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
     const [search, setSearch] = useState('');
     useEffect(() => {
         setData(item.options)
+        resetFilterTalent()
+        dispatch(resetFilterTalent())
     }, [item])
     return (
         <div className='text-bright-sun-400'>
@@ -29,9 +34,13 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
                 value={selected}
                 onChange={(selectedValues) => {
                     setSelected(selectedValues)
+                    dispatch(changeFilterTalent({ [item.title]: [...selectedValues] }))
                 }}
                 searchValue={search}
-                onSearchChange={setSearch}
+                onSearchChange={(value: string) => {
+                    setSearch(value);
+                    dispatch(changeFilterTalent({ [item.title]: [...selected, value] }))
+                }}
                 searchable
                 creatable
                 clearable

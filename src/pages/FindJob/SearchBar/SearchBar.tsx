@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { dropdownData } from '../../../Data/JobsData'
 import MultiSelectComponent from '../../../MultiSelect/MultiSelect'
 import { Divider, RangeSlider } from '@mantine/core'
-import { IconCurrencyRupee } from '@tabler/icons-react'
 
 const SearchBar = () => {
-    const [rangeValue, setRangeValue] = useState<[number, number]>([1, 100]);
+    const [rangeValue, setRangeValue] = useState<[number, number]>([0, 15]);
     return (
         <div className='flex justify-evenly items-center px-5 py-8'>
             {
@@ -16,8 +15,21 @@ const SearchBar = () => {
                 </React.Fragment>)
             }
             <div className='flex flex-col gap-7 w-fit'>
-                <div className='text-1xl'>Salary<IconCurrencyRupee className='inline-block' /> {rangeValue[0]} lpa - {rangeValue[1]} lpa</div>
-                <RangeSlider min={1} max={100} value={rangeValue} onChange={setRangeValue} labelTransition={'skew-down'} labelTransitionDuration={150} labelTransitionTimingFunction='ease' step={1} color='brightSun.4' />
+                <div
+                    className='text-1xl'>
+                    Experience {rangeValue[0]} year - {rangeValue[1]} year
+                </div>
+                <RangeSlider
+                    min={0}
+                    max={15}
+                    step={1}
+                    value={rangeValue}
+                    onChange={setRangeValue}
+                    labelTransition={'skew-down'}
+                    labelTransitionDuration={150}
+                    labelTransitionTimingFunction='ease'
+                    color='brightSun.4'
+                />
             </div>
         </div>
     )

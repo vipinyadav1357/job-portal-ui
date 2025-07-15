@@ -19,7 +19,8 @@ const SearchBar = () => {
             </div>
             {
                 searchFields.map((item, index) => <React.Fragment key={index}>
-                    <div> <MultiSelectComponent item={item} />
+                    <div>
+                        <MultiSelectComponent item={item} />
                     </div>
                     <Divider size={"xs"} orientation='vertical' />
                 </React.Fragment>)
