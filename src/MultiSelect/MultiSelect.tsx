@@ -20,7 +20,6 @@ const MultiSelectComponent: React.FC<DropdownFiltersProps> = ({ item }) => {
     const [search, setSearch] = useState('');
     useEffect(() => {
         setData(item.options)
-        resetFilterTalent()
         dispatch(resetFilterTalent())
     }, [item])
     return (

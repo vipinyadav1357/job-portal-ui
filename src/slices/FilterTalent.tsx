@@ -7,7 +7,6 @@ const FilterTalent = createSlice(
         reducers: {
             changeFilterTalent: (state, action) => {
                 state = { ...state, ...action.payload }
-                console.log("Filter Talent", state)
                 return state;
             },
             resetFilterTalent: (state) => {

@@ -77,6 +77,7 @@ const Talents = () => {
         }
         if (filter.exp && filter.exp.length > 0) {
             filtered = filtered.filter((talent: any) => filter['exp'][0] <= talent?.totalExp && filter['exp'][1] >= talent?.totalExp)
+            setFilteredTalents(filtered);
         }
     }, [filter, talents])
     return (
@@ -87,7 +88,9 @@ const Talents = () => {
             </div>
             <div className='mt-8 flex flex-wrap justify-center gap-10 '>
                 {
-                    filteredTalents.map((job: any, index: any) => <div key={index}><TalentCard talent={job} /></div>)
+                    filteredTalents.length ? filteredTalents.map((job: any, index: any) => <div key={index}><TalentCard talent={job} /></div>)
+                        :
+                        <div>No Talents Available</div>
                 }
             </div>
         </div>

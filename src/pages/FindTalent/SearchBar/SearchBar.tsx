@@ -52,6 +52,7 @@ const SearchBar = () => {
                     min={0}
                     max={15}
                     step={1}
+                    minRange={1}
                     value={rangeValue}
                     onChange={setRangeValue}
                     labelTransition={'skew-down'}
