@@ -1,6 +1,6 @@
 import { Badge, Tabs } from '@mantine/core'
 import { IconPhoto, IconBriefcase2Filled, IconUsers } from '@tabler/icons-react'
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import JobProfile from '../JobProfile/JobProfile'
 import TalentCard from '../FindTalent/Talents/TalentCard/TalentCard'
 
@@ -48,7 +48,6 @@ const PostedJobDescription = (props: any) => {
                                                 <div className='text-2xl font-semibold text-mine-shaft-300'>No {tab} applicants</div>
                                                 :
                                                 applicants?.map((talent: any, index: any) => {
-                                                    console.log(talent);
                                                     return (
                                                         <div key={index}>
                                                             {

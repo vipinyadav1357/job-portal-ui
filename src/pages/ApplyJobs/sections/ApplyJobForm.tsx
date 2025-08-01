@@ -59,7 +59,6 @@ const ApplyJobForm = (props: any) => {
     }, [navigate, submit]);
     const handlePrev = () => {
         setPrev(!prev)
-        console.log(form.getValues())
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     const handleSubmit = async () => {

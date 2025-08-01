@@ -11,7 +11,7 @@ const SearchBar = () => {
     const [name, setName] = useState<string>("vipin");
     const dispatch = useDispatch();
     const handleChange = (name: string, e: any) => {
-        if (name === "exp") {
+        if (name === "sal") {
             dispatch(changeFilterTalent({ [name]: e }))
         } else {
             setName(e.target.value)
@@ -42,7 +42,7 @@ const SearchBar = () => {
                     labelTransitionDuration={150}
                     labelTransitionTimingFunction='ease'
                     step={1} color='brightSun.4'
-                    onChangeEnd={e => handleChange("exp", e)}
+                    onChangeEnd={e => handleChange("sal", e)}
                 />
 
             </div>

@@ -28,7 +28,6 @@ const JobHistoryComponent = () => {
         if (activeTab === 'APPLIED') {
             setActiveTabData(activeTab, jobList)
         } else if (activeTab === 'SAVED') {
-
             setShowList(jobList?.filter((job: any) =>
                 userProfile?.savedJobs.includes(job.id)
             ))

@@ -1,4 +1,4 @@
-import { IconCalendar, IconCalendarMonth, IconCurrencyRupee, IconHeart, IconMapPin, IconPointFilled } from '@tabler/icons-react'
+import { IconCalendar, IconCalendarMonth, IconHeart, IconMapPin, IconPointFilled } from '@tabler/icons-react'
 import React, { useEffect, useState } from 'react'
 import { Avatar, Button, Divider, Modal, Text } from '@mantine/core'
 import { Calendar, TimeInput } from '@mantine/dates'
@@ -7,6 +7,7 @@ import { getProfile } from '../../../../services/ProfileService'
 import { changeApplicationStatus } from '../../../../services/JobService'
 import { useDisclosure } from '@mantine/hooks'
 import { openResume } from '../../../../services/Utilities/Utilities'
+import { useSelector } from 'react-redux'
 
 interface applicants {
     applicantId: number;
@@ -45,6 +46,7 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
     const [date, setDate] = useState<Date | null>(null);
     const [time, setTime] = useState<{ hours: number; minutes: number }>({ hours: 9, minutes: 0 });
     const [profile, setProfile] = useState<any>({})
+    const userProfile = useSelector((state: any) => state.profile);
     const { id } = useParams();
     useEffect(() => {
         if (applicants?.applicantId) {
@@ -55,11 +57,12 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
             setProfile(talent)
         }
     }, [talent, applicants, posted, invite])
+
     const handleOffer = (status: string) => {
         const choosenDateAndTime = new Date(date ? date : new Date());
         choosenDateAndTime?.setHours(time.hours - 1, time.minutes, 0, 0);
         choosenDateAndTime.setSeconds(0, 0); // Set seconds and milliseconds to 0
-        let application = { jobId: Number(id), applicantId: applicants?.applicantId, userId: profile.id, applicationStatus: status, interViewTime: choosenDateAndTime.toJSON() }
+        let application = { jobId: Number(id), applicantId: applicants?.applicantId, userId: userProfile.id, applicationStatus: status, interViewTime: choosenDateAndTime.toJSON() }
         setDate(choosenDateAndTime);
         changeApplicationStatus(application).then((res) => {
             window.location.reload();
@@ -196,7 +199,6 @@ const TalentCard: React.FC<talentData> = ({ talent, applicants, posted, invite }
                 centered
                 overlayColor="#c5c5c5"
                 size="xs"
-
             >
                 <div className='flex flex-col gap-2'>
                     <div >

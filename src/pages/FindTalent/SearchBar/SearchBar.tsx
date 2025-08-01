@@ -36,12 +36,16 @@ const SearchBar = () => {
                 </Input.Wrapper>
             </div>
             {
-                searchFields.map((item, index) => <React.Fragment key={index}>
-                    <div>
-                        <MultiSelectComponent item={item} />
-                    </div>
-                    <Divider size={"xs"} orientation='vertical' />
-                </React.Fragment>)
+                searchFields
+                    .map(
+                        (item, index) =>
+                            <React.Fragment key={index}>
+                                <div>
+                                    <MultiSelectComponent item={item} />
+                                </div>
+                                <Divider size={"xs"} orientation='vertical' />
+                            </React.Fragment>
+                    )
             }
             <div className='flex flex-col gap-7 w-fit'>
                 <div

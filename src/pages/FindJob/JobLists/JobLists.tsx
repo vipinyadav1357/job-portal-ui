@@ -10,7 +10,7 @@ const JobLists = () => {
     useEffect(() => {
         getAllJob()
             .then((res) => {
-                setJobList(res)
+                setJobList(res.filter((job: any) => job.jobStatus === 'ACTIVE'));
             })
             .catch(() => { });
     }, [])
