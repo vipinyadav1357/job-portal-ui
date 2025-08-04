@@ -43,7 +43,7 @@ const PostedJobDescription = (props: any) => {
                                     :
                                     <div className=' flex flex-wrap gap-10 justify-center'>
                                         {
-                                            applicants?.length === 0 || Object.keys(applicants).length === 0
+                                            applicants?.length === 0 || Object.keys(applicants ?? {}).length === 0
                                                 ?
                                                 <div className='text-2xl font-semibold text-mine-shaft-300'>No {tab} applicants</div>
                                                 :

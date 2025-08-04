@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '@mantine/core'; // Example library import
 import { IconAdjustments, IconChevronDown, } from '@tabler/icons-react';
+import { useDispatch } from 'react-redux';
+import { changeSort } from '../../../../slices/SortSlice';
 
 const SortJobs: React.FC = () => {
 
     const [data, setData] = useState<string[]>([]);
     const [selected, setSelected] = useState<string | null>('Relevance');
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setData(["Relevance", "Most Recent", "Salary(low to high)", "Salary(high to low)"])
@@ -18,7 +21,10 @@ const SortJobs: React.FC = () => {
                 label={"Sort Jobs By"}
                 data={data.map((option) => ({ value: option, label: option }))}
                 value={selected}
-                onChange={(selectedValues) => setSelected(selectedValues)}
+                onChange={(selectedValues) => {
+                    setSelected(selectedValues);
+                    dispatch(changeSort({ sortBy: selectedValues }));
+                }}
                 rightSection={<IconChevronDown size={14} />}
                 icon={<IconAdjustments className='text-bright-sun-400 bg-mine-shaft-900 size-7 rounded-xl p-1' />}
                 dropdownPosition="bottom"

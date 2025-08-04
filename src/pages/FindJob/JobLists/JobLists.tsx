@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 const JobLists = () => {
     const [jobList, setJobList] = useState<any[]>([]);
     const filter = useSelector((state: any) => state.filter)
+    const sort = useSelector((state: any) => state.sort);
     const [filteredJobsList, setFilteredJobsList] = useState<any[]>([])
     useEffect(() => {
         getAllJob()
@@ -84,7 +85,19 @@ const JobLists = () => {
             filtered = filtered.filter((job: any) => filter['sal'][0] <= job?.packageOffered && filter['sal'][1] >= job?.packageOffered)
             setFilteredJobsList(filtered);
         }
+
     }, [jobList, filter]);
+    useEffect(() => {
+        if (sort.sortBy) {
+            if (sort.sortBy === "Salary(low to high)") {
+                setJobList([...jobList].sort((a, b) => a.packageOffered - b.packageOffered));
+            } else if (sort.sortBy === "Salary(high to low)") {
+                setJobList([...jobList].sort((a, b) => b.packageOffered - a.packageOffered));
+            } else if (sort.sortBy === "Most Recent") {
+                setJobList([...jobList].sort((a, b) => new Date(b.postTime).getTime() - new Date(a.postTime).getTime()));
+            }
+        }
+    }, [sort])
     return (
         <div className='px-8 pt-16'>
             <div className='flex justify-between '>

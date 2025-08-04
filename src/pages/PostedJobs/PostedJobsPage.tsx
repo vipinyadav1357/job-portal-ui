@@ -19,7 +19,6 @@ const PostedJobsPage = () => {
         if (userProfile?.id) {
             jobPostedBy(userProfile.id)
                 .then((jobList) => {
-                    console.log("jobList", jobList)
                     if (jobList && jobList.length > 0 && Number(id) === 0) navigate(`/posted-job/${jobList[0].id}`);
                     setJobList(jobList.filter((job: any) => job.jobStatus === "DRAFT" || job.jobStatus === "ACTIVE" || job.jobStatus === "CLOSED"));
                 })
