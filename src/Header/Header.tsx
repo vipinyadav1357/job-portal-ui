@@ -8,6 +8,7 @@ import ProfileMenu from "./ProfileMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../slices/ProfileSlice";
 import { getProfile } from "../services/ProfileService";
+import NotificationMenu from "./NotificationMenu";
 const Header = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
@@ -71,11 +72,11 @@ const Header = () => {
             <IconSettings stroke={1.25} />
           </Indicator>
         </div> */}
-        <div className="bg-mine-shaft-900 p-2 rounded-full ">
-          <Indicator color="brightSun.4" processing size={9} offset={3}>
-            <IconBell stroke={1.25} />
-          </Indicator>
-        </div>
+        {user ?
+          <div >
+            <NotificationMenu />
+          </div> : <></>
+        }
       </div>
     </div > : <></>
   );

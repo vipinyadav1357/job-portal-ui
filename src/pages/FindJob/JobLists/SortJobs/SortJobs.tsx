@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Select } from '@mantine/core'; // Example library import
 import { IconAdjustments, IconChevronDown, } from '@tabler/icons-react';
 import { useDispatch } from 'react-redux';
-import { changeSort } from '../../../../slices/SortSlice';
+import { changeSort, resetSort } from '../../../../slices/SortSlice';
 
 const SortJobs: React.FC = () => {
 
@@ -12,6 +12,7 @@ const SortJobs: React.FC = () => {
 
     useEffect(() => {
         setData(["Relevance", "Most Recent", "Salary(low to high)", "Salary(high to low)"])
+        dispatch(resetSort())
     }, [])
 
     return (

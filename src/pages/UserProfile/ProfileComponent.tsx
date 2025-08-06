@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Divider, FileInput, Overlay } from '@mantine/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfile } from '../../services/ProfileService'
@@ -19,7 +19,6 @@ const ProfileComponent = ({ props }: any) => {
     // const user = useSelector((state: any) => state.user);
     const handleFileChange = async (image: File | null) => {
         if (!image) {
-            console.log("hello");
             return
         }
         let profilePicture: any = await getBase64(image);
