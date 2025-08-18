@@ -1,10 +1,9 @@
-import { Menu, Avatar, Indicator, Notification, Stack } from '@mantine/core'
-import { IconUserCircle, IconMessageCircle, IconFileText, IconBell } from '@tabler/icons'
+import { Menu, Indicator, Notification, Stack } from '@mantine/core'
+import { IconMessageCircle, IconBell } from '@tabler/icons'
 import { IconCheck } from '@tabler/icons-react'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { getNotifications } from '../services/NotificationService'
+import { changeNotificationStatus, getNotifications } from '../services/NotificationService'
 
 const NotificationMenu = () => {
     const [opened, setOpened] = useState(false);
@@ -17,11 +16,14 @@ const NotificationMenu = () => {
                 .catch((err) => console.error("Error fetching notifications:", err));
         }
     }, [userProfile])
-    const readIndex = (index: number) => {
+    const readIndex = (id: number) => {
         return () => {
             setNotifications((prev) => {
                 let newNotifications = [...prev];
-                newNotifications = newNotifications.filter((noti: any, i: any) => i !== index);
+                newNotifications = newNotifications.filter((noti: any) => noti.id !== id);
+                changeNotificationStatus(id)
+                    .then(() => console.log(`Notification with ID ${id} status changed successfully.`))
+                    .catch((err) => console.error(`Error changing status for notification with ID ${id}:`, err));
                 console.log("New notifications after filtering:", newNotifications);
                 return newNotifications;
             });
@@ -41,8 +43,8 @@ const NotificationMenu = () => {
                 <Menu.Item className='text-bright-sun-300 text-lg tracking-widest' icon={<IconMessageCircle size={24} className='text-bright-sun-300' />}>Notifications</Menu.Item>
                 <Stack className='' sx={(theme) => ({ backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0], height: 300, alignItems: 'strech', })} >
                     <div className='flex flex-col gap-1'>
-                        {notifications ? notifications.map((notification: any, index: number) => (
-                            <Notification onClose={readIndex(index)} key={notification.id} className='hover:bg-mine-shaft-900 cursor-pointer' icon={<IconCheck size={18} />} color="brightSun.4" title={notification.action}>
+                        {notifications ? notifications.map((notification: any) => (
+                            <Notification onClose={readIndex(notification.id)} key={notification.id} className='hover:bg-mine-shaft-900 cursor-pointer' icon={<IconCheck size={18} />} color="brightSun.4" title={notification.action}>
                                 {notification.msg}
                             </Notification>
                         ))

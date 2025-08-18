@@ -11,5 +11,14 @@ const getNotifications = async (userId: any) => {
             throw error;
         });
 };
+const changeNotificationStatus = async (notificationId: any) => {
+    return axios
+        .post(`${BASE_URL}change/${notificationId}`)
+        .then(response => response.data)
+        .catch(error => {
+            console.error("There was an error changing notification status!", error);
+            throw error;
+        });
+}
 
-export { getNotifications };
+export { getNotifications, changeNotificationStatus };
