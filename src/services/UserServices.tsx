@@ -13,14 +13,7 @@ const registerUser = async (userData: RegisterRequest) => {
             throw error;
         });
 }
-const loginUser = async (userData: LoginRequest) => {
-    return axios.post(BASE_URL + "login", userData)
-        .then(response => response.data)
-        .catch(error => {
-            console.error("There was an error registering the user!", error);
-            throw error;
-        });
-}
+
 const sendOtp = async (email: string) => {
     const encodedEmail = encodeURIComponent(email);
     return axios.post(BASE_URL + `otp/${encodedEmail}`)
@@ -47,4 +40,4 @@ const resetPassword = async (userData: LoginRequest) => {
             throw error;
         });
 }
-export { registerUser, loginUser, resetPassword, sendOtp, verifyOtp };
+export { registerUser, resetPassword, sendOtp, verifyOtp };

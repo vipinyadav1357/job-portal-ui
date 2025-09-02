@@ -13,6 +13,7 @@ const Header = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
   const user = useSelector((state: any) => state.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

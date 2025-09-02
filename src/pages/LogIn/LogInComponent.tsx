@@ -2,7 +2,6 @@ import { TextInput, PasswordInput, Anchor, Button } from '@mantine/core'
 import { IconAt, IconLock } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../../services/UserServices';
 import { LoginRequest } from '../../services/models/LoginRequest';
 import { SignUpValidation } from '../../services/FormValidation';
 import { UserLogInAndSignUpError } from '../../services/models/UserLogInAndSignUpError';
@@ -10,6 +9,9 @@ import { useDisclosure } from '@mantine/hooks';
 import ResetPassword from '../SignUp/ResetPassword';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/UserSlice';
+import { logInUser } from '../../services/AuthService';
+import { setToken } from '../../slices/JwtSlice';
+import { jwtDecode } from 'jwt-decode';
 
 const LogInComponent = () => {
     const dispatch = useDispatch();
@@ -50,10 +52,11 @@ const LogInComponent = () => {
         if (!isValid) {
             return; // Stop submission if validation fails
         }
-        await loginUser(form)
+        await logInUser(form)
             .then((res) => {
                 setLoading(false);
-                dispatch(setUser(res))
+                dispatch(setToken(res.jwt))
+                dispatch(setUser({ ...jwtDecode(res.jwt), email: jwtDecode(res.jwt).sub }))
                 navigate("/");
             }).catch((err) => {
                 setLoading(false);

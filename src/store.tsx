@@ -3,12 +3,15 @@ import userReducer from "./slices/UserSlice"; // Adjust the import path as neces
 import profileReducer from "./slices/ProfileSlice";
 import FilterReducer from "./slices/FilterTalent";
 import SortReducer from "./slices/SortSlice";
+import JwtReducer from "./slices/JwtSlice";
+
 export default configureStore({
     reducer: {
         user: userReducer,
         profile: profileReducer,
         filter: FilterReducer,
         sort: SortReducer,
+        jwt: JwtReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

@@ -20,7 +20,7 @@ function ProfileMenu() {
         <Menu shadow="md" width={200} opened={opened} onChange={setOpened}>
             <Menu.Target>
                 <div className="flex gap-3 items-center cursor-pointer">
-                    <div>{user.password}</div>
+                    <div>Hello, {user.name.split(" ")[0]}</div>
                     <Avatar className="w-10 h-10 rounded-full overflow-hidden object-cover" src={userProfile.profilePicture ? `data:image/jpeg;base64,${userProfile.profilePicture}` : `Avatar.png`} />
                 </div>
             </Menu.Target>
