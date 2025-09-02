@@ -1,5 +1,5 @@
-import React, { } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import CursorFollower from '../Animition/CursorAnimition/CursorFollower'
 import ApplyJobsPage from '../pages/ApplyJobs/ApplyJobsPage'
 import CompanyProfilePage from '../pages/CompanyProfile/CompanyProfilePage'
@@ -18,13 +18,22 @@ import Footer from '../Footer/Footer'
 import { useSelector } from 'react-redux'
 
 const AppRoutes = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handler = () => {
+            navigate("/log-in");
+        };
+        window.addEventListener("unauthorized", handler);
+        return () => window.removeEventListener("unauthorized", handler);
+    }, [navigate]);
 
     const user = useSelector((state: any) => state.user);
 
-    return (<BrowserRouter>
+    return (<>
         <CursorFollower />
         <Header />
-        <Routes>
+        <Routes >
             <Route path='/find-jobs' element={<FindJob />} />
             <Route path='/find-talent' element={<FindTalent />} />
             <Route path='/talent-profile/:id' element={<TalentProfilePage />} />
@@ -40,7 +49,7 @@ const AppRoutes = () => {
             <Route path='*' element={<HomePage />} />
         </Routes>
         <Footer />
-    </BrowserRouter>
+    </>
     )
 }
 

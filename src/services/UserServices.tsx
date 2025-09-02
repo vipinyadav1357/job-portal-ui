@@ -1,12 +1,12 @@
 import axios from "axios";
 import { LoginRequest } from "./models/LoginRequest";
 import { RegisterRequest } from "./models/RegisterRequest";
+import axiosInterceptor from "../Interceptor/axiosInterceptor";
 
-const BASE_URL = "http://localhost:8080/users/";
+// const BASE_URL = "http://localhost:8080/users/";
 
 const registerUser = async (userData: RegisterRequest) => {
-    console.log("Registering user with data:", userData);
-    return axios.post(BASE_URL + "register", userData)
+    return axiosInterceptor.post("users/register", userData)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error registering the user!", error);
@@ -16,7 +16,7 @@ const registerUser = async (userData: RegisterRequest) => {
 
 const sendOtp = async (email: string) => {
     const encodedEmail = encodeURIComponent(email);
-    return axios.post(BASE_URL + `otp/${encodedEmail}`)
+    return axiosInterceptor.post(`users/otp/${encodedEmail}`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error sending the OTP!", error);
@@ -25,7 +25,7 @@ const sendOtp = async (email: string) => {
 }
 const verifyOtp = async (otp: string, email: string) => {
     const encodedEmail = encodeURIComponent(email);
-    return axios.get(BASE_URL + `otp/${encodedEmail}/${otp}`)
+    return axiosInterceptor.get(`users/otp/${encodedEmail}/${otp}`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error verifying the OTP!", error);
@@ -33,7 +33,7 @@ const verifyOtp = async (otp: string, email: string) => {
         });
 }
 const resetPassword = async (userData: LoginRequest) => {
-    return axios.post(BASE_URL + "changePass", userData)
+    return axiosInterceptor.post("users/changePass", userData)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error resetting the password!", error);

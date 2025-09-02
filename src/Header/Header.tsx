@@ -3,30 +3,46 @@ import { IconAnchor, IconBell } from "@tabler/icons-react";
 import React, { useEffect, useRef } from "react";
 import NavLinks from "./NavLinks";
 import gsap from "gsap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../slices/ProfileSlice";
 import { getProfile } from "../services/ProfileService";
 import NotificationMenu from "./NotificationMenu";
+import { setUser } from "../slices/UserSlice";
+import { jwtDecode } from "jwt-decode";
 const Header = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
   const user = useSelector((state: any) => state.user);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
-    getProfile("1").then((res) => {
-      if (res) {
-        console.log("Profile fetched successfully:", res);
-        // dispatch({ type: 'SET_PROFILE', payload: res });
-        dispatch(setProfile(res));
+    const decode = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const userData = jwtDecode(token);
+        if (userData) {
+          dispatch(setUser({ ...userData, email: userData.sub }));
+        }
       }
+    };
+    decode();
+  }, [navigate])
+  useEffect(() => {
+    if (window.location.pathname !== "/log-in" &&
+      window.location.pathname !== "/sign-up") {
+      getProfile("1").then((res) => {
+        if (res) {
+          console.log("Profile fetched successfully:", res);
+          // dispatch({ type: 'SET_PROFILE', payload: res });
+          dispatch(setProfile(res));
+        }
+      }
+      ).catch((err) => {
+        console.error("Error fetching profile:", err);
+      });
     }
-    ).catch((err) => {
-      console.error("Error fetching profile:", err);
-    });
   }, [dispatch]);
 
   useEffect(() => {

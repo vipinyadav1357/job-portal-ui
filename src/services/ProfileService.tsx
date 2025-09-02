@@ -1,10 +1,11 @@
 import axios from "axios";
 import { ProfileData } from "./models/ProfileData";
+import axiosInterceptor from "../Interceptor/axiosInterceptor";
 
-const BASE_URL = "http://localhost:8080/profile/";
+// const BASE_URL = "http://localhost:8080/profile/";
 
 const getProfile = async (userId: string) => {
-    return axios.get(BASE_URL + `get/${userId}`)
+    return axiosInterceptor.get(`profile/get/${userId}`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error fetching the profile!", error);
@@ -12,7 +13,7 @@ const getProfile = async (userId: string) => {
         });
 }
 const updateProfile = async (profileData: ProfileData) => {
-    return axios.put(BASE_URL + `update`, profileData)
+    return axiosInterceptor.put(`profile/update`, profileData)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error updating the profile!", error);
@@ -20,7 +21,7 @@ const updateProfile = async (profileData: ProfileData) => {
         });
 }
 const getAllProfiles = async () => {
-    return axios.get(BASE_URL + `getAll`)
+    return axiosInterceptor.get(`profile/getAll`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error fetching all profiles!", error);

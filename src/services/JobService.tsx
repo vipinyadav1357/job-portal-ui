@@ -1,9 +1,10 @@
 import axios from "axios"
+import axiosInterceptor from "../Interceptor/axiosInterceptor";
 
-const BASE_URL = "http://localhost:8080/job/"
+// const BASE_URL = "http://localhost:8080/job/"
 
 const postJob = async (jobData: any) => {
-    return await axios.post(BASE_URL + `post`, jobData)
+    return await axiosInterceptor.post(`job/post`, jobData)
         .then(response => {
             return response.data
         })
@@ -12,14 +13,14 @@ const postJob = async (jobData: any) => {
         });
 }
 const getJobById = async (id: any) => {
-    return await axios.get(BASE_URL + `get/${id}`)
+    return await axiosInterceptor.get(`job/get/${id}`)
         .then(response => response.data)
         .catch(error => {
             throw error;
         });
 }
 const getAllJob = async () => {
-    return await axios.get(BASE_URL + `getAll`)
+    return await axiosInterceptor.get(`job/getAll`)
         .then(response => {
             return response.data
         })
@@ -28,7 +29,7 @@ const getAllJob = async () => {
         });
 }
 const applyJob = async (applicantDto: any, jobId: any) => {
-    return await axios.post(BASE_URL + `apply/${jobId}`, applicantDto)
+    return await axiosInterceptor.post(`job/apply/${jobId}`, applicantDto)
         .then(response => {
             return response.data
         })
@@ -37,7 +38,7 @@ const applyJob = async (applicantDto: any, jobId: any) => {
         });
 }
 const jobPostedBy = async (userId: any) => {
-    return await axios.get(BASE_URL + `postedBy/${userId}`)
+    return await axiosInterceptor.get(`job/postedBy/${userId}`)
         .then(response => {
             return response.data
         })
@@ -46,7 +47,7 @@ const jobPostedBy = async (userId: any) => {
         });
 }
 const changeApplicationStatus = async (application: any) => {
-    return await axios.post(BASE_URL + `changeAppStatus`, application)
+    return await axiosInterceptor.post(`job/changeAppStatus`, application)
         .then(response => {
             return response.data
         })

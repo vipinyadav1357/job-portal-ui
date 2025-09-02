@@ -1,10 +1,11 @@
 import axios from "axios";
+import axiosInterceptor from "../Interceptor/axiosInterceptor";
 
 const BASE_URL = "http://localhost:8080/notification/";
 
 const getNotifications = async (userId: any) => {
-    return axios
-        .get(`${BASE_URL}getAllNoti/${userId}`)
+    return axiosInterceptor
+        .get(`notification/getAllNoti/${userId}`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error fetching notifications!", error);
@@ -12,8 +13,8 @@ const getNotifications = async (userId: any) => {
         });
 };
 const changeNotificationStatus = async (notificationId: any) => {
-    return axios
-        .post(`${BASE_URL}change/${notificationId}`)
+    return axiosInterceptor
+        .post(`notification/change/${notificationId}`)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error changing notification status!", error);
