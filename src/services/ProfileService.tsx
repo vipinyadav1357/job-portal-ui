@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ProfileData } from "./models/ProfileData";
 import axiosInterceptor from "../Interceptor/axiosInterceptor";
 

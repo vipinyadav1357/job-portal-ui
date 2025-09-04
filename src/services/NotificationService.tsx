@@ -1,7 +1,6 @@
-import axios from "axios";
 import axiosInterceptor from "../Interceptor/axiosInterceptor";
 
-const BASE_URL = "http://localhost:8080/notification/";
+// const BASE_URL = "http://localhost:8080/notification/";
 
 const getNotifications = async (userId: any) => {
     return axiosInterceptor

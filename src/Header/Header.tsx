@@ -1,5 +1,4 @@
-import { Indicator, } from "@mantine/core";
-import { IconAnchor, IconBell } from "@tabler/icons-react";
+import { IconAnchor } from "@tabler/icons-react";
 import React, { useEffect, useRef } from "react";
 import NavLinks from "./NavLinks";
 import gsap from "gsap";
@@ -11,24 +10,24 @@ import { getProfile } from "../services/ProfileService";
 import NotificationMenu from "./NotificationMenu";
 import { setUser } from "../slices/UserSlice";
 import { jwtDecode } from "jwt-decode";
+import { DecodedUser } from "../services/models/DecodedUser";
 const Header = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
   const user = useSelector((state: any) => state.user);
-  const navigate = useNavigate();
+  const token = useSelector((state: any) => state.jwt);
   const dispatch = useDispatch();
   useEffect(() => {
     const decode = async () => {
-      const token = localStorage.getItem("token");
       if (token) {
-        const userData = jwtDecode(token);
+        const userData = jwtDecode<DecodedUser>(token);
         if (userData) {
           dispatch(setUser({ ...userData, email: userData.sub }));
         }
       }
     };
     decode();
-  }, [navigate])
+  }, [token])
   useEffect(() => {
     if (window.location.pathname !== "/log-in" &&
       window.location.pathname !== "/sign-up") {

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { LoginRequest } from "./models/LoginRequest";
 import { RegisterRequest } from "./models/RegisterRequest";
 import axiosInterceptor from "../Interceptor/axiosInterceptor";

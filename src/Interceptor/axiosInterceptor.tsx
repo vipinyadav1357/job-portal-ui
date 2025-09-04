@@ -18,7 +18,6 @@ axiosInterceptor.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-let isRedirecting = false;
 
 axiosInterceptor.interceptors.response.use(
     (response) => {
@@ -26,8 +25,7 @@ axiosInterceptor.interceptors.response.use(
     },
     (error) => {
         // Handle token expiration or other errors
-        if (error.response?.status === 401 && !isRedirecting) {
-            isRedirecting = true;
+        if (error.response?.status === 401) {
             localStorage.removeItem("token");
             removeUser();
             window.dispatchEvent(new Event("unauthorized"));

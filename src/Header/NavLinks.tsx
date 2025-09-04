@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const links: { name: string, url: string }[] = [
     { name: "Find Jobs", url: "find-jobs" },
@@ -20,7 +20,6 @@ const renderlinks = (location: any) => {
 }
 const NavLinks = () => {
     const location = useLocation();
-    const { id } = useParams();
 
     return (
         <div className="flex gap-7 h-full items-center text-mine-shaft-200">
