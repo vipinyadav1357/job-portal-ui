@@ -1,5 +1,5 @@
 import { TextInput, NumberInput, FileInput, Textarea, Button, Notification } from '@mantine/core';
-import { IconCheck, IconUpload } from '@tabler/icons';
+import { IconCheck, IconUpload } from '@tabler/icons-react';
 import { motion, easeInOut } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -24,7 +24,6 @@ const ApplyJobForm = (props: any) => {
             resume: null,
             coverLetter: ''
         },
-        mode: 'controlled',
     })
 
     useEffect(() => {
@@ -62,9 +61,9 @@ const ApplyJobForm = (props: any) => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     const handleSubmit = async () => {
-        let resume: any = await getBase64(form.getValues().resume);
+        let resume: any = await getBase64(form.values.resume);
         form.setFieldValue('resume', resume.split(",")[1]);
-        applyJob(form.getValues(), id).then((res) => {
+        applyJob(form.values, id).then((res) => {
             setSubmit(true);
             props.setLoading(true);
             form.reset();

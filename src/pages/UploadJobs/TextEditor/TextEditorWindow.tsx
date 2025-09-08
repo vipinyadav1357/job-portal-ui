@@ -20,7 +20,7 @@ function TextEditorWindow(props: any) {
             Highlight,
             TextAlign.configure({ types: ['heading', 'paragraph'] }),
         ],
-        content: props.form.getValues().description,
+        content: props.form.values.description,
         onUpdate({ editor }) {
             props.form.setFieldValue('description', editor.getHTML())
         }

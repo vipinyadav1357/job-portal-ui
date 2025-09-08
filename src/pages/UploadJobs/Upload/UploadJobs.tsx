@@ -29,13 +29,12 @@ const UploadJobs = () => {
             about: "" as string,
             description: content as string
         },
-        mode: 'controlled'
     });
     useEffect(() => {
         if (Number(id) !== 0 && id)
             getJobById(Number(id)).then((job) => {
                 setJob(job);
-                form.setValues({ ...form.getValues(), ...job })
+                form.setValues({ ...form.values, ...job })
             }).catch((e) => console.log(e))
     }, [id]);
 
@@ -54,12 +53,12 @@ const UploadJobs = () => {
         form.setFieldValue('skillRequired', updatedSkills);
     }
     const handlePost = () => {
-        postJob({ ...form.getValues(), postedBy: userProfile.id, jobStatus: "ACTIVE" })
+        postJob({ ...form.values, postedBy: userProfile.id, jobStatus: "ACTIVE" })
             .then((res) => { navigate(`/posted-job/${res.id}`) })
             .catch((error) => { console.log("na post bhail") });
     }
     const handleDraft = () => {
-        postJob({ ...form.getValues(), postedBy: userProfile.id, jobStatus: "DRAFT" })
+        postJob({ ...form.values, postedBy: userProfile.id, jobStatus: "DRAFT" })
             .then((res) => { navigate(`/posted-job/${res.id}`) })
             .catch((error) => { console.log("na post bhail") });
     }
