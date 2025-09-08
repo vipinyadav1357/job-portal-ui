@@ -9,7 +9,7 @@ import Skills from './Sections/Skills'
 import Experiance from './Sections/Experiance'
 import Certification from './Sections/Certification'
 import { useHover } from '@mantine/hooks'
-import { IconPencil } from '@tabler/icons'
+import { IconPencil } from '@tabler/icons-react'
 
 const ProfileComponent = ({ props }: any) => {
     const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const ProfileComponent = ({ props }: any) => {
     return (
         <div className='w-4/5 mx-auto'>
             <div className='relative'>
-                <img className='rounded-t-2xl w-full h-52' src="/profile/banner.jpg" alt="" />
+                <img className='rounded-t-2xl w-full h-52' src="/Profile/banner.jpg" alt="" />
                 <div ref={ref} className='absolute -bottom-1/3 left-3 flex items-center justify-center'>
                     <img className='rounded-full h-36 w-36 border-8 border-mine-shaft-600 object-cover' src={userProfile.profilePicture ? `data:image/jpeg;base64,${userProfile.profilePicture}` : `Avatar.png`} alt="" />
                     {hovered && <Overlay opacity={0.25} color="#000" blur={1} className='rounded-full' />}

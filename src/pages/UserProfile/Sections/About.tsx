@@ -1,6 +1,6 @@
 import { ActionIcon, Textarea } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconCheck, IconPencil, IconX } from '@tabler/icons';
+import { IconCheck, IconPencil, IconX } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeProfile } from '../../../slices/ProfileSlice';
@@ -14,7 +14,6 @@ const About = () => {
         initialValues: {
             about: ''
         },
-        mode: 'controlled',
     });
 
     const handleEdit = () => {
@@ -32,8 +31,8 @@ const About = () => {
     }
     const handleSave = () => {
         form.setFieldValue('about', about);
-        console.log("Form submitted with values:", form.getValues());
-        let updateProfile = { ...userProfile, ...form.getValues() }
+        console.log("Form submitted with values:", form.values);
+        let updateProfile = { ...userProfile, ...form.values }
         console.log("updated profile", updateProfile);
         dispatch(changeProfile(updateProfile));
         form.reset();

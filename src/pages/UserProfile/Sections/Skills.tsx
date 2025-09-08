@@ -1,5 +1,5 @@
 import { ActionIcon } from '@mantine/core'
-import { IconCheck, IconPencil, IconX } from '@tabler/icons'
+import { IconCheck, IconPencil, IconX } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import TagsInput from '../SelectInput/TagsInput'
 import { useDispatch, useSelector } from 'react-redux'

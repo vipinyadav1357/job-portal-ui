@@ -60,7 +60,6 @@ const LogInComponent = () => {
                 navigate("/");
             }).catch((err) => {
                 setLoading(false);
-                console.error("Error during registration:", err.response.data.error);
             }
             );
         // Reset form after submission

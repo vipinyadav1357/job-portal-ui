@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { dropdownData } from '../../../Data/JobsData'
 import MultiSelectComponent from '../../../MultiSelect/MultiSelect'
 import { Divider, RangeSlider } from '@mantine/core'
-import { IconCurrencyRupee } from '@tabler/icons'
+import { IconCurrencyRupee } from '@tabler/icons-react'
 import { useDispatch } from 'react-redux'
 import { changeFilterTalent } from '../../../slices/FilterTalent'
 

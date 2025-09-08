@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import fields from '../../../Data/Profile'
 import { ActionIcon } from '@mantine/core'
-import { IconPencil, IconMapPin, IconCheck, IconX } from '@tabler/icons'
+import { IconPencil, IconMapPin, IconCheck, IconX } from '@tabler/icons-react'
 import { IconBriefcase2Filled, IconPointFilled } from '@tabler/icons-react'
 import SelectInput from '../SelectInput/SelectInput'
 import { useForm } from '@mantine/form'
@@ -19,7 +19,6 @@ const Info = () => {
             company: '',
             location: ''
         },
-        mode: 'controlled',
     });
     const handleEdit = () => {
         if (!edit) {
@@ -29,13 +28,13 @@ const Info = () => {
                 company: userProfile.company,
                 location: userProfile.location
             });
-            console.log("Form submitted with values:", form.getValues());
+            console.log("Form submitted with values:", form.values);
         } else {
             setEdit(false);
         }
     }
     const handleSave = () => {
-        let updateProfile = { ...userProfile, ...form.getValues() }
+        let updateProfile = { ...userProfile, ...form.values }
         console.log("updated profile", updateProfile);
         dispatch(changeProfile(updateProfile));
         form.reset();
