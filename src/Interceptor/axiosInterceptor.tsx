@@ -2,7 +2,7 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 import { removeUser } from "../slices/UserSlice";
 
 const axiosInterceptor = axios.create({
-    baseURL: "http://localhost:8080/"
+    baseURL: "https://job-portal-backend-oxhk.onrender.com/"
 });
 
 axiosInterceptor.interceptors.request.use(

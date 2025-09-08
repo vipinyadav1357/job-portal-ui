@@ -17,7 +17,7 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { useSelector } from 'react-redux'
 import ProtectedRoutes from './ProtectedRoutes'
-import PublicRoutes from './PublicRoutes'
+import PublicRoutes from './PublicRoutes';
 
 const AppRoutes = () => {
     const navigate = useNavigate();
@@ -29,8 +29,6 @@ const AppRoutes = () => {
         window.addEventListener("unauthorized", handler);
         return () => window.removeEventListener("unauthorized", handler);
     }, [navigate]);
-
-    const user = useSelector((state: any) => state.user);
 
     return (<>
         <CursorFollower />
@@ -48,7 +46,8 @@ const AppRoutes = () => {
             <Route path='/sign-up' element={<PublicRoutes><SignUpPage /></PublicRoutes>} />
             <Route path='/log-in' element={<PublicRoutes><SignUpPage /></PublicRoutes>} />
             <Route path='/user-profile' element={<UserProfilePage />} />
-            <Route path='*' element={<HomePage />} />
+            <Route path='/' element={<HomePage />} />
+            <Route path='*' element={<PublicRoutes><HomePage /></PublicRoutes>} />
         </Routes>
         <Footer />
     </>

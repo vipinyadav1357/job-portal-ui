@@ -1,9 +1,9 @@
 import axios from "axios";
+import axiosInterceptor from "../Interceptor/axiosInterceptor";
 
-const BASE_URL = "http://localhost:8080/users/"
 
 const logInUser = async (login: any) => {
-    return await axios.post(BASE_URL + "login", login)
+    return await axiosInterceptor.post("users/login", login)
         .then(response => response.data)
         .catch(error => {
             console.error("There was an error logging in the user!", error);
