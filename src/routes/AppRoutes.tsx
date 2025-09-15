@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import CursorFollower from '../Animition/CursorAnimition/CursorFollower'
 import ApplyJobsPage from '../pages/ApplyJobs/ApplyJobsPage'
 import CompanyProfilePage from '../pages/CompanyProfile/CompanyProfilePage'
@@ -15,7 +15,6 @@ import FindJob from '../pages/FindJob/FindJobPage';
 import FindTalent from '../pages/FindTalent/FindTalentPage';
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import { useSelector } from 'react-redux'
 import ProtectedRoutes from './ProtectedRoutes'
 import PublicRoutes from './PublicRoutes';
 
